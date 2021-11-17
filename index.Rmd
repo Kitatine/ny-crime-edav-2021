@@ -1,6 +1,6 @@
 --- 
-title: "YOUR TITLE HERE"
-author: "YOUR NAMES HERE"
+title: "NY Crime Investigation"
+author: "Jingwen Bai, Qiran Li, Zheng Wu"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
