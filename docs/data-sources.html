@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Data sources | NY Crime Investigation</title>
-  <meta name="description" content="Chapter 2 Data sources | NY Crime Investigation" />
+  <title>Chapter 2 Data sources | Missing</title>
+  <meta name="description" content="Chapter 2 Data sources | Missing" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Data sources | NY Crime Investigation" />
+  <meta property="og:title" content="Chapter 2 Data sources | Missing" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Data sources | NY Crime Investigation" />
+  <meta name="twitter:title" content="Chapter 2 Data sources | Missing" />
   
   
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Jingwen Bai, Qiran Li, Zheng Wu" />
 
 
-<meta name="date" content="2021-11-17" />
+<meta name="date" content="2021-11-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="index.html"/>
-<link rel="next" href="data-transformation.html"/>
+<link rel="next" href="results.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -55,6 +55,70 @@
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -74,12 +138,13 @@
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
-<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
-<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
-<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
-<li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
-<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
+<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a>
+<ul>
+<li class="chapter" data-level="2.0.1" data-path="data-sources.html"><a href="data-sources.html#missing-data-analysis"><i class="fa fa-check"></i><b>2.0.1</b> Missing Data Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>3</b> Results</a></li>
+<li class="chapter" data-level="4" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>4</b> Interactive component</a></li>
+<li class="chapter" data-level="5" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>5</b> Conclusion</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -91,7 +156,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">NY Crime Investigation</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Missing</a>
           </h1>
         </div>
 
@@ -102,6 +167,170 @@
 <div id="data-sources" class="section level1" number="2">
 <h1><span class="header-section-number">Chapter 2</span> Data sources</h1>
 
+
+<div id="missing-data-analysis" class="section level3" number="2.0.1">
+<h3><span class="header-section-number">2.0.1</span> Missing Data Analysis</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="data-sources.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-2"><a href="data-sources.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="data-sources.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb1-4"><a href="data-sources.html#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="data-sources.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;source/plot_missing.R&quot;</span>)</span></code></pre></div>
+<blockquote>
+<p>There are indeed a lot of missing data in our NYPD crime datasets. Here is a compreshensive missing data analyzing accross all the data set. Notice that, for some datasets, we have more than 1 billion rows. To simplified the first draft analysis, we always choose the first 50000 rows if the number of rows exceeds or equals to 50000, otherwise the whole dataset. Also, to keep track on our exploration targets, we choose to delete some of the unrelated variables. Beside, to make our graphs more readable, we have coded the original name of variables into integers. Specific coding rules will be explained during the analyzing below.</p>
+</blockquote>
+<div id="for-shooting-data-historical" class="section level4" number="2.0.1.1">
+<h4><span class="header-section-number">2.0.1.1</span> For shooting data (Historical):</h4>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="data-sources.html#cb2-1" aria-hidden="true" tabindex="-1"></a>shootings <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&#39;data/NYPD_Shooting_Incident_Data__Historic_.csv&#39;</span>)</span></code></pre></div>
+<blockquote>
+<p>Here is our “shooting incident (historical)” dataset. The original dataset contains 19 variables and 23568 observations. To simplify our analysis, we have figured that variables named “JURISDICTION_CODE”,“X_COORD_CD”, “Y_COORD_CD”, “Lon_Lat” are not necessary. So we deleted them. As shown below, according to the order in the data frame, we coded the variables from 1 to 15.</p>
+</blockquote>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="data-sources.html#cb3-1" aria-hidden="true" tabindex="-1"></a>shootings[shootings<span class="sc">==</span><span class="st">&quot;&quot;</span>]<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb3-2"><a href="data-sources.html#cb3-2" aria-hidden="true" tabindex="-1"></a>shootings[shootings<span class="sc">==</span><span class="st">&quot;UNKNOWN&quot;</span>]<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb3-3"><a href="data-sources.html#cb3-3" aria-hidden="true" tabindex="-1"></a>drops <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;JURISDICTION_CODE&quot;</span>,<span class="st">&quot;X_COORD_CD&quot;</span>, <span class="st">&quot;Y_COORD_CD&quot;</span>, <span class="st">&quot;Lon_Lat&quot;</span>)</span>
+<span id="cb3-4"><a href="data-sources.html#cb3-4" aria-hidden="true" tabindex="-1"></a>shootings <span class="ot">&lt;-</span> shootings[ , <span class="sc">!</span>(<span class="fu">names</span>(shootings) <span class="sc">%in%</span> drops)]</span>
+<span id="cb3-5"><a href="data-sources.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(shootings) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>, <span class="st">&quot;4&quot;</span>, <span class="st">&quot;5&quot;</span>, <span class="st">&quot;6&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;8&quot;</span>, <span class="st">&quot;9&quot;</span>, <span class="st">&quot;10&quot;</span>, <span class="st">&quot;11&quot;</span>, </span>
+<span id="cb3-6"><a href="data-sources.html#cb3-6" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;12&quot;</span>, <span class="st">&quot;13&quot;</span>, <span class="st">&quot;14&quot;</span>, <span class="st">&quot;15&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="data-sources.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(shootings, <span class="at">percent =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
+<blockquote>
+<p>As one can see, the variables except x6, x8, x9, x10 are all completed. What noticealbe is that the x6 variable (LOCATION_DESC) has a missing rate almost 30%. And 25% of all the cases are recorded completed. Beside, the age group, sex, and race of crininals are often missed (x8, x9, and x10), especially the ages, almost 40% of missing data are related to ages.</p>
+</blockquote>
+</div>
+<div id="for-shooting-data-ytd" class="section level4" number="2.0.1.2">
+<h4><span class="header-section-number">2.0.1.2</span> For shooting data (YTD):</h4>
+<blockquote>
+<p>Here is our “shooting incident (YTD)” dataset. The original dataset contains 19 variables and 902 observations. To simplify our analysis, we have figured that variables named “JURISDICTION_CODE”,“X_COORD_CD”, “Y_COORD_CD”, “Lon_Lat” are not necessary. So we deleted them. As shown below, according to the order in the data frame, we coded the variables from 1 to 15.</p>
+</blockquote>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="data-sources.html#cb5-1" aria-hidden="true" tabindex="-1"></a>shootings <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&#39;data/NYPD_Shooting_Incident_Data__Year_To_Date_.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="data-sources.html#cb6-1" aria-hidden="true" tabindex="-1"></a>shootings[shootings<span class="sc">==</span><span class="st">&quot;&quot;</span>]<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb6-2"><a href="data-sources.html#cb6-2" aria-hidden="true" tabindex="-1"></a>shootings[shootings<span class="sc">==</span><span class="st">&quot;UNKNOWN&quot;</span>]<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb6-3"><a href="data-sources.html#cb6-3" aria-hidden="true" tabindex="-1"></a>drops <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;JURISDICTION_CODE&quot;</span>,<span class="st">&quot;X_COORD_CD&quot;</span>, <span class="st">&quot;Y_COORD_CD&quot;</span>, <span class="st">&quot;Lon_Lat&quot;</span>)</span>
+<span id="cb6-4"><a href="data-sources.html#cb6-4" aria-hidden="true" tabindex="-1"></a>shootings <span class="ot">&lt;-</span> shootings[ , <span class="sc">!</span>(<span class="fu">names</span>(shootings) <span class="sc">%in%</span> drops)]</span>
+<span id="cb6-5"><a href="data-sources.html#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(shootings) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>, <span class="st">&quot;4&quot;</span>, <span class="st">&quot;5&quot;</span>, <span class="st">&quot;6&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;8&quot;</span>, <span class="st">&quot;9&quot;</span>, <span class="st">&quot;10&quot;</span>, <span class="st">&quot;11&quot;</span>, </span>
+<span id="cb6-6"><a href="data-sources.html#cb6-6" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;12&quot;</span>, <span class="st">&quot;13&quot;</span>, <span class="st">&quot;14&quot;</span>, <span class="st">&quot;15&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="data-sources.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(shootings, <span class="at">percent =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-84-1.png" width="672" /></p>
+<blockquote>
+<p>As one can see, there are only 4 vairables are missed: location, age group, sex, and race. Similarly to the historical data, the identification of the cirminals (age, sex, race) are often missed. However, we still have about 15% of all the data are complete. Besides, over 55% percent of missing data are because of age, sex, and race of the cirminals. Which may indicates that the shooting crime criminals are very hard to identificate.</p>
+</blockquote>
+</div>
+<div id="for-hata-crimes" class="section level4" number="2.0.1.3">
+<h4><span class="header-section-number">2.0.1.3</span> For Hata Crimes:</h4>
+<blockquote>
+<p>Here is our “hate crimes” dataset. The original dataset contains 14 variables and 1704 observations. To simplify our analysis, we have figured that variables named “JURISDICTION_CODE”,“X_COORD_CD”, “Y_COORD_CD”, “Lon_Lat”, “Arrest.Id”, “Complaint.Precinct.Code”, “Arrest.Date”, “Full.Complaint.ID” are not necessary. So we deleted them. As shown below, according to the order in the data frame, we coded the variables from 1 to 10.</p>
+</blockquote>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="data-sources.html#cb8-1" aria-hidden="true" tabindex="-1"></a>hates <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&#39;data/NYPD_Hate_Crimes.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="data-sources.html#cb9-1" aria-hidden="true" tabindex="-1"></a>hates[hates<span class="sc">==</span><span class="st">&quot;&quot;</span>]<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb9-2"><a href="data-sources.html#cb9-2" aria-hidden="true" tabindex="-1"></a>hates[hates<span class="sc">==</span><span class="st">&quot;UNKNOWN&quot;</span>]<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb9-3"><a href="data-sources.html#cb9-3" aria-hidden="true" tabindex="-1"></a>drops <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;JURISDICTION_CODE&quot;</span>,<span class="st">&quot;X_COORD_CD&quot;</span>, <span class="st">&quot;Y_COORD_CD&quot;</span>, <span class="st">&quot;Lon_Lat&quot;</span>, <span class="st">&quot;Arrest.Id&quot;</span>, </span>
+<span id="cb9-4"><a href="data-sources.html#cb9-4" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;Complaint.Precinct.Code&quot;</span>, <span class="st">&quot;Arrest.Date&quot;</span>, <span class="st">&quot;Full.Complaint.ID&quot;</span>)</span>
+<span id="cb9-5"><a href="data-sources.html#cb9-5" aria-hidden="true" tabindex="-1"></a>hates <span class="ot">&lt;-</span> hates[ , <span class="sc">!</span>(<span class="fu">names</span>(hates) <span class="sc">%in%</span> drops)]</span>
+<span id="cb9-6"><a href="data-sources.html#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="data-sources.html#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="data-sources.html#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#str(hates)</span></span>
+<span id="cb9-9"><a href="data-sources.html#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(hates) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>, <span class="st">&quot;4&quot;</span>, <span class="st">&quot;5&quot;</span>, <span class="st">&quot;6&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;8&quot;</span>, <span class="st">&quot;9&quot;</span>, <span class="st">&quot;10&quot;</span>)</span>
+<span id="cb9-10"><a href="data-sources.html#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="data-sources.html#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#str(shootings)</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="data-sources.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(hates, <span class="at">percent =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-87-1.png" width="672" /></p>
+<blockquote>
+<p>It is very impressive to find out that the hate crime data are all completes cases. Nothing was missed according to the rocords of NYPD.</p>
+</blockquote>
+</div>
+<div id="for-crime-court-summons-historical" class="section level4" number="2.0.1.4">
+<h4><span class="header-section-number">2.0.1.4</span> For crime court summons (Historical):</h4>
+<blockquote>
+<p>Here is our “crime court summons (historical)” dataset. The original dataset contains 17 variables and 50000 observations. To simplify our analysis, we have figured that variables named “JURISDICTION_CODE”,“X_COORDINATE_CD”, “Y_COORDINATE_CD”, “Lon_Lat”, “PRECINCT_OF_OCCUR”, “SUMMONS_KEY” are not necessary. So we deleted them. As shown below, according to the order in the data frame, we coded the variables from 1 to 12.</p>
+</blockquote>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="data-sources.html#cb11-1" aria-hidden="true" tabindex="-1"></a>summons <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&#39;data/NYPD_Criminal_Court_Summons__Historic_.csv&#39;</span>, <span class="at">nrows=</span><span class="dv">50000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="data-sources.html#cb12-1" aria-hidden="true" tabindex="-1"></a>summons[summons<span class="sc">==</span><span class="st">&quot;&quot;</span>]<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb12-2"><a href="data-sources.html#cb12-2" aria-hidden="true" tabindex="-1"></a>summons[summons<span class="sc">==</span><span class="st">&quot;UNKNOWN&quot;</span>]<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb12-3"><a href="data-sources.html#cb12-3" aria-hidden="true" tabindex="-1"></a>drops <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;JURISDICTION_CODE&quot;</span>,<span class="st">&quot;X_COORDINATE_CD &quot;</span>, <span class="st">&quot;Y_COORDINATE_CD&quot;</span>, <span class="st">&quot;Lon_Lat&quot;</span>, </span>
+<span id="cb12-4"><a href="data-sources.html#cb12-4" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;PRECINCT_OF_OCCUR&quot;</span>, <span class="st">&quot;SUMMONS_KEY&quot;</span>)</span>
+<span id="cb12-5"><a href="data-sources.html#cb12-5" aria-hidden="true" tabindex="-1"></a>summons <span class="ot">&lt;-</span> summons[ , <span class="sc">!</span>(<span class="fu">names</span>(summons) <span class="sc">%in%</span> drops)]</span>
+<span id="cb12-6"><a href="data-sources.html#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(summons) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>, <span class="st">&quot;4&quot;</span>, <span class="st">&quot;5&quot;</span>, <span class="st">&quot;6&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;8&quot;</span>, <span class="st">&quot;9&quot;</span>, <span class="st">&quot;10&quot;</span>, <span class="st">&quot;11&quot;</span>, <span class="st">&quot;12&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="data-sources.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(summons, <span class="at">percent =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-90-1.png" width="672" /></p>
+<blockquote>
+<p>As one can see, there are 6 out of 12 variables can be missing in our historical cour summons datasets, which is x4 to x9, which is LAW_DESCRIPTION, SUMMONS_CATEGORY_TYPE, AGE_GROUP, SEX, RACE, and BORO. What important is, we still have 35% of observations are completed. Law description missing are often related with summons category missing, which combined leads to 25% percent of the missing cases. What’s more, similar to our anlysis in the shooting crimes, it is also hard to identify the criminals by age, sex, and race, which combined leads to 38% of missing. Other missing are very small in number.</p>
+</blockquote>
+</div>
+<div id="for-crime-court-summons-ytd" class="section level4" number="2.0.1.5">
+<h4><span class="header-section-number">2.0.1.5</span> For crime court summons (YTD):</h4>
+<blockquote>
+<p>Here is our “crime court summons (YTD)” dataset. The original dataset contains 17 variables and 25691 observations. To simplify our analysis, we have figured that variables named “JURISDICTION_CODE”,“X_COORDINATE_CD”, “Y_COORDINATE_CD”, “Lon_Lat”, “PRECINCT_OF_OCCUR”, “SUMMONS_KEY” are not necessary. So we deleted them. As shown below, according to the order in the data frame, we coded the variables from 1 to 12.</p>
+</blockquote>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="data-sources.html#cb14-1" aria-hidden="true" tabindex="-1"></a>summons <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&#39;data/NYPD_Criminal_Court_Summons_Incident_Level_Data__Year_To_Date_.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="data-sources.html#cb15-1" aria-hidden="true" tabindex="-1"></a>summons[summons<span class="sc">==</span><span class="st">&quot;&quot;</span>]<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb15-2"><a href="data-sources.html#cb15-2" aria-hidden="true" tabindex="-1"></a>summons[summons<span class="sc">==</span><span class="st">&quot;UNKNOWN&quot;</span>]<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb15-3"><a href="data-sources.html#cb15-3" aria-hidden="true" tabindex="-1"></a>drops <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;JURISDICTION_CODE&quot;</span>,<span class="st">&quot;X_COORDINATE_CD &quot;</span>, <span class="st">&quot;Y_COORDINATE_CD&quot;</span>, <span class="st">&quot;Lon_Lat&quot;</span>, </span>
+<span id="cb15-4"><a href="data-sources.html#cb15-4" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;PRECINCT_OF_OCCUR&quot;</span>, <span class="st">&quot;SUMMONS_KEY&quot;</span>)</span>
+<span id="cb15-5"><a href="data-sources.html#cb15-5" aria-hidden="true" tabindex="-1"></a>summons <span class="ot">&lt;-</span> summons[ , <span class="sc">!</span>(<span class="fu">names</span>(summons) <span class="sc">%in%</span> drops)]</span>
+<span id="cb15-6"><a href="data-sources.html#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(summons) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>, <span class="st">&quot;4&quot;</span>, <span class="st">&quot;5&quot;</span>, <span class="st">&quot;6&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;8&quot;</span>, <span class="st">&quot;9&quot;</span>, <span class="st">&quot;10&quot;</span>, <span class="st">&quot;11&quot;</span>, <span class="st">&quot;12&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="data-sources.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(summons, <span class="at">percent =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-93-1.png" width="672" /></p>
+<blockquote>
+<p>This data set is not ideal. As one can percieve, there are only 4 variables out of 12 are complete. Good news is, we still got 25% percent of data are complete. Besides, the missin are mainly from 2 kinds: one is the missing of age, sex, and race; the other is from law description and summon type. This pattern is similar to the historical data.</p>
+</blockquote>
+</div>
+<div id="for-motor-vehicle-collisions-and-crahses-historical" class="section level4" number="2.0.1.6">
+<h4><span class="header-section-number">2.0.1.6</span> For Motor Vehicle Collisions and Crahses (Historical):</h4>
+<blockquote>
+<p>Here is our “crime court summons (YTD)” dataset. The original dataset contains 29 variables and 50000 observations. To simplify our analysis, we have figured that variables named “COLLISION_ID”, “LOCATION”, “ZIP.CODE”, “CONTRIBUTING.FACTOR.VEHICLE.1”, “CONTRIBUTING.FACTOR.VEHICLE.2”, “CONTRIBUTING.FACTOR.VEHICLE.3”, “CONTRIBUTING.FACTOR.VEHICLE.4”, “CONTRIBUTING.FACTOR.VEHICLE.5”, “VEHICLE.TYPE.CODE.1”, “VEHICLE.TYPE.CODE.2”, “VEHICLE.TYPE.CODE.3”, “VEHICLE.TYPE.CODE.4”, “VEHICLE.TYPE.CODE.5” are not necessary. So we deleted them. As shown below, according to the order in the data frame, we coded the variables from 1 to 16.</p>
+</blockquote>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="data-sources.html#cb17-1" aria-hidden="true" tabindex="-1"></a>motors <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&#39;data/Motor_Vehicle_Collisions_-_Crashes.csv&#39;</span>, <span class="at">nrows=</span><span class="dv">50000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="data-sources.html#cb18-1" aria-hidden="true" tabindex="-1"></a>motors[motors<span class="sc">==</span><span class="st">&quot;&quot;</span>]<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb18-2"><a href="data-sources.html#cb18-2" aria-hidden="true" tabindex="-1"></a>motors[motors<span class="sc">==</span><span class="st">&quot;UNKNOWN&quot;</span>]<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb18-3"><a href="data-sources.html#cb18-3" aria-hidden="true" tabindex="-1"></a>drops <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;COLLISION_ID&quot;</span>, <span class="st">&quot;LOCATION&quot;</span>, <span class="st">&quot;ZIP.CODE&quot;</span>, <span class="st">&quot;CONTRIBUTING.FACTOR.VEHICLE.1&quot;</span>, </span>
+<span id="cb18-4"><a href="data-sources.html#cb18-4" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;CONTRIBUTING.FACTOR.VEHICLE.2&quot;</span>, <span class="st">&quot;CONTRIBUTING.FACTOR.VEHICLE.3&quot;</span>, </span>
+<span id="cb18-5"><a href="data-sources.html#cb18-5" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;CONTRIBUTING.FACTOR.VEHICLE.4&quot;</span>, <span class="st">&quot;CONTRIBUTING.FACTOR.VEHICLE.5&quot;</span>, </span>
+<span id="cb18-6"><a href="data-sources.html#cb18-6" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;VEHICLE.TYPE.CODE.1&quot;</span>, <span class="st">&quot;VEHICLE.TYPE.CODE.2&quot;</span>, <span class="st">&quot;VEHICLE.TYPE.CODE.3&quot;</span>, </span>
+<span id="cb18-7"><a href="data-sources.html#cb18-7" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;VEHICLE.TYPE.CODE.4&quot;</span>, <span class="st">&quot;VEHICLE.TYPE.CODE.5&quot;</span>)</span>
+<span id="cb18-8"><a href="data-sources.html#cb18-8" aria-hidden="true" tabindex="-1"></a>motors <span class="ot">&lt;-</span> motors[ , <span class="sc">!</span>(<span class="fu">names</span>(motors) <span class="sc">%in%</span> drops)]</span>
+<span id="cb18-9"><a href="data-sources.html#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(motors) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>, <span class="st">&quot;4&quot;</span>, <span class="st">&quot;5&quot;</span>, <span class="st">&quot;6&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;8&quot;</span>, <span class="st">&quot;9&quot;</span>, <span class="st">&quot;10&quot;</span>, <span class="st">&quot;11&quot;</span>, </span>
+<span id="cb18-10"><a href="data-sources.html#cb18-10" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;12&quot;</span>, <span class="st">&quot;13&quot;</span>, <span class="st">&quot;14&quot;</span>, <span class="st">&quot;15&quot;</span>, <span class="st">&quot;16&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="data-sources.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(motors, <span class="at">percent =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-96-1.png" width="672" /></p>
+<blockquote>
+<p>It is weird that almost all missing data are related to the missing of location information, which is x8, x7, and x3, which are borough, on-street name, and out-street name. This pattern may indicates that in our motor collisions and curshed datasets, it can be difficult to locate the criminals, which may also shows that there is a tendency to run away after curshed in NYC.</p>
+</blockquote>
+</div>
+<div id="for-arrest-historical" class="section level4" number="2.0.1.7">
+<h4><span class="header-section-number">2.0.1.7</span> For arrest (Historical):</h4>
+<blockquote>
+<p>Here is our “crime court summons (YTD)” dataset. The original dataset contains 19 variables and 50000 observations. To simplify our analysis, we have figured that variables named “JURISDICTION_CODE”,“X_COORD_CD”, “Y_COORD_CD”, “Lon_Lat” are not necessary. So we deleted them. As shown below, according to the order in the data frame, we coded the variables from 1 to 15.</p>
+</blockquote>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="data-sources.html#cb20-1" aria-hidden="true" tabindex="-1"></a>arrests <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&#39;data/NYPD_Arrests_Data__Historic_.csv&#39;</span>, <span class="at">nrows=</span><span class="dv">50000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="data-sources.html#cb21-1" aria-hidden="true" tabindex="-1"></a>arrests[arrests<span class="sc">==</span><span class="st">&quot;&quot;</span>]<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb21-2"><a href="data-sources.html#cb21-2" aria-hidden="true" tabindex="-1"></a>drops <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;JURISDICTION_CODE&quot;</span>,<span class="st">&quot;X_COORD_CD&quot;</span>, <span class="st">&quot;Y_COORD_CD&quot;</span>, <span class="st">&quot;Lon_Lat&quot;</span>)</span>
+<span id="cb21-3"><a href="data-sources.html#cb21-3" aria-hidden="true" tabindex="-1"></a>arrests <span class="ot">&lt;-</span> arrests[ , <span class="sc">!</span>(<span class="fu">names</span>(arrests) <span class="sc">%in%</span> drops)]</span>
+<span id="cb21-4"><a href="data-sources.html#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(arrests) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>, <span class="st">&quot;4&quot;</span>, <span class="st">&quot;5&quot;</span>, <span class="st">&quot;6&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;8&quot;</span>, <span class="st">&quot;9&quot;</span>, <span class="st">&quot;10&quot;</span>, <span class="st">&quot;11&quot;</span>, </span>
+<span id="cb21-5"><a href="data-sources.html#cb21-5" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;12&quot;</span>, <span class="st">&quot;13&quot;</span>, <span class="st">&quot;14&quot;</span>, <span class="st">&quot;15&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="data-sources.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(arrests, <span class="at">percent =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-99-1.png" width="672" /></p>
+<blockquote>
+<p>Our arrests datasets are very friendly for analysts. Almost all the cases are complete.</p>
+</blockquote>
+</div>
+<div id="for-arrest-ytd" class="section level4" number="2.0.1.8">
+<h4><span class="header-section-number">2.0.1.8</span> For arrest (YTD):</h4>
+<blockquote>
+<p>Here is our “crime court summons (YTD)” dataset. The original dataset contains 19 variables and 74243 observations. To simplify our analysis, we have figured that variables named “JURISDICTION_CODE”,“X_COORD_CD”, “Y_COORD_CD”, “Lon_Lat”, “New.Georeferenced.Column” are not necessary. So we deleted them. As shown below, according to the order in the data frame, we coded the variables from 1 to 15.</p>
+</blockquote>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="data-sources.html#cb23-1" aria-hidden="true" tabindex="-1"></a>arrests <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&#39;data/NYPD_Arrest_Data__Year_to_Date_.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="data-sources.html#cb24-1" aria-hidden="true" tabindex="-1"></a>arrests[arrests<span class="sc">==</span><span class="st">&quot;&quot;</span>]<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb24-2"><a href="data-sources.html#cb24-2" aria-hidden="true" tabindex="-1"></a>drops <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;JURISDICTION_CODE&quot;</span>,<span class="st">&quot;X_COORD_CD&quot;</span>, <span class="st">&quot;Y_COORD_CD&quot;</span>, <span class="st">&quot;Lon_Lat&quot;</span>, <span class="st">&quot;New.Georeferenced.Column&quot;</span>)</span>
+<span id="cb24-3"><a href="data-sources.html#cb24-3" aria-hidden="true" tabindex="-1"></a>arrests <span class="ot">&lt;-</span> arrests[ , <span class="sc">!</span>(<span class="fu">names</span>(arrests) <span class="sc">%in%</span> drops)]</span>
+<span id="cb24-4"><a href="data-sources.html#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(arrests) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>, <span class="st">&quot;4&quot;</span>, <span class="st">&quot;5&quot;</span>, <span class="st">&quot;6&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;8&quot;</span>, <span class="st">&quot;9&quot;</span>, <span class="st">&quot;10&quot;</span>, <span class="st">&quot;11&quot;</span>, </span>
+<span id="cb24-5"><a href="data-sources.html#cb24-5" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;12&quot;</span>, <span class="st">&quot;13&quot;</span>, <span class="st">&quot;14&quot;</span>, <span class="st">&quot;15&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="data-sources.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(arrests, <span class="at">percent =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-102-1.png" width="672" /></p>
+<blockquote>
+<p>Just like the historical datasets, the YTD datasets are almost complete.</p>
+</blockquote>
+
+</div>
+</div>
 </div>
             </section>
 
@@ -109,7 +338,7 @@
         </div>
       </div>
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="data-transformation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="results.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
