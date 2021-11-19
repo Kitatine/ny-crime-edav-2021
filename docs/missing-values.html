@@ -24,7 +24,7 @@
 <meta name="author" content="Jingwen Bai, Qiran Li, Zheng Wu" />
 
 
-<meta name="date" content="2021-11-17" />
+<meta name="date" content="2021-11-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -76,7 +76,20 @@
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
-<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
+<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="missing-values.html"><a href="missing-values.html#missing-data-analysis"><i class="fa fa-check"></i><b>4.1</b> Missing Data Analysis</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="missing-values.html"><a href="missing-values.html#for-shooting-data-historical"><i class="fa fa-check"></i><b>4.1.1</b> For shooting data (Historical):</a></li>
+<li class="chapter" data-level="4.1.2" data-path="missing-values.html"><a href="missing-values.html#for-shooting-data-ytd"><i class="fa fa-check"></i><b>4.1.2</b> For shooting data (YTD):</a></li>
+<li class="chapter" data-level="4.1.3" data-path="missing-values.html"><a href="missing-values.html#for-hata-crimes"><i class="fa fa-check"></i><b>4.1.3</b> For Hata Crimes:</a></li>
+<li class="chapter" data-level="4.1.4" data-path="missing-values.html"><a href="missing-values.html#for-crime-court-summons-historical"><i class="fa fa-check"></i><b>4.1.4</b> For crime court summons (Historical):</a></li>
+<li class="chapter" data-level="4.1.5" data-path="missing-values.html"><a href="missing-values.html#for-crime-court-summons-ytd"><i class="fa fa-check"></i><b>4.1.5</b> For crime court summons (YTD):</a></li>
+<li class="chapter" data-level="4.1.6" data-path="missing-values.html"><a href="missing-values.html#for-motor-vehicle-collisions-and-crahses-historical"><i class="fa fa-check"></i><b>4.1.6</b> For Motor Vehicle Collisions and Crahses (Historical):</a></li>
+<li class="chapter" data-level="4.1.7" data-path="missing-values.html"><a href="missing-values.html#for-arrest-historical"><i class="fa fa-check"></i><b>4.1.7</b> For arrest (Historical):</a></li>
+<li class="chapter" data-level="4.1.8" data-path="missing-values.html"><a href="missing-values.html#for-arrest-ytd"><i class="fa fa-check"></i><b>4.1.8</b> For arrest (YTD):</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
@@ -101,7 +114,93 @@
             <section class="normal" id="section-">
 <div id="missing-values" class="section level1" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Missing values</h1>
+<div id="missing-data-analysis" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Missing Data Analysis</h2>
+<blockquote>
+<p>There are indeed a lot of missing data in our NYPD crime datasets. Here is a compreshensive missing data analyzing accross all the data set. Notice that, for some datasets, we have more than 1 billion rows. To simplified the first draft analysis, we always choose the first 50000 rows if the number of rows exceeds or equals to 50000, otherwise the whole dataset. Also, to keep track on our exploration targets, we choose to delete some of the unrelated variables. Beside, to make our graphs more readable, we have coded the original name of variables into integers. Specific coding rules will be explained during the analyzing below.</p>
+</blockquote>
+<div id="for-shooting-data-historical" class="section level3" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> For shooting data (Historical):</h3>
+<blockquote>
+<p>Here is our “shooting incident (historical)” dataset. The original dataset contains 19 variables and 23568 observations. To simplify our analysis, we have figured that variables named “JURISDICTION_CODE”,“X_COORD_CD”, “Y_COORD_CD”, “Lon_Lat” are not necessary. So we deleted them. As shown below, according to the order in the data frame, we coded the variables from 1 to 15.</p>
+</blockquote>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<blockquote>
+<p>As one can see, the variables except x6, x8, x9, x10 are all completed. What noticealbe is that the x6 variable (LOCATION_DESC) has a missing rate almost 30%. And 25% of all the cases are recorded completed. Beside, the age group, sex, and race of crininals are often missed (x8, x9, and x10), especially the ages, almost 40% of missing data are related to ages.</p>
+</blockquote>
+</div>
+<div id="for-shooting-data-ytd" class="section level3" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> For shooting data (YTD):</h3>
+<blockquote>
+<p>Here is our “shooting incident (YTD)” dataset. The original dataset contains 19 variables and 902 observations. To simplify our analysis, we have figured that variables named “JURISDICTION_CODE”,“X_COORD_CD”, “Y_COORD_CD”, “Lon_Lat” are not necessary. So we deleted them. As shown below, according to the order in the data frame, we coded the variables from 1 to 15.</p>
+</blockquote>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<blockquote>
+<p>As one can see, there are only 4 vairables are missed: location, age group, sex, and race. Similarly to the historical data, the identification of the cirminals (age, sex, race) are often missed. However, we still have about 15% of all the data are complete. Besides, over 55% percent of missing data are because of age, sex, and race of the cirminals. Which may indicates that the shooting crime criminals are very hard to identificate.</p>
+</blockquote>
+</div>
+<div id="for-hata-crimes" class="section level3" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> For Hata Crimes:</h3>
+<blockquote>
+<p>Here is our “hate crimes” dataset. The original dataset contains 14 variables and 1704 observations. To simplify our analysis, we have figured that variables named “JURISDICTION_CODE”,“X_COORD_CD”, “Y_COORD_CD”, “Lon_Lat”, “Arrest.Id”, “Complaint.Precinct.Code”, “Arrest.Date”, “Full.Complaint.ID” are not necessary. So we deleted them. As shown below, according to the order in the data frame, we coded the variables from 1 to 10.</p>
+</blockquote>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<blockquote>
+<p>It is very impressive to find out that the hate crime data are all completes cases. Nothing was missed according to the rocords of NYPD.</p>
+</blockquote>
+</div>
+<div id="for-crime-court-summons-historical" class="section level3" number="4.1.4">
+<h3><span class="header-section-number">4.1.4</span> For crime court summons (Historical):</h3>
+<blockquote>
+<p>Here is our “crime court summons (historical)” dataset. The original dataset contains 17 variables and 50000 observations. To simplify our analysis, we have figured that variables named “JURISDICTION_CODE”,“X_COORDINATE_CD”, “Y_COORDINATE_CD”, “Lon_Lat”, “PRECINCT_OF_OCCUR”, “SUMMONS_KEY” are not necessary. So we deleted them. As shown below, according to the order in the data frame, we coded the variables from 1 to 12.</p>
+</blockquote>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<blockquote>
+<p>As one can see, there are 6 out of 12 variables can be missing in our historical cour summons datasets, which is x4 to x9, which is LAW_DESCRIPTION, SUMMONS_CATEGORY_TYPE, AGE_GROUP, SEX, RACE, and BORO. What important is, we still have 35% of observations are completed. Law description missing are often related with summons category missing, which combined leads to 25% percent of the missing cases. What’s more, similar to our anlysis in the shooting crimes, it is also hard to identify the criminals by age, sex, and race, which combined leads to 38% of missing. Other missing are very small in number.</p>
+</blockquote>
+</div>
+<div id="for-crime-court-summons-ytd" class="section level3" number="4.1.5">
+<h3><span class="header-section-number">4.1.5</span> For crime court summons (YTD):</h3>
+<blockquote>
+<p>Here is our “crime court summons (YTD)” dataset. The original dataset contains 17 variables and 25691 observations. To simplify our analysis, we have figured that variables named “JURISDICTION_CODE”,“X_COORDINATE_CD”, “Y_COORDINATE_CD”, “Lon_Lat”, “PRECINCT_OF_OCCUR”, “SUMMONS_KEY” are not necessary. So we deleted them. As shown below, according to the order in the data frame, we coded the variables from 1 to 12.</p>
+</blockquote>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<blockquote>
+<p>This data set is not ideal. As one can percieve, there are only 4 variables out of 12 are complete. Good news is, we still got 25% percent of data are complete. Besides, the missin are mainly from 2 kinds: one is the missing of age, sex, and race; the other is from law description and summon type. This pattern is similar to the historical data.</p>
+</blockquote>
+</div>
+<div id="for-motor-vehicle-collisions-and-crahses-historical" class="section level3" number="4.1.6">
+<h3><span class="header-section-number">4.1.6</span> For Motor Vehicle Collisions and Crahses (Historical):</h3>
+<blockquote>
+<p>Here is our “crime court summons (YTD)” dataset. The original dataset contains 29 variables and 50000 observations. To simplify our analysis, we have figured that variables named “COLLISION_ID”, “LOCATION”, “ZIP.CODE”, “CONTRIBUTING.FACTOR.VEHICLE.1”, “CONTRIBUTING.FACTOR.VEHICLE.2”, “CONTRIBUTING.FACTOR.VEHICLE.3”, “CONTRIBUTING.FACTOR.VEHICLE.4”, “CONTRIBUTING.FACTOR.VEHICLE.5”, “VEHICLE.TYPE.CODE.1”, “VEHICLE.TYPE.CODE.2”, “VEHICLE.TYPE.CODE.3”, “VEHICLE.TYPE.CODE.4”, “VEHICLE.TYPE.CODE.5” are not necessary. So we deleted them. As shown below, according to the order in the data frame, we coded the variables from 1 to 16.</p>
+</blockquote>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<blockquote>
+<p>It is weird that almost all missing data are related to the missing of location information, which is x8, x7, and x3, which are borough, on-street name, and out-street name. This pattern may indicates that in our motor collisions and curshed datasets, it can be difficult to locate the criminals, which may also shows that there is a tendency to run away after curshed in NYC.</p>
+</blockquote>
+</div>
+<div id="for-arrest-historical" class="section level3" number="4.1.7">
+<h3><span class="header-section-number">4.1.7</span> For arrest (Historical):</h3>
+<blockquote>
+<p>Here is our “crime court summons (YTD)” dataset. The original dataset contains 19 variables and 50000 observations. To simplify our analysis, we have figured that variables named “JURISDICTION_CODE”,“X_COORD_CD”, “Y_COORD_CD”, “Lon_Lat” are not necessary. So we deleted them. As shown below, according to the order in the data frame, we coded the variables from 1 to 15.</p>
+</blockquote>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<blockquote>
+<p>Our arrests datasets are very friendly for analysts. Almost all the cases are complete.</p>
+</blockquote>
+</div>
+<div id="for-arrest-ytd" class="section level3" number="4.1.8">
+<h3><span class="header-section-number">4.1.8</span> For arrest (YTD):</h3>
+<blockquote>
+<p>Here is our “crime court summons (YTD)” dataset. The original dataset contains 19 variables and 74243 observations. To simplify our analysis, we have figured that variables named “JURISDICTION_CODE”,“X_COORD_CD”, “Y_COORD_CD”, “Lon_Lat”, “New.Georeferenced.Column” are not necessary. So we deleted them. As shown below, according to the order in the data frame, we coded the variables from 1 to 15.</p>
+</blockquote>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<blockquote>
+<p>Just like the historical datasets, the YTD datasets are almost complete.</p>
+</blockquote>
 
+</div>
+</div>
 </div>
             </section>
 

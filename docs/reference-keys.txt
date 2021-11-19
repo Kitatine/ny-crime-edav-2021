@@ -1,5 +1,7 @@
 introduction
 data-sources
+data-transformation
+missing-values
 missing-data-analysis
 for-shooting-data-historical
 for-shooting-data-ytd
