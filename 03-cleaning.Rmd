@@ -1,1 +1,6 @@
 # Data transformation
+
+```{r import the data}
+complaint.csv = read.csv(file = 'data/NYPD_Complaint_Data_Historic.csv')
+arrest.csv = read.csv(file = 'data/NYPD_Arrests_Data__Historic_.csv')
+```
