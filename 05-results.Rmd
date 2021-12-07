@@ -6,7 +6,7 @@ library(ggplot2)
 library(tidyr)
 
 
-register_google(key = 'AIzaSyBzOD3m8z7wqMsegu3wgun8uPcC8oLIa0E')
+register_google(key = Sys.getenv('GOOGLE_KEY'))
 # ggmap version 2.7+ required, use devtools::install_github('dkahle/ggmap', dep=F)
 
 
