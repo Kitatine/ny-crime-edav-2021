@@ -1,1 +1,64 @@
 # Results
+
+```{r }
+library(ggmap)
+library(ggplot2)
+library(tidyr)
+
+
+register_google(key = 'AIzaSyBzOD3m8z7wqMsegu3wgun8uPcC8oLIa0E')
+# ggmap version 2.7+ required, use devtools::install_github('dkahle/ggmap', dep=F)
+
+
+```
+
+Total Hate Crime Number this year
+
+```{r}
+# get map
+manhattan_map <- get_map(location = c(lon = -73.95, lat = 40.7), zoom = 11, scale = "auto", )
+#ggmap(manhattan_map)
+
+```
+
+```{r}
+library(rgdal)
+library(httr)
+library(dplyr)
+library(sp)
+library(tigris)
+library(broom)
+
+arrests <- read.csv(file = 'data/NYPD_Arrest_Data__Year_to_Date_.csv')
+points <- arrests[,c("Latitude","Longitude")]
+points <- points[which(!is.na(points$Latitude)),]
+points <- points[which(!is.na(points$Longitude)),]
+
+
+r <- GET('http://data.beta.nyc//dataset/0ff93d2d-90ba-457c-9f7e-39e47bf2ac5f/resource/35dd04fb-81b3-479b-a074-a27a37888ce7/download/d085e2f8d0b54d4590b1e7d1f35594c1pediacitiesnycneighborhoods.geojson')
+
+nyc_neighborhoods <- readOGR(content(r,'text'), 'OGRGeoJSON', verbose = F)
+
+points_spdf <- points
+coordinates(points_spdf) <- ~Longitude + Latitude
+proj4string(points_spdf) <- proj4string(nyc_neighborhoods)
+matches <- over(points_spdf, nyc_neighborhoods)
+points <- cbind(points, matches)
+points_by_neighborhood <- points %>% group_by(neighborhood) %>% dplyr::summarize(num_points=n())
+
+map_data <- geo_join(nyc_neighborhoods, points_by_neighborhood, "neighborhood", "neighborhood")
+
+plot_data <- tidy(nyc_neighborhoods, region="neighborhood") %>%
+  left_join(., points_by_neighborhood, by=c("id"="neighborhood")) %>%
+  filter(!is.na(num_points))
+
+```
+```{r}
+ggmap(manhattan_map)+
+  geom_polygon(data=plot_data, aes(x=long, y=lat, group=group, fill=num_points), alpha=0.75) + 
+  scale_fill_gradient(low="yellow", high="red") + 
+  ggtitle("Figure 1\n\nTotal Crimes per Neighborhood in NYC from 2021") + 
+  xlab("") +
+  ylab("") + 
+  labs(fill="Number of Crimes")
+```
