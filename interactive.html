@@ -1,0 +1,26 @@
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="https://d3js.org/d3.v6.js"></script>
+        <link rel="stylesheet" href="scripts/interactve.css">
+    </head>
+    <body>
+        <div>
+            <p id="format1" >Total Arrests in History</p>
+             <svg width="800" height="500" id="svg3"></svg>
+        </div>
+        <div>
+            <p id="format1" >Arrests by Categories in 2021</p>
+            <div>
+                <label>Select a crime category:</label>
+                <select id="CrimeCategory"></select>
+                
+            </div>
+        </div>
+        <svg  width="800" height="500"  id="crimeByCategory"></svg> 
+        <script type="text/javascript" src="scripts/totalCrime.js"> </script>
+        <script type="text/javascript" src="scripts/crimeByCategory.js"> </script>  
+    </body>
+</html>
