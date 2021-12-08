@@ -58,6 +58,7 @@ plot_data <- tidy(nyc_neighborhoods, region="neighborhood") %>%
   filter(!is.na(num_points))
 
 ```
+
 ```{r}
 ggmap(manhattan_map)+
   geom_polygon(data=plot_data, aes(x=long, y=lat, group=group, fill=num_points), alpha=0.75) + 
