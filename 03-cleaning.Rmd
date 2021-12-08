@@ -1,6 +1,148 @@
 # Data transformation
 
+Here we include the basic data transformation as the preprocessing module to clean the data and obtain some fundamental insights. Most of the data provided by NYPD has already been organized and has few missing data, so our focus here would mainly be insights formulation, where we shall decide the specific metric for further exploration.     
+Notice that since all our data listed here have millions of rows, so we turn to the `ff` library to enable fast loading the dataset feature.   
+
+
 ```{r import the data}
-complaint.csv = read.csv(file = 'data/NYPD_Complaint_Data_Historic.csv')
-arrest.csv = read.csv(file = 'data/NYPD_Arrests_Data__Historic_.csv')
+library(ff)
+library(dplyr)
+library(ggplot2)
+# if want to see the detailed output, add the VERBOSE = TRUE option for the read.csv.ffdf function
+complaint.df = read.csv(file="data/NYPD_Complaint_Data_Historic.csv")
+arrest.df = read.csv.ffdf(file = 'data/NYPD_Arrests_Data__Historic_.csv', header=TRUE, 
+                  first.rows=10000, next.rows=50000)
+
+arrest.df = as.data.frame(arrest.df)
+```
+First we define some reusable module that we would repetitively use in our analysis below,   
+
+```{r data analysis, reusable module}
+filter_before <- function(df, col, format = "%m/%d/%Y", year = NULL, date = NULL, option = NULL) {
+    if (option == 'y'){
+      df[['Year']] <- format(as.Date(df[[col]], format=format),"%Y")
+      return(df %>% filter(Year >= year))
+    }
+}
+```
+
+
+```{r}
+arrest_2020.df <- filter_before(arrest.df, 'ARREST_DATE', year = 2020, option = 'y')
+col_of_interest <- c('LAW_CAT_CD', 'ARREST_DATE')
+arrest_2020.df.interest = arrest_2020.df[col_of_interest]
+arrest_2020.df.interest
+```
+## Preprocess and Time Trend Modulation (NA REMOVAL)
+```{r}
+
+time_target <- function(df, time_id_col, option = NULL, col_of_interest = NULL, target_col  = NULL,
+                        group_option = NULL){
+    if (option == 'year') {
+        df[['Year']] <- format(as.Date(df[[time_id_col]], format="%m/%d/%Y"),"%Y")
+        if (!is.null(col_of_interest)) {
+            df.interest <- df[col_of_interest]
+            df.interest[df.interest==""] <- NA
+            df.interest <- na.omit(df.interest)
+            if(!is.null(group_option)){
+              df_year_target = df.interest %>% group_by(Year, across(all_of(target_col))) %>% 
+    summarise(count = n())
+              return (df_year_target)
+            }
+            else{
+              return(df.interest)
+            }
+            
+        }
+        else {
+          return(df[['Year']])
+        }
+    }
+    if (option == "month") {
+      df[['Month']] <- format(as.Date(df[[time_id_col]], format="%m/%d/%Y"),"%m")
+      if (!is.null(col_of_interest)) {
+            df.interest <- df[col_of_interest]
+            df.interest[df.interest==""] <- NA
+            df.interest <- na.omit(df.interest)
+            df_year_target = df.interest %>% group_by(Month, across(all_of(target_col))) %>% 
+    summarise(count = n())
+            return (df_year_target)
+        }
+        else {
+          return(df[['Month']])
+        }
+    }
+}
+
+df_year_target <- time_target(arrest.df, 
+                        time_id_col = 'ARREST_DATE',
+                        option = 'year',
+                        col_of_interest = c('LAW_CAT_CD', 'ARREST_DATE', 'Year'),
+                        target_col = 'LAW_CAT_CD',
+                        group_option = 'group')
+
+year_range <- unique(df_year_target$Year)
+caption = "Number of offense incidents over the last "
+caption <- paste(caption, 
+                 as.integer(max(year_range)) - as.integer(min(year_range)),
+                 " years (",
+                 min(year_range), "-", max(year_range), ")")
+plt <- 
+  ggplot(data = df_year_target,aes(x = as.numeric(Year), y = count)) + 
+    ggtitle(caption) + 
+    xlab("Year from 2006 to 2020") + 
+    ylab("Number of incidents") + 
+    geom_point(aes(color = LAW_CAT_CD), size = 3) + 
+    geom_line(aes(color = LAW_CAT_CD), size = 1)
+plt
+
+```
+
+## By Region Analysis Trial
+```{r}
+df_year <- time_target(arrest.df, 
+                        time_id_col = 'ARREST_DATE',
+                        option = 'year',
+                        col_of_interest = c('LAW_CAT_CD', 'ARREST_DATE', 'Year', 'ARREST_BORO',
+                                            'Latitude', 'Longitude'),
+                        target_col = 'LAW_CAT_CD',
+                        group_option = NULL)
+
+ggplot(data = (df_year %>% filter(Year == 2015)), aes(x = LAW_CAT_CD)) + 
+    geom_bar(aes(fill = LAW_CAT_CD)) + ggtitle("The histogram of offense insidents by borough") + 
+    xlab("Offenses") + ylab("Number of offenses") + theme(legend.position = "bottom") + 
+    scale_x_discrete(labels = c('BR', 'SI', 'K', 'MA', 'Q')) + 
+    facet_wrap(~ARREST_BORO, nrow = 1)
+```
+
+## Interactive Map Trial
+```{r}
+library(leaflet)
+library(ggmap)
+
+df_year = df_year %>% mutate(lon = Longitude, lat = Latitude)
+df_MANHATTAN_2020 = df_year %>% filter(ARREST_BORO=="M", Year == "2020")
+leaflet(df_year, height=300, width=900) %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(lng=df_MANHATTAN_2020$lon, lat=df_MANHATTAN_2020$lat,
+             clusterOptions = markerClusterOptions())
+
+```
+
+## Require API KEY
+```{r eval=FALSE}
+register_google(key = Sys.getenv('GOOGLE_KEY'))
+area_map_obj = get_map("MANHATTAN NYC", zoom = 13, maptype = "toner-background", 
+    source = "stamen")
+t_manhattan = tb %>% filter(Borough == "MANHATTAN", Occurrence.Year == "2015") %>% 
+    mutate(lon = loc_y, lat = loc_x)
+draw_density_map_of_offenses_for_borough(area_map_obj, t_manhattan)
+```
+
+
+Here 'CMPLNT_FR_DT' represent the   
+```{r echo = FALSE}
+complaint_2019_2020.df <- filter_before(complaint.df, 'CMPLNT_FR_DT', year = 2019, option = 'y')
+str(complaint_2019_2020.df)
+col_of_interest <- c('CMPLNT_FR_DT', 'Year')
 ```

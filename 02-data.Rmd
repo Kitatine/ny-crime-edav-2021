@@ -1,2 +1,27 @@
 # Data sources
 
+
+## NYPD Complaints Dataset
+
+```{r, results='asis'}
+complaints.description.df = data.frame(Variables = c("CMPLNT_FR_DT"), 
+                            Description = c("Date in %m/%d/%y, Exact date of occurrence for the reported event (or starting date of occurrence, if CMPLNT_TO_DT exists)")
+)
+knitr::kable(complaints.description.df, caption = "Major columns used in NYPD Complaints",
+             row.names = F,font_size = 10)
+```
+
+### NYPD Arrest Dataset
+
+```{r}
+arrest.description.df = data.frame(
+                            Variables = c("LAW_CAT_CD", 
+                                          "ARREST_DATE"), 
+                            Description = c("Text, Level of offense: felony, misdemeanor, violation",                                              "Date in %m/%d/%y, Exact date of arrest for the reported event"))
+knitr::kable(arrest.description.df, caption = "Major columns used in NYPD Arrest",
+             row.names = F,font_size = 10)
+```
+
+
+
+
