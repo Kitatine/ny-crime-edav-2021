@@ -4,6 +4,8 @@
     stroke-width: 2.0px;
 }
 
+/* add more color when add new category*/
+
 .assualt {
     fill: none;
     stroke: red;
@@ -21,6 +23,7 @@
     stroke: greenyellow;
     stroke-width: 2.0px;
 }
+/******/
 
 #format1{
     font-size:20px;
