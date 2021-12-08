@@ -1,12 +1,17 @@
 # Results
 
 ```{r }
+#all the code below are just tests, just trying to make things work , will be extracted later on
+
 library(ggmap)
 library(ggplot2)
 library(tidyr)
+library(highcharter)
+library(leaflet)
+library(lubridate)
 
 
-register_google(key = Sys.getenv('GOOGLE_KEY'))
+register_google(key = 'AIzaSyCN8o1uKOQ5frwppp_0xwIQrOp1_WgyKeo')
 # ggmap version 2.7+ required, use devtools::install_github('dkahle/ggmap', dep=F)
 
 
@@ -21,7 +26,7 @@ manhattan_map <- get_map(location = c(lon = -73.95, lat = 40.7), zoom = 11, scal
 
 ```
 
-```{r}
+```{r, echo=FALSE}
 library(rgdal)
 library(httr)
 library(dplyr)
@@ -61,4 +66,12 @@ ggmap(manhattan_map)+
   xlab("") +
   ylab("") + 
   labs(fill="Number of Crimes")
+```
+
+```{r}
+leaflet(plot_data) %>%
+  addTiles() %>%
+  setView(-74.00, 40.71, zoom = 10) %>%
+  addCircleMarkers(~long, ~lat, radius = 5, stroke=FALSE, fillOpacity = 0.5)
+```
 ```

@@ -1,0 +1,34 @@
+.line1 {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 2.0px;
+}
+
+.assualt {
+    fill: none;
+    stroke: red;
+    stroke-width: 2.0px;
+}
+
+.felony {
+    fill: none;
+    stroke: blueviolet;
+    stroke-width: 2.0px;
+}
+
+.burgary {
+    fill: none;
+    stroke: greenyellow;
+    stroke-width: 2.0px;
+}
+
+#format1{
+    font-size:20px;
+    font-family:Palatino;
+    text-align: center;
+}
+
+#format2{
+    font-size:16px;
+    font-family:Palatino;
+}
