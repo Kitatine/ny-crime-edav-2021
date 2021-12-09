@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+<link rel="stylesheet" href="styles/mapStyle.css">
+<!-- Create an element where the map will take place -->
+<div id = 'map'>
+<svg id="my_dataviz" width="800" height="500"></svg>
+</div>
+
+<script>
+     
+    // Define color scale
+    var color = d3.scaleLinear()
+    .domain([1, 20])
+    .clamp(true)
+    .range(['#fff', '#409A99']);
+
+    // The svg
+    var svg = d3.select("svg"),
+        width = +svg.attr("width"),
+        height = +svg.attr("height");
+    
+    var  centered;
+    
+    // add background
+    svg.append('rect')
+        .attr('class', 'background')
+        .attr('width', width)
+        .attr('height', height)
+        .on('click', clicked);
+
+    // add layer
+    var g = svg.append('g');
+
+    var effectLayer = g.append('g')
+    .classed('effect-layer', true);
+
+    var mapLayer = g.append('g')
+    .classed('map-layer', true);
+
+    // var dummyText = g.append('text')
+    // .classed('dummy-text', true)
+    // .attr('x', 10)
+    // .attr('y', 30)
+    // .style('opacity', 0);
+
+    // var bigText = g.append('text')
+    // .classed('big-text', true)
+    // .attr('x', 20)
+    // .attr('y', 45);
+
+    // ///////////////////////////////////////////////////////////
+
+            
+    // Map and projection
+
+    var projection = d3.geoMercator()
+        .center([-74.00, 40.71])                // GPS of location to zoom on
+        .scale(50000)                       // This is like the zoom
+        .translate([ width/2, height/2 ])
+    var path = d3.geoPath()
+    .projection(projection);
+
+    // ///////////////////////////////////////////////////////////
+    // tooltip 
+    var Tooltip = d3.select("#map")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("background-color", "white")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "5px")
+    .style("padding", "5px")
+
+  // Three function that change the tooltip when user hover / move / leave a cell
+  var mouseover = function(d) {
+    Tooltip
+      .style("opacity", 1)
+    d3.select(this)
+      .style("stroke", "black")
+      .style("opacity", 1)
+  }
+  var mousemove = function(d) {
+    //   console.log(d)
+    Tooltip
+      .html("precinct number : " + d.properties.precinct)
+      .style("left", (d3.mouse(this)[0]+70) + "px")
+      .style("top", (d3.mouse(this)[1]) + "px")
+  }
+  var mouseleave = function(d) {
+    Tooltip
+      .style("opacity", 0)
+    d3.select(this)
+      .style("stroke", "none")
+      .style("opacity", 0.8)
+  }
+
+
+    // Load internal data and boot
+    //https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson
+   // http://data.beta.nyc//dataset/0ff93d2d-90ba-457c-9f7e-39e47bf2ac5f/resource/35dd04fb-81b3-479b-a074-a27a37888ce7/download/d085e2f8d0b54d4590b1e7d1f35594c1pediacitiesnycneighborhoods.geojson
+   
+    d3.json('/data/Police_Precincts.geojson', function(error, mapData) {
+            var features = mapData.features;
+            // console.log(features)
+            // Update color scale domain based on data
+            color.domain([0, d3.max(features, nameLength)]);
+
+            // Draw each province as a path
+            mapLayer.selectAll('path')
+                .data(features)
+                .enter().append('path')
+                .attr('d', path)
+                .attr('vector-effect', 'non-scaling-stroke')
+                .style('fill', fillFn)
+                .on("mouseover", mouseover)
+                .on("mousemove", mousemove)
+                .on("mouseleave", mouseleave)
+                .on('click', clicked);
+            });
+
+    // Get province name
+function nameFn(d){
+    // console.log(d)
+  return d && d.properties ? d.properties.precinct : null;
+}
+
+var numberCrime2021 =[]
+// Get province name length
+function nameLength(d){
+  var n = nameFn(d);
+//   console.log(n)
+//   numberCrime2021.push(int(n))
+  return n ? n.length : 0;
+}
+
+// Get province color
+function fillFn(d){
+  return color(nameLength(d));
+}
+////////////////////////////////////////        
+// When clicked, zoom in, double click to zoom out 
+function clicked(d) {
+  var x, y, k;
+
+  // Compute centroid of the selected path
+  if (d && centered !== d) {
+    var centroid = path.centroid(d);
+    x = centroid[0];
+    y = centroid[1];
+    k = 4;
+    centered = d;
+  } else {
+    x = width / 2;
+    y = height / 2;
+    k = 1;
+    centered = null;
+  }
+
+  // Highlight the clicked province
+  mapLayer.selectAll('path')
+    .style('fill', function(d){return centered && d===centered ? '#D5708B' : fillFn(d);});
+
+  // Zoom
+  g.transition()
+    .duration(750)
+    .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')scale(' + k + ')translate(' + -x + ',' + -y + ')');
+}
+
+    
+</script> 
+
+</html>
