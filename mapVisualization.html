@@ -7,171 +7,543 @@
 <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
 <link rel="stylesheet" href="styles/mapStyle.css">
 <!-- Create an element where the map will take place -->
-<div id = 'map'>
-<svg id="my_dataviz" width="800" height="500"></svg>
+<div id='map'>
+    <label>Select a year</label>
+    <select id="year"></select>
+    <svg id="my_dataviz" width="800" height="500"></svg>
 </div>
 
 <script>
-     
+    var total_2018 = {
+        "14": 8097,
+        "44": 7123,
+        "40": 6730,
+        "75": 6694,
+        "113": 6251,
+        "52": 5915,
+        "46": 5743,
+        "73": 5482,
+        "25": 5356,
+        "47": 5182,
+        "43": 4842,
+        "67": 4736,
+        "48": 4604,
+        "120": 4587,
+        "5": 4570,
+        "115": 4370,
+        "114": 4281,
+        "42": 4278,
+        "103": 4132,
+        "109": 3984,
+        "18": 3883,
+        "60": 3880,
+        "70": 3874,
+        "79": 3828,
+        "41": 3748,
+        "110": 3656,
+        "77": 3650,
+        "84": 3607,
+        "102": 3496,
+        "23": 3348,
+        "49": 3344,
+        "72": 3286,
+        "13": 3202,
+        "105": 3195,
+        "32": 3130,
+        "34": 3096,
+        "71": 3072,
+        "83": 3053,
+        "1": 2792,
+        "106": 2777,
+        "6": 2722,
+        "101": 2701,
+        "33": 2651,
+        "104": 2624,
+        "45": 2617,
+        "121": 2609,
+        "90": 2539,
+        "68": 2502,
+        "19": 2352,
+        "28": 2320,
+        "7": 2311,
+        "9": 2310,
+        "107": 2309,
+        "61": 2231,
+        "69": 2176,
+        "81": 2157,
+        "76": 2080,
+        "63": 2051,
+        "122": 2004,
+        "10": 1954,
+        "108": 1929,
+        "24": 1803,
+        "78": 1783,
+        "26": 1778,
+        "62": 1653,
+        "30": 1631,
+        "112": 1628,
+        "20": 1622,
+        "100": 1552,
+        "17": 1491,
+        "88": 1415,
+        "94": 1365,
+        "50": 1320,
+        "66": 1293,
+        "123": 1224,
+        "111": 1055,
+        "22": 137
+    };
+    var total_2019 = {
+        "40": 7098,
+        "44": 6465,
+        "14": 6051,
+        "113": 6036,
+        "75": 6024,
+        "52": 5131,
+        "46": 4724,
+        "25": 4693,
+        "47": 4566,
+        "73": 4409,
+        "115": 4103,
+        "5": 4066,
+        "103": 4050,
+        "67": 4038,
+        "43": 4007,
+        "120": 3704,
+        "42": 3703,
+        "114": 3566,
+        "48": 3551,
+        "109": 3496,
+        "110": 3283,
+        "60": 3194,
+        "41": 3155,
+        "72": 3151,
+        "18": 3108,
+        "79": 3061,
+        "84": 3049,
+        "70": 3020,
+        "32": 2979,
+        "77": 2978,
+        "23": 2820,
+        "102": 2814,
+        "13": 2804,
+        "49": 2799,
+        "83": 2743,
+        "105": 2710,
+        "1": 2687,
+        "71": 2574,
+        "121": 2520,
+        "19": 2468,
+        "90": 2453,
+        "34": 2435,
+        "106": 2419,
+        "104": 2238,
+        "45": 2235,
+        "6": 2211,
+        "33": 2209,
+        "101": 2134,
+        "28": 2109,
+        "7": 2088,
+        "68": 2060,
+        "61": 2032,
+        "107": 2008,
+        "9": 1903,
+        "81": 1893,
+        "10": 1890,
+        "122": 1833,
+        "62": 1801,
+        "108": 1784,
+        "63": 1772,
+        "76": 1682,
+        "112": 1653,
+        "26": 1605,
+        "69": 1525,
+        "30": 1516,
+        "20": 1439,
+        "24": 1407,
+        "50": 1380,
+        "100": 1358,
+        "78": 1320,
+        "17": 1311,
+        "88": 1283,
+        "66": 1252,
+        "123": 975,
+        "94": 973,
+        "111": 945,
+        "22": 88
+    }
+    var total_2020 = {
+        "40": 4379,
+        "44": 3808,
+        "75": 3793,
+        "46": 3371,
+        "113": 3317,
+        "52": 3196,
+        "43": 3164,
+        "47": 3140,
+        "14": 3047,
+        "103": 2993,
+        "25": 2789,
+        "73": 2776,
+        "114": 2659,
+        "67": 2612,
+        "115": 2556,
+        "79": 2523,
+        "42": 2517,
+        "48": 2490,
+        "120": 2379,
+        "41": 2287,
+        "109": 2240,
+        "60": 2219,
+        "5": 2199,
+        "110": 2183,
+        "77": 2113,
+        "105": 2082,
+        "72": 2027,
+        "23": 1938,
+        "70": 1935,
+        "102": 1934,
+        "104": 1901,
+        "18": 1896,
+        "83": 1875,
+        "121": 1870,
+        "32": 1852,
+        "49": 1819,
+        "6": 1807,
+        "13": 1751,
+        "84": 1748,
+        "106": 1735,
+        "101": 1560,
+        "33": 1495,
+        "19": 1490,
+        "34": 1469,
+        "71": 1468,
+        "90": 1455,
+        "45": 1444,
+        "28": 1429,
+        "1": 1407,
+        "61": 1395,
+        "63": 1357,
+        "68": 1353,
+        "107": 1334,
+        "81": 1281,
+        "9": 1277,
+        "7": 1267,
+        "24": 1233,
+        "122": 1227,
+        "10": 1175,
+        "62": 1163,
+        "50": 1109,
+        "112": 1063,
+        "69": 1034,
+        "30": 1018,
+        "26": 1016,
+        "108": 997,
+        "88": 984,
+        "66": 972,
+        "100": 881,
+        "17": 869,
+        "78": 791,
+        "76": 762,
+        "20": 748,
+        "123": 719,
+        "94": 623,
+        "111": 578,
+        "22": 50
+    }
+    var overall = {
+        "14": 179971,
+        "75": 176046,
+        "44": 165166,
+        "40": 151858,
+        "73": 141278,
+        "46": 128498,
+        "43": 126364,
+        "52": 121176,
+        "25": 115660,
+        "103": 107070,
+        "113": 100044,
+        "115": 96412,
+        "79": 93609,
+        "120": 92843,
+        "47": 92565,
+        "41": 91581,
+        "67": 91267,
+        "48": 90399,
+        "42": 86669,
+        "114": 81897,
+        "83": 81256,
+        "32": 79739,
+        "77": 79695,
+        "110": 78834,
+        "5": 77949,
+        "23": 76108,
+        "34": 73243,
+        "18": 71902,
+        "70": 71643,
+        "28": 71381,
+        "33": 70995,
+        "109": 68303,
+        "71": 67333,
+        "13": 67019,
+        "60": 65417,
+        "81": 63603,
+        "1": 62532,
+        "84": 62227,
+        "105": 61285,
+        "102": 58483,
+        "6": 56461,
+        "30": 55743,
+        "104": 55178,
+        "90": 54161,
+        "9": 54005,
+        "72": 53442,
+        "49": 51129,
+        "106": 50653,
+        "101": 48353,
+        "7": 46657,
+        "19": 44955,
+        "122": 43961,
+        "61": 43651,
+        "10": 43448,
+        "107": 43429,
+        "45": 42811,
+        "69": 40934,
+        "24": 40089,
+        "26": 39808,
+        "108": 37619,
+        "88": 37213,
+        "62": 36319,
+        "68": 33896,
+        "112": 33118,
+        "63": 32936,
+        "50": 30688,
+        "76": 29891,
+        "20": 29680,
+        "100": 27437,
+        "78": 27258,
+        "17": 26192,
+        "66": 25864,
+        "121": 24639,
+        "111": 23171,
+        "94": 22530,
+        "123": 20145,
+        "22": 6584,
+        "27": 1
+    }
+
     // Define color scale
     var color = d3.scaleLinear()
-    .domain([1, 20])
-    .clamp(true)
-    .range(['#fff', '#409A99']);
+        .domain([1, 20])
+        .clamp(true)
+        .range(['#fff', '#409A99']);
 
     // The svg
     var svg = d3.select("svg"),
         width = +svg.attr("width"),
         height = +svg.attr("height");
-    
-    var  centered;
-    
+
+    var centered;
+
     // add background
     svg.append('rect')
         .attr('class', 'background')
         .attr('width', width)
         .attr('height', height)
-        .on('click', clicked);
+
+    // .on('click', clicked);
 
     // add layer
     var g = svg.append('g');
 
     var effectLayer = g.append('g')
-    .classed('effect-layer', true);
+        .classed('effect-layer', true);
 
     var mapLayer = g.append('g')
-    .classed('map-layer', true);
+        .classed('map-layer', true)
 
-    // var dummyText = g.append('text')
-    // .classed('dummy-text', true)
-    // .attr('x', 10)
-    // .attr('y', 30)
-    // .style('opacity', 0);
-
-    // var bigText = g.append('text')
-    // .classed('big-text', true)
-    // .attr('x', 20)
-    // .attr('y', 45);
 
     // ///////////////////////////////////////////////////////////
 
-            
+
     // Map and projection
 
     var projection = d3.geoMercator()
-        .center([-74.00, 40.71])                // GPS of location to zoom on
-        .scale(50000)                       // This is like the zoom
-        .translate([ width/2, height/2 ])
+        .center([-74.00, 40.71]) // GPS of location to zoom on
+        .scale(50000) // This is like the zoom
+        .translate([width / 2, height / 2])
     var path = d3.geoPath()
-    .projection(projection);
+        .projection(projection);
 
-    // ///////////////////////////////////////////////////////////
-    // tooltip 
-    var Tooltip = d3.select("#map")
-    .append("div")
-    .style("opacity", 0)
-    .attr("class", "tooltip")
-    .style("background-color", "white")
-    .style("border", "solid")
-    .style("border-width", "2px")
-    .style("border-radius", "5px")
-    .style("padding", "5px")
 
-  // Three function that change the tooltip when user hover / move / leave a cell
-  var mouseover = function(d) {
-    Tooltip
-      .style("opacity", 1)
-    d3.select(this)
-      .style("stroke", "black")
-      .style("opacity", 1)
-  }
-  var mousemove = function(d) {
-    //   console.log(d)
-    Tooltip
-      .html("precinct number : " + d.properties.precinct)
-      .style("left", (d3.mouse(this)[0]+70) + "px")
-      .style("top", (d3.mouse(this)[1]) + "px")
-  }
-  var mouseleave = function(d) {
-    Tooltip
-      .style("opacity", 0)
-    d3.select(this)
-      .style("stroke", "none")
-      .style("opacity", 0.8)
-  }
 
 
     // Load internal data and boot
     //https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson
-   // http://data.beta.nyc//dataset/0ff93d2d-90ba-457c-9f7e-39e47bf2ac5f/resource/35dd04fb-81b3-479b-a074-a27a37888ce7/download/d085e2f8d0b54d4590b1e7d1f35594c1pediacitiesnycneighborhoods.geojson
-   
+    // http://data.beta.nyc//dataset/0ff93d2d-90ba-457c-9f7e-39e47bf2ac5f/resource/35dd04fb-81b3-479b-a074-a27a37888ce7/download/d085e2f8d0b54d4590b1e7d1f35594c1pediacitiesnycneighborhoods.geojson
+    var features;
     d3.json('/data/Police_Precincts.geojson', function(error, mapData) {
-            var features = mapData.features;
-            // console.log(features)
+        features = mapData.features;
+        console.log(features)
             // Update color scale domain based on data
-            color.domain([0, d3.max(features, nameLength)]);
+        color.domain([0, d3.max(features, nameLength)]);
 
-            // Draw each province as a path
-            mapLayer.selectAll('path')
-                .data(features)
-                .enter().append('path')
-                .attr('d', path)
-                .attr('vector-effect', 'non-scaling-stroke')
-                .style('fill', fillFn)
-                .on("mouseover", mouseover)
-                .on("mousemove", mousemove)
-                .on("mouseleave", mouseleave)
-                .on('click', clicked);
-            });
+        // Draw each province as a path
+        mapLayer.selectAll('path')
+            .data(features)
+            .enter().append('path')
+            .attr('d', path)
+            .attr('vector-effect', 'non-scaling-stroke')
+            .style('fill', fillFn)
+            .on("mouseover", mouseover)
+            .on("mousemove", mousemove)
+            .on("mouseleave", mouseleave)
+            .on('click', clicked);
+    });
 
     // Get province name
-function nameFn(d){
-    // console.log(d)
-  return d && d.properties ? d.properties.precinct : null;
-}
+    function nameFn(d) {
+        // console.log(d.properties .precinct)
+        return d && d.properties ? d.properties.precinct : null;
+    }
 
-var numberCrime2021 =[]
-// Get province name length
-function nameLength(d){
-  var n = nameFn(d);
-//   console.log(n)
-//   numberCrime2021.push(int(n))
-  return n ? n.length : 0;
-}
+    var numberCrime2021 = []
+        // Get province name length
+    function nameLength(d) {
+        var n = nameFn(d);
+        // console.log(total_2018[n.toString()])
+        return data[n.toString()];
+    }
 
-// Get province color
-function fillFn(d){
-  return color(nameLength(d));
-}
-////////////////////////////////////////        
-// When clicked, zoom in, double click to zoom out 
-function clicked(d) {
-  var x, y, k;
+    // Get province color
+    function fillFn(d) {
+        return color(nameLength(d));
+    }
+    // *************************** functional data ***************************
+    // Three function that change the tooltip when user hover / move / leave a cell
+    var Tooltip = d3.select("#map")
+        .append("div")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        .style("background-color", "white")
+        .style("border", "solid")
+        .style("border-width", "2px")
+        .style("border-radius", "5px")
+        .style("padding", "5px")
 
-  // Compute centroid of the selected path
-  if (d && centered !== d) {
-    var centroid = path.centroid(d);
-    x = centroid[0];
-    y = centroid[1];
-    k = 4;
-    centered = d;
-  } else {
-    x = width / 2;
-    y = height / 2;
-    k = 1;
-    centered = null;
-  }
+    var mouseover = function(d) {
+        Tooltip
+            .style("opacity", 1)
+        d3.select(this)
+            .style("stroke", "black")
+            .style("opacity", 1)
+    }
+    var mousemove = function(d) {
+        //   console.log(d)
+        Tooltip
+            .html("precinct number : " + d.properties.precinct + '</br>' +
+                "year __ overall crime number : " + data[d.properties.precinct])
+            .style("left", (d3.mouse(this)[0] + 70) + "px")
+            .style("top", (d3.mouse(this)[1]) + "px")
+    }
+    var mouseleave = function(d) {
+        Tooltip
+            .style("opacity", 1)
+        d3.select(this)
+            .style("stroke", "none")
+            .style("opacity", 0.8)
+    }
 
-  // Highlight the clicked province
-  mapLayer.selectAll('path')
-    .style('fill', function(d){return centered && d===centered ? '#D5708B' : fillFn(d);});
+    // When clicked, zoom in , double click to zoom out
 
-  // Zoom
-  g.transition()
-    .duration(750)
-    .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')scale(' + k + ')translate(' + -x + ',' + -y + ')');
-}
+    function clicked(d) {
+        var x, y, k;
+        // Compute centroid of the selected path
+        if (d && centered !== d) {
+            var centroid = path.centroid(d);
+            x = centroid[0];
+            y = centroid[1];
+            k = 4;
+            centered = d;
+        } else {
+            x = width / 2;
+            y = height / 2;
+            k = 1;
+            centered = null;
+        }
 
-</script> 
+        // Highlight the clicked province
+        mapLayer.selectAll('path')
+            .style('fill', function(d) {
+                return centered && d === centered ? '#D5708B' : fillFn(d);
+            });
+        // Zoom
+        g.transition()
+            .duration(750)
+            .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')scale(' + k + ')translate(' + -x + ',' + -y + ')');
+
+        Tooltip
+            .style("opacity", 1)
+        d3.select(this)
+            .style("stroke", "black")
+            .style("opacity", 1)
+    }
+
+    //***************** ***************** dropdown selection  ***************** *****************
+
+    d3.select("select#year")
+        .selectAll('myOptions')
+        .data(["", 2018, 2019, 2020])
+        .enter()
+        .append('option')
+        .text((d) => d.toString()) // text showed in the menu
+        .attr("value", (d) => d.toString()) // corresponding value returned by the button
+
+    var data = overall
+    d3.select("select#year").on("change", (d) => {
+        var selected = d3.select("select#year").property("value");
+
+        update(selected);
+
+    })
+
+    function update(selected) {
+        var dataLookup = {
+            '2018': total_2018,
+            '2019': total_2019,
+            '2020': total_2020,
+
+        }
+        data = dataLookup[selected];
+
+        // update color 
+        color.domain([0, d3.max(features, nameLength)]);
+
+        mapLayer.selectAll('path')
+            .style('fill', fillFn)
+
+        color.domain([0, d3.max(features, nameLength)]);
+
+        // Get province name
+        function nameFn(d) {
+            // console.log(d.properties .precinct)
+            return d && d.properties ? d.properties.precinct : null;
+        }
+
+        var numberCrime2021 = []
+            // Get province name length
+        function nameLength(d) {
+            var n = nameFn(d);
+            // console.log(total_2018[n.toString()])
+            return data[n.toString()];
+        }
+
+        // Get province color
+        function fillFn(d) {
+            return color(nameLength(d));
+        }
+
+    }
+</script>
 
 </html>
