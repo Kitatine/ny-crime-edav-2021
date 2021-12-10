@@ -4,7 +4,9 @@
         <meta charset="utf-8">
         <title></title>
         <script src="https://d3js.org/d3.v6.js"></script>
-        <link rel="stylesheet" href="scripts/interactve.css">
+        <script src="https://d3js.org/d3-fetch.v1.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?&sensor=true&key=AIzaSyCN8o1uKOQ5frwppp_0xwIQrOp1_WgyKeo" defer></script>
+        <link rel="stylesheet" href="styles/interactve.css">
     </head>
     <body>
         <div>
@@ -19,8 +21,14 @@
                 
             </div>
         </div>
+        <div>
+            <label>Crime Data Location Visualization</label>
+            <select id="CrimeCategory"></select>
+            
+        </div>
         <svg  width="800" height="500"  id="crimeByCategory"></svg> 
         <script type="text/javascript" src="scripts/totalCrime.js"> </script>
         <script type="text/javascript" src="scripts/crimeByCategory.js"> </script>  
+         
     </body>
 </html>
