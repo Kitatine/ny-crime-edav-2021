@@ -5,24 +5,37 @@
 }
 
 /* add more color when add new category*/
+/* var categories = ['assualt', 'drugs', 'theft', 'felony', 'petit_larceny'] */
 
-.assualt {
+/* #assualt {
     fill: none;
-    stroke: red;
+    stroke: 	#e9967a;
     stroke-width: 2.0px;
 }
 
-.felony {
+#felony {
     fill: none;
-    stroke: blueviolet;
+    stroke: #8fbc8f	;
     stroke-width: 2.0px;
 }
 
-.burgary {
+#drugs {
     fill: none;
-    stroke: greenyellow;
+    stroke: #6495ed	;
     stroke-width: 2.0px;
 }
+
+#vehicle_and_traiffic_law {
+    fill: none;
+    stroke: #8b008b	;
+    stroke-width: 2.0px;
+}
+
+#petit_larceny {
+    fill: none;
+    stroke: 	#483d8b;
+    stroke-width: 2.0px;
+} */
 /******/
 
 #format1{
@@ -34,4 +47,23 @@
 #format2{
     font-size:16px;
     font-family:Palatino;
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 60px;
+    height: 28px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+  }
+
+g.legend{
+    font-size:12px;
+    font-family: sans-serif;
+
 }
