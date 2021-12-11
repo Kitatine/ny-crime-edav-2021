@@ -70,18 +70,37 @@ caption <- paste(caption,
 
 color_lst <- colorspace::rainbow_hcl(n = 4)
 
-plt_arrest_1 <- 
-  ggplot(data = df_year_target,aes(x = as.numeric(Year), y = count)) + 
-    ggtitle(caption) + 
-    xlab("Year") + 
-    ylab("Number of incidents") + 
-    geom_point(aes(color = LAW_CAT_CD), size = 1) + 
-    geom_line(aes(color = LAW_CAT_CD), size = 1) +
-    scale_color_manual(labels = c("Misdemeanor", "Felony", "Violation", "Other"), values = color_lst) +
-    theme_bw() +
-    guides(color = guide_legend("Levels of Offense"))
+static_trend_plot_arrest <- function(df) {
+  plt_arrest_1 <- 
+    ggplot(data = df, aes(x = as.numeric(Year), y = count)) + 
+      ggtitle(caption) + 
+      xlab("Year") + 
+      ylab("Number of incidents") + 
+      geom_point(aes(color = LAW_CAT_CD), size = 1) + 
+      geom_line(aes(color = LAW_CAT_CD), size = 1) +
+      scale_color_manual(labels = c("Misdemeanor", "Felony", "Violation", "Other"), values = color_lst) +
+      theme_bw() +
+      guides(color = guide_legend("Levels of Offense"))
   
-plt_arrest_1
+  return(plt_arrest_1)
+}
+
+
+interactive_trend_plot_arrest <- function(df){
+  levels(df_year_target$LAW_CAT_CD) <- c("Misdemeanor", "Felony", "Violation", "Other")
+  plt <-
+    df %>% 
+      hchart(
+        'line', hcaes(x = Year, y = count, group = LAW_CAT_CD)
+      ) %>%
+      hc_legend(align = "right", verticalAlign = "top",layout = "horizontal",floating=TRUE, y = 50) %>%
+      hc_title(text = paste("<b>", caption, "</b>")) %>%
+      hc_subtitle(text = "Click on the legend to hide/show the seleced level of offense")
+  return(plt)
+}
+
+# static_trend_plot_arrest(df_year_target)
+interactive_trend_plot_arrest(df_year_target)
 ```
 
 Also, we could investigate the ratio of each kind of offense by years by looking at the stacked bar plot,   
@@ -97,7 +116,7 @@ df_year_target %>%
   hc_colors(color_lst) %>%
   hc_legend(align = "right", verticalAlign = "top",layout = "horizontal",floating=TRUE, y = 50) %>%
   hc_title(text = "<b>Ratio trend of different level of offense event</b>") %>%
-  hc_subtitle(text = "Click on the legend to hide the seleced level of offense") 
+  hc_subtitle(text = "Click on the legend to hide/show the seleced level of offense") 
 ```
 
 From the plot, we notice that though over the years since 2016 to 2020, the misdemeanor level of offense remains as the most frequently happened events, its ratio suffers a significant decrease. Moreover, we can witness the improvement in the safety of the community by noticing the fewer and fewer occupation of the violation class events.    
@@ -135,7 +154,7 @@ spatial_plot_arrest_interactive <- function(df, year) {
       hc_colors(color_lst) %>%
       hc_legend(align = "right", verticalAlign = "top",layout = "horizontal",floating=TRUE, y = 50) %>%
       hc_title(text = paste("<b>The histogram of offense incidents by borough, Year", year, '</b>')) %>%
-      hc_subtitle(text = "Click on the legend to hide the seleced level of offense")
+      hc_subtitle(text = "Click on the legend to hide/show the seleced level of offense")
   return(plt)
 }
 
