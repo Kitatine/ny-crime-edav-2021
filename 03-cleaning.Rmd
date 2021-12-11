@@ -22,7 +22,7 @@ filter_before <- function(df, col, format = "%m/%d/%Y", year = NULL, date = NULL
 }
 ```
 
-## Preprocessing for arrest data
+## Preprocessing for Arrest data
 ```{r load the data, arrest}
 arrest.df = read.csv.ffdf(file = 'data/NYPD_Arrests_Data__Historic_.csv', header=TRUE, 
                   first.rows=10000, next.rows=50000)
@@ -33,7 +33,7 @@ knitr::kable(head(arrest.df), caption = "Head 6 Rows in Arrest Dataset for Tempo
              row.names = F,font_size = 10)
 ```
 
-## Preprocessing for Temporal Analysis
+### Preprocessing for Time Analysis
 
 ```{r data transformation for arrest time analysis}
 
@@ -88,7 +88,7 @@ knitr::kable(head(df_year_target), caption = "Head 6 Rows in Arrest Dataset for 
 ```
 
 
-## Preprocessing for Spatial Anaylsis
+### Preprocessing for Spatial Anaylsis
 
 ```{r}
 df_year <- time_target(arrest.df, 
@@ -101,21 +101,3 @@ knitr::kable(head(df_year), caption = "Head 6 Rows in Arrest Dataset for Spatial
              row.names = F,font_size = 10)
 ```
 
-
-## Require API KEY
-```{r eval=FALSE}
-register_google(key = Sys.getenv(GOOGLE_KEY))
-area_map_obj = get_map("MANHATTAN NYC", zoom = 13, maptype = "toner-background", 
-    source = "stamen")
-t_manhattan = tb %>% filter(Borough == "MANHATTAN", Occurrence.Year == "2015") %>% 
-    mutate(lon = loc_y, lat = loc_x)
-draw_density_map_of_offenses_for_borough(area_map_obj, t_manhattan)
-```
-
-
-Here 'CMPLNT_FR_DT' represent the   
-```{r echo = FALSE}
-complaint_2019_2020.df <- filter_before(complaint.df, 'CMPLNT_FR_DT', year = 2019, option = 'y')
-str(complaint_2019_2020.df)
-col_of_interest <- c('CMPLNT_FR_DT', 'Year')
-```

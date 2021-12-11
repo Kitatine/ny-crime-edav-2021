@@ -73,6 +73,7 @@ caption <- paste(caption,
 cols <- brewer.pal(n = 8, name = "Set2")
 color_lst <- colorspace::rainbow_hcl(n = 4)
 
+# the component is no more used
 static_trend_plot_arrest <- function(df) {
   plt_arrest_1 <- 
     ggplot(data = df, aes(x = as.numeric(Year), y = count)) + 
@@ -88,7 +89,7 @@ static_trend_plot_arrest <- function(df) {
   return(plt_arrest_1)
 }
 
-
+# the component is in working
 interactive_trend_plot_arrest <- function(df){
   levels(df$LAW_CAT_CD) <- c("Misdemeanor", "Felony", "Violation", "Other")
   plt <-
