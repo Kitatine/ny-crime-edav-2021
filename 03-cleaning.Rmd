@@ -15,19 +15,7 @@ Finally, after successfully cleaned/pre-processed the Arrest Data and the Compla
 
 We developed several reusable modules that we would repetitively use in our analysis below. Specifically, we set our environment as well as a time stamp formatting function to unify our criteria for date data.
 
-Beside, we also developed a mimic function for str() to provide insights of the data sets in a table way.
-
-One can implement these modules via the syntax of time-and-date manipulation in R and "knitr" as well as "magrittr" packages. For a detailed implementation, please refer to our [repository](https://github.com/Kitatine/ny-crime-edav-2021).
-
-```{r import the data}
-library(ff)
-library(dplyr)
-library(ggplot2)
-library(knitr)
-library(magrittr)
-# if want to see the detailed output, add the VERBOSE = TRUE option for the read.csv.ffdf function
-complaint.df = read.csv(file="data/NYPD_Complaint_Data_Historic.csv")
-```
+>One can implement these modules via the syntax of time-and-date manipulation in R and "knitr" as well as "magrittr" packages.
 
 ```{r cleaning data analysis, reusable module}
 filter_before <- function(df, col, format = "%m/%d/%Y", year = NULL, date = NULL, option = NULL) {
@@ -37,6 +25,8 @@ filter_before <- function(df, col, format = "%m/%d/%Y", year = NULL, date = NULL
     }
 }
 ```
+
+>We also developed a mimic function for str() to provide insights of the data sets in a table way.
 
 ```{r str() display function}
 printStr <- function(df) {
@@ -50,9 +40,63 @@ printStr <- function(df) {
 }
 ```
 
+>To formulate proper data structure and columns, we developed a function allowing we derive year and/or month information from the original time stamp column of Arrest Data. Further more, this function also allow us to decide whether an grouping by year and/or month is needed. One can find further details in our repository.
+
+```{r data transformation for arrest time analysis}
+
+time_target <- function(df, time_id_col, option = NULL, col_of_interest = NULL, target_col  = NULL,
+                        group_option = NULL){
+    if (option == 'year') {
+        df[['Year']] <- format(as.Date(df[[time_id_col]], format="%m/%d/%Y"),"%Y")
+        if (!is.null(col_of_interest)) {
+            df.interest <- df[col_of_interest]
+            df.interest[df.interest==""] <- NA
+            df.interest <- na.omit(df.interest)
+            if(!is.null(group_option)){
+              df_year_target = df.interest %>% group_by(Year, across(all_of(target_col))) %>% 
+    summarise(count = n()) %>% mutate(prop = count/sum(count))
+              return (df_year_target)
+            }
+            else{
+              return(df.interest)
+            }
+        }
+        else {
+          return(df[['Year']])
+        }
+    }
+    if (option == "month") {
+      df[['Month']] <- format(as.Date(df[[time_id_col]], format="%m/%d/%Y"),"%m")
+      if (!is.null(col_of_interest)) {
+            df.interest <- df[col_of_interest]
+            df.interest[df.interest==""] <- NA
+            df.interest <- na.omit(df.interest)
+            df_year_target = df.interest %>% group_by(Month, across(all_of(target_col))) %>% 
+    summarise(count = n())
+            return (df_year_target)
+        }
+        else {
+          return(df[['Month']])
+        }
+    }
+}
+```
+
+For a detailed implementation, please refer to our [repository](https://github.com/Kitatine/ny-crime-edav-2021).
+
 ## Preprocessing: Loading and Descriptive Analysis
 
-We formulate tables for the data set structures to get a first impression on how exactly the data is showed.
+```{r import the data}
+library(ff)
+library(dplyr)
+library(ggplot2)
+library(knitr)
+library(magrittr)
+# if want to see the detailed output, add the VERBOSE = TRUE option for the read.csv.ffdf function
+complaint.df = read.csv(file="data/NYPD_Complaint_Data_Historic.csv")
+```
+
+We created tables for the data set structures to get a first impression on how exactly the data is showed.
 
 ```{r load the data, arrest}
 arrest.df = read.csv.ffdf(file = 'data/NYPD_Arrests_Data__Historic_.csv', header=TRUE, 
@@ -78,56 +122,12 @@ Then, for our Complaints Data, we acquired over 7.3 million rows and 35 variable
 printStr(complaint.df)
 ```
 
-We process the 2 sets separately.
+We processed the Arrest Data, Complaints Data and other data sets separately.
 
 ## Pre-processing for Arrest Data
-
-First, we process the Arrest Data.
-
 ### Arrest Data: Time Analysis Pre-processing
 
-
-
-```{r data transformation for arrest time analysis}
-
-time_target <- function(df, time_id_col, option = NULL, col_of_interest = NULL, target_col  = NULL,
-                        group_option = NULL){
-    if (option == 'year') {
-        df[['Year']] <- format(as.Date(df[[time_id_col]], format="%m/%d/%Y"),"%Y")
-        if (!is.null(col_of_interest)) {
-            df.interest <- df[col_of_interest]
-            df.interest[df.interest==""] <- NA
-            df.interest <- na.omit(df.interest)
-            if(!is.null(group_option)){
-              df_year_target = df.interest %>% group_by(Year, across(all_of(target_col))) %>% 
-    summarise(count = n()) %>% mutate(prop = count/sum(count))
-              return (df_year_target)
-            }
-            else{
-              return(df.interest)
-            }
-            
-        }
-        else {
-          return(df[['Year']])
-        }
-    }
-    if (option == "month") {
-      df[['Month']] <- format(as.Date(df[[time_id_col]], format="%m/%d/%Y"),"%m")
-      if (!is.null(col_of_interest)) {
-            df.interest <- df[col_of_interest]
-            df.interest[df.interest==""] <- NA
-            df.interest <- na.omit(df.interest)
-            df_year_target = df.interest %>% group_by(Month, across(all_of(target_col))) %>% 
-    summarise(count = n())
-            return (df_year_target)
-        }
-        else {
-          return(df[['Month']])
-        }
-    }
-}
-```
+To formulate proper data structure and columns, we developed a function allowing we derive year and/or month information from the original time stamp column of Arrest Data. Further more, this function also allow us to decide whether an grouping by year and/or month is needed. One can find further details in our repository.
 
 ```{r}
 df_year_target <- time_target(arrest.df, 
@@ -140,8 +140,16 @@ knitr::kable(head(df_year_target), caption = "Head 6 Rows in Arrest Dataset for 
              row.names = F,font_size = 10)
 ```
 
+We selected information from year, LAW_CAT_CD (crime category), counting of each category, and probability represented by frequency out via processing on 'LAW_CAT_CD', 'ARREST_DATE', and 'Year'. This allowed us to perform a analysis on crime category based on their counting and probability in a time series manner.
 
-### Arrest Data: Space Anaylsis Pre-processing
+```{r}
+printStr(df_year_target)
+```
+
+
+### Arrest Data: Geometry Anaylsis Pre-processing
+
+We selected out 'LAW_CAT_CD', 'ARREST_DATE', 'Year', 'ARREST_BORO', 'Latitude', and 'Longitude' in order to get a better understanding on the geometry distribution of the crimes.
 
 ```{r}
 df_year <- time_target(arrest.df, 
@@ -153,6 +161,13 @@ df_year <- time_target(arrest.df,
 knitr::kable(head(df_year), caption = "Head 6 Rows in Arrest Dataset for Spatial Analysis",
              row.names = F,font_size = 10)
 ```
+
+Here is a brief structure of the cleaned data set.
+
+```{r}
+printStr(df_year)
+```
+
 
 ## Pre-processing for Complaint Data
 
