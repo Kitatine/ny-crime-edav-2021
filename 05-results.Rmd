@@ -25,6 +25,8 @@ gpclibPermit()
 library('rjson')
 library(ggpubr)
 
+library(RColorBrewer)
+
 result <- fromJSON(file = 'configure.json')
 GOOGLE_KEY <- result$GOOGLE_KEY
 register_google(key = GOOGLE_KEY)
@@ -68,6 +70,7 @@ caption = "Number of incidents of different offense level over"
 caption <- paste(caption,
                  min(year_range), "-", max(year_range))
 
+cols <- brewer.pal(n = 8, name = "Set2")
 color_lst <- colorspace::rainbow_hcl(n = 4)
 
 static_trend_plot_arrest <- function(df) {
@@ -87,12 +90,13 @@ static_trend_plot_arrest <- function(df) {
 
 
 interactive_trend_plot_arrest <- function(df){
-  levels(df_year_target$LAW_CAT_CD) <- c("Misdemeanor", "Felony", "Violation", "Other")
+  levels(df$LAW_CAT_CD) <- c("Misdemeanor", "Felony", "Violation", "Other")
   plt <-
     df %>% 
       hchart(
         'line', hcaes(x = Year, y = count, group = LAW_CAT_CD)
       ) %>%
+      hc_colors(cols) %>%
       hc_legend(align = "right", verticalAlign = "top",layout = "horizontal",floating=TRUE, y = 50) %>%
       hc_title(text = paste("<b>", caption, "</b>")) %>%
       hc_subtitle(text = "Click on the legend to hide/show the seleced level of offense")
@@ -106,17 +110,21 @@ interactive_trend_plot_arrest(df_year_target)
 Also, we could investigate the ratio of each kind of offense by years by looking at the stacked bar plot,   
 
 ```{r interactive bar chart 1 for arrest data}
-df_year_target$LAW_CAT_CD <- factor(df_year_target$LAW_CAT_CD, levels = c("M", "F", "V", "I"))
-levels(df_year_target$LAW_CAT_CD) <- c("Misdemeanor", "Felony", "Violation", "Other")
-df_year_target %>% 
-  hchart(
-    'column', hcaes(x = 'Year', y = 'count', group = 'LAW_CAT_CD'),
-    stacking = 'normal'
-  ) %>%
-  hc_colors(color_lst) %>%
-  hc_legend(align = "right", verticalAlign = "top",layout = "horizontal",floating=TRUE, y = 50) %>%
-  hc_title(text = "<b>Ratio trend of different level of offense event</b>") %>%
-  hc_subtitle(text = "Click on the legend to hide/show the seleced level of offense") 
+temporal_ratio_plot_arrest <- function(df) {
+  levels(df$LAW_CAT_CD) <- c("Misdemeanor", "Felony", "Violation", "Other")
+  plt <-
+    df %>% 
+      hchart(
+        'column', hcaes(x = 'Year', y = 'count', group = 'LAW_CAT_CD'),
+        stacking = 'normal'
+      ) %>%
+      hc_colors(cols) %>%
+      hc_legend(align = "right", verticalAlign = "top",layout = "horizontal",floating = TRUE, y = 50) %>%
+      hc_title(text = "<b>Ratio trend of different level of offense event</b>") %>%
+      hc_subtitle(text = "Click on the legend to hide/show the seleced level of offense") 
+  return(plt)
+}
+temporal_ratio_plot_arrest(df_year_target)
 ```
 
 From the plot, we notice that though over the years since 2016 to 2020, the misdemeanor level of offense remains as the most frequently happened events, its ratio suffers a significant decrease. Moreover, we can witness the improvement in the safety of the community by noticing the fewer and fewer occupation of the violation class events.    
@@ -145,13 +153,14 @@ spatial_plot_arrest <- function(df, year){
 
 spatial_plot_arrest_interactive <- function(df, year) {
   levels(df$LAW_CAT_CD) <- c("Misdemeanor", "Felony", "Violation", "Other")
+  levels(df$ARREST_BORO) <- c('Bronx', 'Brooklyn', 'Manhattan', 'Queens', 'Staten Island', 'Other')
   plt <- 
     df %>% filter(Year == year) %>%
       hchart(
         'column', hcaes(x = 'ARREST_BORO', y = 'count', group = 'LAW_CAT_CD'),
         stacking = 'normal'
       ) %>%
-      hc_colors(color_lst) %>%
+      hc_colors(cols) %>%
       hc_legend(align = "right", verticalAlign = "top",layout = "horizontal",floating=TRUE, y = 50) %>%
       hc_title(text = paste("<b>The histogram of offense incidents by borough, Year", year, '</b>')) %>%
       hc_subtitle(text = "Click on the legend to hide/show the seleced level of offense")
