@@ -79,13 +79,19 @@
 <li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#nypd-complaints-dataset"><i class="fa fa-check"></i><b>2.1</b> NYPD Complaints Dataset</a></li>
 <li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#nypd-arrest-dataset"><i class="fa fa-check"></i><b>2.2</b> NYPD Arrest Dataset</a></li>
 <li class="chapter" data-level="2.3" data-path="data-sources.html"><a href="data-sources.html#other-data-sets"><i class="fa fa-check"></i><b>2.3</b> Other Data Sets</a></li>
+<li class="chapter" data-level="2.4" data-path="data-sources.html"><a href="data-sources.html#featured-variables"><i class="fa fa-check"></i><b>2.4</b> Featured Variables</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#preprocessing-for-arrest-data"><i class="fa fa-check"></i><b>3.1</b> Preprocessing for arrest data</a></li>
-<li class="chapter" data-level="3.2" data-path="data-transformation.html"><a href="data-transformation.html#preprocessing-for-temporal-analysis"><i class="fa fa-check"></i><b>3.2</b> Preprocessing for Temporal Analysis</a></li>
-<li class="chapter" data-level="3.3" data-path="data-transformation.html"><a href="data-transformation.html#preprocessing-for-spatial-anaylsis"><i class="fa fa-check"></i><b>3.3</b> Preprocessing for Spatial Anaylsis</a></li>
-<li class="chapter" data-level="3.4" data-path="data-transformation.html"><a href="data-transformation.html#require-api-key"><i class="fa fa-check"></i><b>3.4</b> Require API KEY</a></li>
+<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#construction-of-processing-modules"><i class="fa fa-check"></i><b>3.1</b> Construction of Processing Modules</a></li>
+<li class="chapter" data-level="3.2" data-path="data-transformation.html"><a href="data-transformation.html#preprocessing-loading-and-descriptive-analysis"><i class="fa fa-check"></i><b>3.2</b> Preprocessing: Loading and Descriptive Analysis</a></li>
+<li class="chapter" data-level="3.3" data-path="data-transformation.html"><a href="data-transformation.html#pre-processing-for-arrest-data"><i class="fa fa-check"></i><b>3.3</b> Pre-processing for Arrest Data</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="data-transformation.html"><a href="data-transformation.html#arrest-data-time-analysis-pre-processing"><i class="fa fa-check"></i><b>3.3.1</b> Arrest Data: Time Analysis Pre-processing</a></li>
+<li class="chapter" data-level="3.3.2" data-path="data-transformation.html"><a href="data-transformation.html#arrest-data-geometry-anaylsis-pre-processing"><i class="fa fa-check"></i><b>3.3.2</b> Arrest Data: Geometry Anaylsis Pre-processing</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="data-transformation.html"><a href="data-transformation.html#pre-processing-for-complaint-data"><i class="fa fa-check"></i><b>3.4</b> Pre-processing for Complaint Data</a></li>
+<li class="chapter" data-level="3.5" data-path="data-transformation.html"><a href="data-transformation.html#pre-processing-for-other-data-sets"><i class="fa fa-check"></i><b>3.5</b> Pre-processing for other Data Sets</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a>
 <ul>
@@ -106,7 +112,7 @@
 <li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#crime-arrest-analysis"><i class="fa fa-check"></i><b>5.1</b> Crime Arrest Analysis</a>
 <ul>
 <li class="chapter" data-level="5.1.1" data-path="results.html"><a href="results.html#overall-illustration-on-map"><i class="fa fa-check"></i><b>5.1.1</b> Overall Illustration on Map</a></li>
-<li class="chapter" data-level="5.1.2" data-path="results.html"><a href="results.html#temporal-analysis"><i class="fa fa-check"></i><b>5.1.2</b> Temporal Analysis</a></li>
+<li class="chapter" data-level="5.1.2" data-path="results.html"><a href="results.html#time-analysis"><i class="fa fa-check"></i><b>5.1.2</b> Time Analysis</a></li>
 <li class="chapter" data-level="5.1.3" data-path="results.html"><a href="results.html#spatial-analysis"><i class="fa fa-check"></i><b>5.1.3</b> Spatial Analysis</a></li>
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#hate-crime-analysis"><i class="fa fa-check"></i><b>5.2</b> Hate Crime Analysis</a></li>
@@ -189,7 +195,29 @@
 </div>
 <div id="other-data-sets" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> Other Data Sets</h2>
-<p>For more details on other data sets, please check Chapter 4: cleaning.</p>
+<p>For more details on data sets mentioned above other than Complaints and Arrest, please check Chapter 04-Cleaning.</p>
+</div>
+<div id="featured-variables" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Featured Variables</h2>
+<p>There are some specific columns that we were concentrate on:</p>
+<blockquote>
+<p>LAW_CAT_CD: Level of offense: felony, misdemeanor, violation</p>
+</blockquote>
+<blockquote>
+<p>ARREST_DATE: Exact date of arrest for the reported event</p>
+</blockquote>
+<blockquote>
+<p>ARREST_BORO: Borough of arrest. B(Bronx), S(Staten Island), K(Brooklyn),
+M(Manhattan), Q(Queens)</p>
+</blockquote>
+<blockquote>
+<p>Latitude: Latitude coordinate for Global Coordinate System, WGS
+1984, decimal degrees (EPSG 4326)</p>
+</blockquote>
+<blockquote>
+<p>Longitude: Longitude coordinate for Global Coordinate System, WGS
+1984, decimal degrees (EPSG 4326)</p>
+</blockquote>
 
 </div>
 </div>
