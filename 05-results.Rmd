@@ -1,7 +1,8 @@
 # Results
 
-```{r }
+```{r echo = FALSE, results = FALSE}
 #all the code below are just tests, just trying to make things work , will be extracted later on
+library(ff)
 
 library(ggmap)
 library(ggplot2)
@@ -10,12 +11,124 @@ library(highcharter)
 library(leaflet)
 library(lubridate)
 
+library(rgdal)
+library(httr)
+library(dplyr)
+library(sp)
+library(tigris)
+library(broom)
 
-register_google(key = 'AIzaSyCN8o1uKOQ5frwppp_0xwIQrOp1_WgyKeo')
+require("maptools")
+library("gpclib")
+gpclibPermit()
+
+library('rjson')
+library(ggpubr)
+
+result <- fromJSON(file = 'configure.json')
+GOOGLE_KEY <- result$GOOGLE_KEY
+register_google(key = GOOGLE_KEY)
 # ggmap version 2.7+ required, use devtools::install_github('dkahle/ggmap', dep=F)
 
 
 ```
+
+
+## Crime Arrest Analysis
+
+### Overall Illustration on Map
+
+```{r}
+library(leaflet)
+library(ggmap)
+
+df_year = df_year %>% mutate(lon = Longitude, lat = Latitude)
+df_2020 = df_year %>% filter(Year == "2020")
+leaflet(df_year, height=300, width=900) %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(lng=df_2020$lon, lat=df_2020$lat,
+             clusterOptions = markerClusterOptions())
+
+```
+
+
+
+### Temporal Analysis
+
+We first perform some transformation on the arrest dataset to enable our illustration for the trend of the data.
+
+Then we first could illustrate in the time line to see the trend of the overall incidents for each level of offense to see if there is any dramatic change in the pandameic year.   
+
+```{r illustrate time trend for arrest, total count for offense}
+options(scipen = 999)
+df_year_target$LAW_CAT_CD <- factor(df_year_target$LAW_CAT_CD, levels = c("M", "F", "V", "I"))
+
+year_range <- unique(df_year_target$Year)
+caption = "Number of incidents of different offense level over"
+caption <- paste(caption,
+                 min(year_range), "-", max(year_range))
+
+color_lst <- colorspace::rainbow_hcl(n = 4)
+
+plt_arrest_1 <- 
+  ggplot(data = df_year_target,aes(x = as.numeric(Year), y = count)) + 
+    ggtitle(caption) + 
+    xlab("Year") + 
+    ylab("Number of incidents") + 
+    geom_point(aes(color = LAW_CAT_CD), size = 1) + 
+    geom_line(aes(color = LAW_CAT_CD), size = 1) +
+    scale_color_manual(labels = c("Misdemeanor", "Felony", "Violation", "Other"), values = color_lst) +
+    theme_bw() +
+    guides(color = guide_legend("Levels of Offense"))
+  
+plt_arrest_1
+```
+
+Also, we could investigate the ratio of each kind of offense by years by looking at the stacked bar plot,   
+
+```{r}
+plt_arrest_2 <-
+  ggplot(data = df_year_target, aes(x = as.numeric(Year), y = count, fill = LAW_CAT_CD)) +
+    geom_bar(stat =  'identity') +
+    scale_fill_manual(labels = c("Misdemeanor", "Felony", "Violation", "Other"), values = color_lst) +
+    labs(x = "Year") +
+    theme_bw() +
+    guides(fill = guide_legend("Levels of Offense"))
+plt_arrest_2
+```
+
+From the plot, we notice that though over the years since 2016 to 2020, the misdemeanor level of offense remains as the most frequently happened events, its ratio suffers a significant decrease. Moreover, we can witness the improvement in the safety of the community by noticing the fewer and fewer occupation of the violation class events.    
+
+
+### Spatial Analysis   
+Having some basic idea in temporal data, we could then zoom in to investigate the detailed spatial distibution of those offense incidents.  
+
+```{r}
+df_year$LAW_CAT_CD <- factor(df_year$LAW_CAT_CD, levels = c("M", "F", "V", "I"))
+
+spatial_plot_arrest <- function(df, year){
+  plt_arrest_3 <-
+    ggplot(data = df %>% filter(Year == year), aes(x = ARREST_BORO)) + 
+        geom_bar(aes(fill = LAW_CAT_CD)) + 
+        scale_fill_manual(labels = c("Misdemeanor", "Felony", "Violation", "Other"), values = color_lst) +
+        ggtitle(paste("The histogram of offense incidents by borough, Year", year)) + 
+        xlab("Areas (Boroughs)") + 
+        ylab("Number of offenses")  +
+        theme(legend.position = "bottom") + 
+        scale_x_discrete(labels = c('Bronx', 'Staten Island', 'Brooklyn', 'Manhattan', 'Queens')) +
+        guides(fill = guide_legend("Levels of Offense"))
+  return(plt_arrest_3)
+}
+
+spatial_plot_arrest(df_year, 2010)
+spatial_plot_arrest(df_year, 2019)
+spatial_plot_arrest(df_year, 2020)
+
+```
+
+
+
+## Hate Crime Analysis
 
 Total Hate Crime Number this year
 
@@ -27,13 +140,6 @@ manhattan_map <- get_map(location = c(lon = -73.95, lat = 40.7), zoom = 11, scal
 ```
 
 ```{r, echo=FALSE}
-library(rgdal)
-library(httr)
-library(dplyr)
-library(sp)
-library(tigris)
-library(broom)
-
 arrests <- read.csv(file = 'data/NYPD_Arrest_Data__Year_to_Date_.csv')
 points <- arrests[,c("Latitude","Longitude")]
 points <- points[which(!is.na(points$Latitude)),]
@@ -75,4 +181,5 @@ leaflet(plot_data) %>%
   setView(-74.00, 40.71, zoom = 10) %>%
   addCircleMarkers(~long, ~lat, radius = 5, stroke=FALSE, fillOpacity = 0.5)
 ```
-```
+
+

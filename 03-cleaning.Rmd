@@ -10,14 +10,10 @@ library(dplyr)
 library(ggplot2)
 # if want to see the detailed output, add the VERBOSE = TRUE option for the read.csv.ffdf function
 complaint.df = read.csv(file="data/NYPD_Complaint_Data_Historic.csv")
-arrest.df = read.csv.ffdf(file = 'data/NYPD_Arrests_Data__Historic_.csv', header=TRUE, 
-                  first.rows=10000, next.rows=50000)
-
-arrest.df = as.data.frame(arrest.df)
 ```
 First we define some reusable module that we would repetitively use in our analysis below,   
 
-```{r data analysis, reusable module}
+```{r cleaning data analysis, reusable module}
 filter_before <- function(df, col, format = "%m/%d/%Y", year = NULL, date = NULL, option = NULL) {
     if (option == 'y'){
       df[['Year']] <- format(as.Date(df[[col]], format=format),"%Y")
@@ -26,15 +22,20 @@ filter_before <- function(df, col, format = "%m/%d/%Y", year = NULL, date = NULL
 }
 ```
 
+## Preprocessing for arrest data
+```{r load the data, arrest}
+arrest.df = read.csv.ffdf(file = 'data/NYPD_Arrests_Data__Historic_.csv', header=TRUE, 
+                  first.rows=10000, next.rows=50000)
 
-```{r}
-arrest_2020.df <- filter_before(arrest.df, 'ARREST_DATE', year = 2020, option = 'y')
-col_of_interest <- c('LAW_CAT_CD', 'ARREST_DATE')
-arrest_2020.df.interest = arrest_2020.df[col_of_interest]
-arrest_2020.df.interest
+arrest.df = as.data.frame(arrest.df)
+str(arrest.df)
+knitr::kable(head(arrest.df), caption = "Head 6 Rows in Arrest Dataset for Temporal Analysis",
+             row.names = F,font_size = 10)
 ```
-## Preprocess and Time Trend Modulation (NA REMOVAL)
-```{r}
+
+## Preprocessing for Temporal Analysis
+
+```{r data transformation for arrest time analysis}
 
 time_target <- function(df, time_id_col, option = NULL, col_of_interest = NULL, target_col  = NULL,
                         group_option = NULL){
@@ -46,7 +47,7 @@ time_target <- function(df, time_id_col, option = NULL, col_of_interest = NULL, 
             df.interest <- na.omit(df.interest)
             if(!is.null(group_option)){
               df_year_target = df.interest %>% group_by(Year, across(all_of(target_col))) %>% 
-    summarise(count = n())
+    summarise(count = n()) %>% mutate(prop = count/sum(count))
               return (df_year_target)
             }
             else{
@@ -73,65 +74,37 @@ time_target <- function(df, time_id_col, option = NULL, col_of_interest = NULL, 
         }
     }
 }
+```
 
+```{r}
 df_year_target <- time_target(arrest.df, 
                         time_id_col = 'ARREST_DATE',
                         option = 'year',
                         col_of_interest = c('LAW_CAT_CD', 'ARREST_DATE', 'Year'),
                         target_col = 'LAW_CAT_CD',
                         group_option = 'group')
-
-year_range <- unique(df_year_target$Year)
-caption = "Number of offense incidents over the last "
-caption <- paste(caption, 
-                 as.integer(max(year_range)) - as.integer(min(year_range)),
-                 " years (",
-                 min(year_range), "-", max(year_range), ")")
-plt <- 
-  ggplot(data = df_year_target,aes(x = as.numeric(Year), y = count)) + 
-    ggtitle(caption) + 
-    xlab("Year from 2006 to 2020") + 
-    ylab("Number of incidents") + 
-    geom_point(aes(color = LAW_CAT_CD), size = 3) + 
-    geom_line(aes(color = LAW_CAT_CD), size = 1)
-plt
-
+knitr::kable(head(df_year_target), caption = "Head 6 Rows in Arrest Dataset for Temporal Analysis",
+             row.names = F,font_size = 10)
 ```
 
-## By Region Analysis Trial
+
+## Preprocessing for Spatial Anaylsis
+
 ```{r}
 df_year <- time_target(arrest.df, 
                         time_id_col = 'ARREST_DATE',
                         option = 'year',
                         col_of_interest = c('LAW_CAT_CD', 'ARREST_DATE', 'Year', 'ARREST_BORO',
                                             'Latitude', 'Longitude'),
-                        target_col = 'LAW_CAT_CD',
-                        group_option = NULL)
-
-ggplot(data = (df_year %>% filter(Year == 2015)), aes(x = LAW_CAT_CD)) + 
-    geom_bar(aes(fill = LAW_CAT_CD)) + ggtitle("The histogram of offense insidents by borough") + 
-    xlab("Offenses") + ylab("Number of offenses") + theme(legend.position = "bottom") + 
-    scale_x_discrete(labels = c('BR', 'SI', 'K', 'MA', 'Q')) + 
-    facet_wrap(~ARREST_BORO, nrow = 1)
+                        target_col = 'LAW_CAT_CD')
+knitr::kable(head(df_year), caption = "Head 6 Rows in Arrest Dataset for Spatial Analysis",
+             row.names = F,font_size = 10)
 ```
 
-## Interactive Map Trial
-```{r}
-library(leaflet)
-library(ggmap)
-
-df_year = df_year %>% mutate(lon = Longitude, lat = Latitude)
-df_MANHATTAN_2020 = df_year %>% filter(ARREST_BORO=="M", Year == "2020")
-leaflet(df_year, height=300, width=900) %>%
-  addTiles() %>%  # Add default OpenStreetMap map tiles
-  addMarkers(lng=df_MANHATTAN_2020$lon, lat=df_MANHATTAN_2020$lat,
-             clusterOptions = markerClusterOptions())
-
-```
 
 ## Require API KEY
 ```{r eval=FALSE}
-register_google(key = Sys.getenv('GOOGLE_KEY'))
+register_google(key = Sys.getenv(GOOGLE_KEY))
 area_map_obj = get_map("MANHATTAN NYC", zoom = 13, maptype = "toner-background", 
     source = "stamen")
 t_manhattan = tb %>% filter(Borough == "MANHATTAN", Occurrence.Year == "2015") %>% 
