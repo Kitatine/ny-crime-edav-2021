@@ -4,7 +4,7 @@ The NYPD Open Data Sets are generally well constructed and with consistent data 
 
 Specifically, we include the basic data transformation as the pre-processing module to clean the data and obtain some fundamental insights.
 
-Notice that, since all our data listed here have millions of rows, so we turn to the `ff` library to enable fast loading the data set feature. Besides, we also developed several reusable modules for cleaner and more efficient processing.
+Notice that, since all our data listed here have millions of rows, so we turn to the `ff` library to enable fast loading the data set feature. Besides, we also developed several reusable modules for cleaner and more efficient processing. For more information on 'ff' package, please check [here](https://cran.r-project.org/web/packages/ff/index.html).
 
 Our interest lies on the geometry distribution and the time series analysis of our Arrest Data and Complaint Data.
 
@@ -170,10 +170,12 @@ printStr(df_year)
 
 
 ## Pre-processing for Complaint Data
-
 Our modification on Complaint Data set are similar to what we processed on Arrest Data set.
 
 ## Pre-processing for other Data Sets
-
 No pre-processing is needed for other data sets.
+
+## Next Stage
+We have successfully constructed cleaned data sets for our actual analysis now.
+
 
