@@ -86,18 +86,22 @@ plt_arrest_1
 
 Also, we could investigate the ratio of each kind of offense by years by looking at the stacked bar plot,   
 
-```{r}
-plt_arrest_2 <-
-  ggplot(data = df_year_target, aes(x = as.numeric(Year), y = count, fill = LAW_CAT_CD)) +
-    geom_bar(stat =  'identity') +
-    scale_fill_manual(labels = c("Misdemeanor", "Felony", "Violation", "Other"), values = color_lst) +
-    labs(x = "Year") +
-    theme_bw() +
-    guides(fill = guide_legend("Levels of Offense"))
-plt_arrest_2
+```{r interactive bar chart 1 for arrest data}
+df_year_target$LAW_CAT_CD <- factor(df_year_target$LAW_CAT_CD, levels = c("M", "F", "V", "I"))
+levels(df_year_target$LAW_CAT_CD) <- c("Misdemeanor", "Felony", "Violation", "Other")
+df_year_target %>% 
+  hchart(
+    'column', hcaes(x = 'Year', y = 'count', group = 'LAW_CAT_CD'),
+    stacking = 'normal'
+  ) %>%
+  hc_colors(color_lst) %>%
+  hc_legend(align = "right", verticalAlign = "top",layout = "horizontal",floating=TRUE, y = 50) %>%
+  hc_title(text = "<b>Ratio trend of different level of offense event</b>") %>%
+  hc_subtitle(text = "Click on the legend to hide the seleced level of offense") 
 ```
 
 From the plot, we notice that though over the years since 2016 to 2020, the misdemeanor level of offense remains as the most frequently happened events, its ratio suffers a significant decrease. Moreover, we can witness the improvement in the safety of the community by noticing the fewer and fewer occupation of the violation class events.    
+
 
 
 ### Spatial Analysis   
