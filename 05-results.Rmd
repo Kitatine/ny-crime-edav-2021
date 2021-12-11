@@ -55,7 +55,7 @@ leaflet(df_year, height=300, width=900) %>%
 
 
 
-### Temporal Analysis
+### Time Analysis
 
 We first perform some transformation on the arrest dataset to enable our illustration for the trend of the data.
 
@@ -133,6 +133,8 @@ From the plot, we notice that though over the years since 2016 to 2020, the misd
 
 ### Spatial Analysis   
 Having some basic idea in temporal data, we could then zoom in to investigate the detailed spatial distibution of those offense incidents.  
+
+daibiaoxing nianfen, zooming in dao diqu
 
 ```{r}
 df_year$LAW_CAT_CD <- factor(df_year$LAW_CAT_CD, levels = c("M", "F", "V", "I"))

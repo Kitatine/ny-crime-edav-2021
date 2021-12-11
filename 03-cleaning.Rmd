@@ -80,7 +80,7 @@ printStr(complaint.df)
 
 We process the 2 sets separately.
 
-## Preprocessing for Arrest Data
+## Pre-processing for Arrest Data
 
 First, we process the Arrest Data.
 
@@ -154,25 +154,11 @@ knitr::kable(head(df_year), caption = "Head 6 Rows in Arrest Dataset for Spatial
              row.names = F,font_size = 10)
 ```
 
-## Preprocessing for Complaint Data
+## Pre-processing for Complaint Data
 
-Our modification on Complaint Data set are similar to what we processed on Arrest Data set. 
+Our modification on Complaint Data set are similar to what we processed on Arrest Data set.
 
+## Pre-processing for other Data Sets
 
-## Require API KEY
-```{r eval=FALSE}
-register_google(key = Sys.getenv(GOOGLE_KEY))
-area_map_obj = get_map("MANHATTAN NYC", zoom = 13, maptype = "toner-background", 
-    source = "stamen")
-t_manhattan = tb %>% filter(Borough == "MANHATTAN", Occurrence.Year == "2015") %>% 
-    mutate(lon = loc_y, lat = loc_x)
-draw_density_map_of_offenses_for_borough(area_map_obj, t_manhattan)
-```
+No pre-processing is needed for other data sets.
 
-Here 'CMPLNT_FR_DT' represent the   
-
-```{r echo = FALSE}
-complaint_2019_2020.df <- filter_before(complaint.df, 'CMPLNT_FR_DT', year = 2019, option = 'y')
-str(complaint_2019_2020.df)
-col_of_interest <- c('CMPLNT_FR_DT', 'Year')
-```
