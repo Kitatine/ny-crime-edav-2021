@@ -124,9 +124,30 @@ spatial_plot_arrest <- function(df, year){
   return(plt_arrest_3)
 }
 
-spatial_plot_arrest(df_year, 2010)
-spatial_plot_arrest(df_year, 2019)
-spatial_plot_arrest(df_year, 2020)
+spatial_plot_arrest_interactive <- function(df, year) {
+  levels(df$LAW_CAT_CD) <- c("Misdemeanor", "Felony", "Violation", "Other")
+  plt <- 
+    df %>% filter(Year == year) %>%
+      hchart(
+        'column', hcaes(x = 'ARREST_BORO', y = 'count', group = 'LAW_CAT_CD'),
+        stacking = 'normal'
+      ) %>%
+      hc_colors(color_lst) %>%
+      hc_legend(align = "right", verticalAlign = "top",layout = "horizontal",floating=TRUE, y = 50) %>%
+      hc_title(text = paste("<b>The histogram of offense incidents by borough, Year", year, '</b>')) %>%
+      hc_subtitle(text = "Click on the legend to hide the seleced level of offense")
+  return(plt)
+}
+
+df <- df_year %>% group_by(Year, LAW_CAT_CD, ARREST_BORO) %>% summarise(count = n()) 
+
+spatial_plot_arrest_interactive(df, 2010)
+spatial_plot_arrest_interactive(df, 2019)
+spatial_plot_arrest_interactive(df, 2020)
+
+# spatial_plot_arrest(df_year, 2010)
+# spatial_plot_arrest(df_year, 2019)
+# spatial_plot_arrest(df_year, 2020)
 
 ```
 
