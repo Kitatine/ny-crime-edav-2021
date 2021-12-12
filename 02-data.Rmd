@@ -1,2 +1,63 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Data sources
+
+We acquired our data through the [NYC Open Data Website](https://opendata.cityofnewyork.us/). It contains free public data published by New York City agencies and other partners. Specifically, we attained data from the Police Department data (NYPD) data set. The online database provides api and .csv version of data.
+
+The primary data sources of this project are [NYPD Complaint Data Historical](https://data.cityofnewyork.us/Public-Safety/NYPD-Complaint-Data-Historic/qgea-i56i) and [NYPD Arrests Data (Historic)](https://data.cityofnewyork.us/Public-Safety/NYPD-Arrests-Data-Historic-/8h9b-rp9u). 
+
+We also consider the missing value situation of several other data sets. Including Motor vehicle Collisions and Crashes, Arrest Data (YTD), Complaint Data (YTD), Criminal Court Summons (historical), Criminal Court Summons (YTD), Hate Crimes, Shooting Incident Data (historical), and Shooting Incident Data (YTD).
+
+One can easily find these data sets on the original data provider website [NYC Open Data Website](https://opendata.cityofnewyork.us/), or check our [Google Drive collection](https://drive.google.com/drive/folders/1qizBRaUb9p1uMkxIIR6MB0exzzqGx3XP?usp=sharing).
+
+## NYPD Complaints Dataset
+
+NYPD Complaint Data Historical data set includes all valid felony, misdemeanor, and violation crimes reported to the New York City Police Department (NYPD) from 2006 to the end of last year (2019). For additional details, please see the attached data dictionary in the ‘About’ section. ([Source](https://data.cityofnewyork.us/Public-Safety/NYPD-Complaint-Data-Historic/qgea-i56i))
+
+```{r, results='asis'}
+complaints.description.df = data.frame(Variables = c("CMPLNT_FR_DT"), 
+                            Description = c("Date in %m/%d/%y, Exact date of occurrence for the reported event (or starting date of occurrence, if CMPLNT_TO_DT exists)")
+)
+knitr::kable(complaints.description.df, caption = "Major columns used in NYPD Complaints",
+             row.names = F,font_size = 10)
+```
+
+## NYPD Arrest Dataset
+
+NYPD Arrests Data (Historic) includes a list of every arrest in NYC going back to 2006 through the end of the previous calendar year. This is a breakdown of every arrest effected in NYC by the NYPD going back to 2006 through the end of the previous calendar year. This data is manually extracted every quarter and reviewed by the Office of Management Analysis and Planning before being posted on the NYPD website. Each record represents an arrest effected in NYC by the NYPD and includes information about the type of crime, the location and time of enforcement. In addition, information related to suspect demographics is also included. ([Source](https://data.cityofnewyork.us/Public-Safety/NYPD-Arrests-Data-Historic-/8h9b-rp9u))
+
+```{r}
+arrest.description.df = data.frame(
+                            Variables = c("LAW_CAT_CD", 
+                                          "ARREST_DATE"), 
+                            Description = c("Text, Level of offense: felony, misdemeanor, violation",                                              "Date in %m/%d/%y, Exact date of arrest for the reported event"))
+knitr::kable(arrest.description.df, caption = "Major columns used in NYPD Arrest",
+             row.names = F,font_size = 10)
+```
+
+## Other Data Sets
+
+For more details on data sets mentioned above other than Complaints and Arrest, please check Chapter 04-Cleaning.
+
+## Featured Variables
+
+There are some specific columns that we were concentrate on:
+
+> LAW_CAT_CD:    Level of offense: felony, misdemeanor, violation
+
+> ARREST_DATE:   Exact date of arrest for the reported event
+
+> ARREST_BORO:   Borough of arrest. B(Bronx), S(Staten Island), K(Brooklyn),
+M(Manhattan), Q(Queens)
+
+> Latitude:      Latitude coordinate for Global Coordinate System, WGS
+1984, decimal degrees (EPSG 4326)
+
+> Longitude:     Longitude coordinate for Global Coordinate System, WGS
+1984, decimal degrees (EPSG 4326)
+
+Definitions of other variables can be found at our [Google Drive data collection](https://drive.google.com/drive/folders/1qizBRaUb9p1uMkxIIR6MB0exzzqGx3XP).
 

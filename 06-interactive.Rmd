@@ -1,3 +1,23 @@
 # Interactive component
 
-
+## Overview of Arrests Data by Time
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="https://d3js.org/d3.v6.js"></script>
+         <link rel="stylesheet" href="scripts/interactve.css">
+       
+    </head>
+    <body>
+    <p id="format1" >Total Arrests in History</p>
+    <svg width="600" height="450" id="svg3">
+    </svg>
+    <p id="format1" >Arrests by Categories in 2021</p>
+    <label>Select a crime category:</label>
+    <select id="CrimeCategory"></select>
+    <svg  width="600" height="450"  id="crimeByCategory"></svg> 
+    <script type="text/javascript" src="scripts/totalCrime.js"> </script>
+    <script type="text/javascript"  src="scripts/crimeByCategory.js"> </script>
+    </body>
+</html>

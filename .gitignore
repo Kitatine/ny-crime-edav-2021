@@ -3,4 +3,6 @@
 .RData
 .Ruserdata
 .DS_Store
+.RDataTmp
 data/
+configure.json
