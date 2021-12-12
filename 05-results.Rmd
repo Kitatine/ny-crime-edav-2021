@@ -1,5 +1,15 @@
 # Results
 
+There are many traces about how the pandemic influence the crimes that one can find from the media. According to Wall Street Journal, there is a [fall back](https://www.wsj.com/articles/new-york-city-crime-falls-as-coronavirus-takes-hold-11584998470) on crimes when the pandemic just started. However, as pandemic shut down the city, the attorneys have [declined to prosecute](https://www.wsj.com/articles/some-crimes-in-new-york-city-evade-prosecution-during-coronavirus-11588110554) more then 500 cases from March 12, 2020 to April 28, 2020. Along with the influence form virus getting deeper, by the end of 2020, New York police power seemed to have a [hard time](https://www.wsj.com/articles/new-york-city-police-solve-fewer-crimes-in-pandemic-11606917600) in solving crimes.
+
+In this report, we ask 3 straightforward questions:
+
+> How does the emerging of COVID-19 affect the number of crime behaviors? If so, is the number raising or declining?
+
+> Is there any difference in crime control among the boroughs?
+
+> There is a new catogory in post-COVID era called "Hate Crime". How does hate crimes distributed on the geometry dimension?
+
 ```{r echo = FALSE, results = FALSE}
 #all the code below are just tests, just trying to make things work , will be extracted later on
 library(ff)
@@ -38,22 +48,15 @@ register_google(key = GOOGLE_KEY)
 
 ## Crime Arrest Analysis
 
-### Overall Illustration on Map
+From 2006 to 2020, NYPD has recorded over 5.1 million arresting. We can derive our analysis on both time and space dimensions.
 
-```{r}
-library(leaflet)
-library(ggmap)
+The Analysis for Arrest Data is as follow: we first we analyse the time span, then we analyse the geometry distribution of crimes. We combine the 2-dimension analysis for further insights at last.
 
-df_year = df_year %>% mutate(lon = Longitude, lat = Latitude)
-df_2020 = df_year %>% filter(Year == "2020")
-leaflet(df_year, height=300, width=900) %>%
-  addTiles() %>%  # Add default OpenStreetMap map tiles
-  addMarkers(lng=df_2020$lon, lat=df_2020$lat,
-             clusterOptions = markerClusterOptions())
+For the time span part, we first perform a time analysis on the categories of different level of offense crime (felony, misdemeanor, violation, and other) of crimes on the whole time span (from 2005 to 2020); then we 
 
-```
+For the geometry part, we first provide a overall visualization on the geometry distribution of the arrests. Then we zoom in to boroughs (Bronx, Staten Island, Brooklyn, Manhattan, and Queens)
 
-
+For the analysis by combining time and geometry, we specifically select 2010, 2019, and 2020 as featured years. Then we derive crimes categories distribution analysis based on boroughs with these time window.
 
 ### Time Analysis
 
@@ -129,9 +132,22 @@ temporal_ratio_plot_arrest(df_year_target)
 
 From the plot, we notice that though over the years since 2016 to 2020, the misdemeanor level of offense remains as the most frequently happened events, its ratio suffers a significant decrease. Moreover, we can witness the improvement in the safety of the community by noticing the fewer and fewer occupation of the violation class events.    
 
+### Geometry Dimension: Overall Illustration
 
+```{r}
+library(leaflet)
+library(ggmap)
 
-### Spatial Analysis   
+df_year = df_year %>% mutate(lon = Longitude, lat = Latitude)
+df_2020 = df_year %>% filter(Year == "2020")
+leaflet(df_year, height=300, width=900) %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(lng=df_2020$lon, lat=df_2020$lat,
+             clusterOptions = markerClusterOptions())
+
+```
+
+### Geometry Dimension: Zoom in to Borough  
 Having some basic idea in temporal data, we could then zoom in to investigate the detailed spatial distibution of those offense incidents.  
 
 daibiaoxing nianfen, zooming in dao diqu
@@ -183,15 +199,18 @@ spatial_plot_arrest_interactive(df, 2020)
 
 
 
-## Hate Crime Analysis
 
-Total Hate Crime Number this year
+
+
+
+
+
+## Hate Crime Analysis
 
 ```{r}
 # get map
 manhattan_map <- get_map(location = c(lon = -73.95, lat = 40.7), zoom = 11, scale = "auto", )
 #ggmap(manhattan_map)
-
 ```
 
 ```{r, echo=FALSE}
@@ -229,6 +248,8 @@ ggmap(manhattan_map)+
   ylab("") + 
   labs(fill="Number of Crimes")
 ```
+
+Total Hate Crime Number (2021, YTD).
 
 ```{r}
 leaflet(plot_data) %>%

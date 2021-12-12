@@ -1,8 +1,53 @@
+--- 
+title: "NY Crime Investigation"
+author: "Jingwen Bai, Qiran Li, Zheng Wu"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+---
+--- 
+title: "NY Crime Investigation"
+author: "Jingwen Bai, Qiran Li, Zheng Wu"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+---
+```{r include=FALSE, cache=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+# Introduction
+
+
+<!--chapter:end:index.Rmd-->
+
+
+# Data sources
+
+Placeholder
+
+
+## NYPD Complaints Dataset
+## NYPD Arrest Dataset
+## Other Data Sets
+## Featured Variables
+
+<!--chapter:end:02-data.Rmd-->
+
 ---
 output:
   pdf_document: default
   html_document: default
 ---
+```{r include=FALSE, cache=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE
+)
+```
 # Data transformation
 
 The NYPD Open Data Sets are generally well constructed and with consistent data structure and type, and the sets usually do not have serious missing value issues. Therefore, our focus here would mainly be insights formulation, where we shall decide the specific metric for further exploration.
@@ -174,10 +219,93 @@ printStr(df_year)
 ```
 
 
+## Pre-processing for Complaint Data
+Our modification on Complaint Data set are similar to what we processed on Arrest Data set.
+
 ## Pre-processing for other Data Sets
 No pre-processing is needed for other data sets.
 
 ## Next Stage
 We have successfully constructed cleaned data sets for our actual analysis now.
 
+
+
+<!--chapter:end:03-cleaning.Rmd-->
+
+
+# Missing values
+
+Placeholder
+
+
+## Missing Data Analysis
+### For shooting data (Historical):
+### For shooting data (YTD):
+### For Hata Crimes:
+### For crime court summons (Historical):
+### For crime court summons (YTD):
+### For Motor Vehicle Collisions and Crahses (Historical):
+### For arrest (Historical):
+### For arrest (YTD):
+
+<!--chapter:end:04-missing.Rmd-->
+
+
+# Results
+
+Placeholder
+
+
+## Crime Arrest Analysis
+### Overall Illustration on Map
+### Time Analysis
+### Spatial Analysis   
+## Hate Crime Analysis
+
+<!--chapter:end:05-results.Rmd-->
+
+```{r include=FALSE, cache=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE
+)
+```
+# Interactive component
+
+## Overview of Arrests Data by Time
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="https://d3js.org/d3.v6.js"></script>
+         <link rel="stylesheet" href="scripts/interactve.css">
+       
+    </head>
+    <body>
+    <p id="format1" >Total Arrests in History</p>
+    <svg width="600" height="450" id="svg3">
+    </svg>
+    <p id="format1" >Arrests by Categories in 2021</p>
+    <label>Select a crime category:</label>
+    <select id="CrimeCategory"></select>
+    <svg  width="600" height="450"  id="crimeByCategory"></svg> 
+    <script type="text/javascript" src="scripts/totalCrime.js"> </script>
+    <script type="text/javascript"  src="scripts/crimeByCategory.js"> </script>
+    </body>
+</html>
+
+<!--chapter:end:06-interactive.Rmd-->
+
+```{r include=FALSE, cache=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE
+)
+```
+# Conclusion
+
+
+<!--chapter:end:07-conclusion.Rmd-->
 
