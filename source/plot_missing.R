@@ -73,7 +73,7 @@ plot_missing<-function(df, percent)
                 ymax= complete_y + 0.5,
                 fill='dark gray') +
       
-      annotate('text', 
+      ggplot2::annotate('text', 
                x = n/2, y = complete_y,
                label = 'complete cases',
                size = 5.5)

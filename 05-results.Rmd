@@ -37,6 +37,7 @@ library(ggpubr)
 
 # color palettes
 library(RColorBrewer)
+library(viridis)
 
 # word cloud generator
 library(wordcloud)
