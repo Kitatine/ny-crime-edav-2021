@@ -52,17 +52,17 @@ From 2006 to 2020, NYPD has recorded over 5.1 million arresting. We can derive o
 
 The Analysis for Arrest Data is as follow: we first we analyse the time span, then we analyse the geometry distribution of crimes. We combine the 2-dimension analysis for further insights at last.
 
-For the time span part, we first perform a time analysis on the categories of different level of offense crime (felony, misdemeanor, violation, and other) of crimes on the whole time span (from 2005 to 2020); then we 
+> For the time span part, we first perform a time analysis on the different level of offense crime (felony, misdemeanor, violation, and other). The whole time span is from 2006 to 2020.
 
-For the geometry part, we first provide a overall visualization on the geometry distribution of the arrests. Then we zoom in to boroughs (Bronx, Staten Island, Brooklyn, Manhattan, and Queens)
+> For the geometry part, we first provide a overall visualization on the geometry distribution of the arrests. Then we zoom in to boroughs (Bronx, Staten Island, Brooklyn, Manhattan, and Queens).
 
-For the analysis by combining time and geometry, we specifically select 2010, 2019, and 2020 as featured years. Then we derive crimes categories distribution analysis based on boroughs with these time window.
+> For the analysis by combining time and geometry, we specifically select 2010, 2019, and 2020 as featured years. Then we derive crimes categories distribution analysis based on boroughs with these time window.
 
 ### Time Analysis
 
-We first perform some transformation on the arrest dataset to enable our illustration for the trend of the data.
+We first perform some transformation on the arrest data set to enable our illustration for the trend of the data.
 
-Then we first could illustrate in the time line to see the trend of the overall incidents for each level of offense to see if there is any dramatic change in the pandameic year.   
+Then we first could illustrate in the line plot to see the trend of the overall incidents for each level of offense to see if there is any dramatic change in the pandemeic year.   
 
 ```{r illustrate time trend for arrest, total count for offense}
 options(scipen = 999)
@@ -110,7 +110,15 @@ interactive_trend_plot_arrest <- function(df){
 interactive_trend_plot_arrest(df_year_target)
 ```
 
-Also, we could investigate the ratio of each kind of offense by years by looking at the stacked bar plot,   
+As shown in the graph, there are general declining trends on all categories of crimes from 2006 to 2020. The total number of all crime categories hits a historical low at 139 024 cases. 
+
+* For misdemeanor arrest, the total number of crimes per year remains in a slowly increasing pattern before 2010, and this tendency brought the number to a historical height in 2010. After the peak, there is a 10-year declining period till 2020. From 2010 to 2014, the decreasing process is relatively smooth, only yielded 11.16% of cases decreasing. The number then realized a grammatical falling in 2015, a total of 220 169, which is a 15.19% decreasing year-on-year. Then move started a fast decreasing period. From 2015 to 2020, the percentage decreasing in misdemeanor is, astonishingly, 84.74%, or 186 591. The total number hit an 14-year high percent decrease year-on-year, 42.33%, to 73 015.
+
+* For felony, before 2009, the level of total number of felony arrest remains high, over 100k cases. Starting 2010, the number is stabilized between 90 000 and 100 000. A decreasing trend started in 2016. Till 2019, there is a 11.69%, or 11 038 decrease. Similar to the misdemeanor in 2020, a huge decreasing, which is 19.18% year-on-year or 18 106 cases occurred.
+
+* For violation, a raising was detected between 2006 and 2009. From 2009 to 2014, there is a 5-year smooth period that the total case each year barely change. Starting 2015, a falling started and reached a very low level in 2018 (3017). In 2020, just like misdemeanor and felony, the number jumped from 2822 to 549.
+
+Then, we investigate the ratio of each kind of offense by years by looking at the stacked bar plot,   
 
 ```{r interactive bar chart 1 for arrest data}
 temporal_ratio_plot_arrest <- function(df) {
@@ -130,7 +138,13 @@ temporal_ratio_plot_arrest <- function(df) {
 temporal_ratio_plot_arrest(df_year_target)
 ```
 
-From the plot, we notice that though over the years since 2016 to 2020, the misdemeanor level of offense remains as the most frequently happened events, its ratio suffers a significant decrease. Moreover, we can witness the improvement in the safety of the community by noticing the fewer and fewer occupation of the violation class events.    
+Over the years since 2016 to 2020, the misdemeanor level of offense remains as the most frequently happened events, its ratio suffers a significant decrease.
+
+* In 2010, the portion of misdemeanor reached a historical high at 69.38%, over 2/3 of all the cases.
+* In 2019, the number is 59.36%.
+* In 2020, with the generalized decreasing in cases of all categories, the number hit a historical low, at 52.52%, just above half the cases.
+
+Moreover, we can witness the improvement in the safety of the community by noticing the fewer and fewer occupation of the violation class events.    
 
 ### Geometry Dimension: Overall Illustration
 
@@ -148,7 +162,7 @@ leaflet(df_year, height=300, width=900) %>%
 ```
 
 ### Geometry Dimension: Zoom in to Borough  
-Having some basic idea in temporal data, we could then zoom in to investigate the detailed spatial distibution of those offense incidents.  
+We could zoom in to investigate the detailed spatial distribution of those offense incidents.  
 
 daibiaoxing nianfen, zooming in dao diqu
 
@@ -188,6 +202,7 @@ spatial_plot_arrest_interactive <- function(df, year) {
 df <- df_year %>% group_by(Year, LAW_CAT_CD, ARREST_BORO) %>% summarise(count = n()) 
 
 spatial_plot_arrest_interactive(df, 2010)
+spatial_plot_arrest_interactive(df, 2014)
 spatial_plot_arrest_interactive(df, 2019)
 spatial_plot_arrest_interactive(df, 2020)
 

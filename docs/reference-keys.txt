@@ -38,3 +38,6 @@ arrest-data-geometry-anaylsis-pre-processing
 pre-processing-for-complaint-data
 pre-processing-for-other-data-sets
 time-analysis
+next-stage
+geometry-dimension-overall-illustration
+geometry-dimension-zoom-in-to-borough
