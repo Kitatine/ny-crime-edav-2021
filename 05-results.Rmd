@@ -55,7 +55,13 @@ register_google(key = GOOGLE_KEY)
 
 ```
 
-To address these questions, we analyzed Arrest Data and Hate Crime Data.
+To address these questions
+
+> We first analyzed Arrest Data
+
+> Then Complaint Data
+
+> Then Hate Crime Data.
 
 ## Crime Arrest Analysis
 
@@ -248,9 +254,17 @@ spatial_plot_arrest_interactive(df, 2020)
 
 * Even though Bronx has much lower total number of arrest in 2010, 2015, and 2019, in 2020, arrest number in Bronx (32 382) is almost the same as the number in Manhattan (32 609), where the difference divided by Manhattan is less than 1%. Manhattan performs much better than Bronx in cutting the total number considering the difference between the 2 boroughs in 2010 divided by Manhattan is over 11%, or 12k.
 
-* The same thing happened between Manhattan and Queens. In 2010, the numbers gap devided by Manhattan is over 32%, or 36k. However, in 2020, gap is merely 8.5%, or 2.7k.
+* The same thing happened between Manhattan and Queens. In 2010, the numbers gap divided by Manhattan is over 32%, or 36k. However, in 2020, gap is merely 8.5%, or 2.7k.
 
 ## Crime Complaint Analysis
+
+To provide a more comprehensive understanding about the crime number trend, we import Complaints Data. We analyze this set as follow:
+
+> Draft trend dectection by solely analyzing this set.
+
+> Combine Arrest and Complaint Data sets
+
+> Provide a NLP analysis to address what are the exact contents of complaints
 
 ### Time Analysis
 
@@ -329,7 +343,7 @@ The 2 data sets have patterns as follow:
 
 * Felony and misdemeanor share the general tread of increasing/decreasing in different periods. That is to say, when arrest number falls, complaints number falls, too.
 
-* From 2006 to 2020, 
+* From 2006 to 2020, the number of violation in complaints and arrests diverge all the time. This category almost follows a contrary direction in number changes. From 2006 to 2011, as the actual arrests raise, the complaints slightly fall. From 2012 to 2020, as the arrests number dramatically falls, the complaints about violation present a upward trend.
 
 ```{r arrest/complaint percent data transform by year}
 
@@ -358,8 +372,14 @@ interactive_trend_plot_ca_ratio <- function(df){
 }
 
 interactive_trend_plot_ca_ratio(ca.df_year_target)
-printStr(ca.df_year_target)
+#printStr(ca.df_year_target)
 ```
+
+We can proof our observations in a more accurate way. By calculating the ratio of arrest over complaint, we merged the 2 data sets into a comprehensive one. The smaller the ratio, the bigger the gap between complaints and arrests (complaints > arrests).
+
+* The most important pattern is, staring 2013, a consecutive decreasing in Violation happened. If we regard the actual arrests as actual happened crimes, the social security powers have successfully rooted violation.
+
+* Both felony and misdemeanor displayed a relatively stable range before 2014. Staring 2015, both of the ratios entered a decreasing period. The misdemeanor ratio implies a bigger gap between arrests and complains. 
 
 ### NLP Analysis
 
@@ -400,11 +420,13 @@ docs <- clean_text(docs)
 wd <- generate_word_cloud(docs)
 ```
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+This word cloud displayed the actual contents of complaints in a decent way. The top 3 level of contents are mainly stealing and assaulting. Specifically:
 
-=======
->>>>>>> remotes/origin/wz-dev
+* Larceny is the most common complaints.
+
+* Petit, harassment, and assault make up the second level
+
+* The third level of common complaints was formed by offenses and mischief.
 
 ## Hate Crime Analysis
 
