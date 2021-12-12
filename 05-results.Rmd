@@ -12,6 +12,14 @@ In this report, we ask 3 straightforward questions:
 
 ```{r echo = FALSE, results = FALSE}
 #all the code below are just tests, just trying to make things work , will be extracted later on
+
+# word cloud generator
+library(wordcloud)
+library(wordcloud2)
+
+# for text mining
+library(tm)
+
 library(ff)
 
 library(ggmap)
@@ -38,13 +46,6 @@ library(ggpubr)
 # color palettes
 library(RColorBrewer)
 library(viridis)
-
-# word cloud generator
-library(wordcloud)
-library(wordcloud2)
-
-# for text mining
-library(tm)
 
 result <- fromJSON(file = 'configure.json')
 GOOGLE_KEY <- result$GOOGLE_KEY
@@ -358,18 +359,18 @@ ca.df_year_target
 ```{r}
 clean_text <- function(docs) {
   # Convert the text to lower case
-  docs <- tm_map(docs, content_transformer(tolower))
+  docs <- tm::tm_map(docs, content_transformer(tolower))
   # Remove numbers
-  docs <- tm_map(docs, removeNumbers)
+  docs <- tm::tm_map(docs, removeNumbers)
   # Remove english common stopwords
-  docs <- tm_map(docs, removeWords, stopwords("english"))
+  docs <- tm::tm_map(docs, removeWords, stopwords("english"))
   # Remove your own stop word
   # specify your stopwords as a character vector
-  docs <- tm_map(docs, removeWords, c("related", "blabla2")) 
+  docs <- tm::tm_map(docs, removeWords, c("related", "blabla2")) 
   # Remove punctuations
-  docs <- tm_map(docs, removePunctuation)
+  docs <- tm::tm_map(docs, removePunctuation)
   # Eliminate extra white spaces
-  docs <- tm_map(docs, stripWhitespace)
+  docs <- tm::tm_map(docs, stripWhitespace)
   return(docs)
 }
 
@@ -396,7 +397,7 @@ wd <- generate_word_cloud(docs)
 
 ```{r}
 # get map
-manhattan_map <- get_map(location = c(lon = -73.95, lat = 40.7), zoom = 11, scale = "auto", )
+manhattan_map <- get_map(location = c(lon = -73.95, lat =  40.7), zoom = 11, scale = "auto", )
 #ggmap(manhattan_map)
 ```
 
@@ -409,14 +410,14 @@ points <- points[which(!is.na(points$Longitude)),]
 
 r <- GET('http://data.beta.nyc//dataset/0ff93d2d-90ba-457c-9f7e-39e47bf2ac5f/resource/35dd04fb-81b3-479b-a074-a27a37888ce7/download/d085e2f8d0b54d4590b1e7d1f35594c1pediacitiesnycneighborhoods.geojson')
 
-nyc_neighborhoods <- readOGR(content(r,'text'), 'OGRGeoJSON', verbose = F)
+nyc_neighborhoods <- readOGR(httr::content(r,'text'), 'OGRGeoJSON', verbose = F)
 
 points_spdf <- points
 coordinates(points_spdf) <- ~Longitude + Latitude
 proj4string(points_spdf) <- proj4string(nyc_neighborhoods)
 matches <- over(points_spdf, nyc_neighborhoods)
 points <- cbind(points, matches)
-points_by_neighborhood <- points %>% group_by(neighborhood) %>% dplyr::summarize(num_points=n())
+points_by_neighborhood <- points %>% dplyr::group_by(neighborhood) %>% dplyr::summarize(num_points=n())
 
 map_data <- geo_join(nyc_neighborhoods, points_by_neighborhood, "neighborhood", "neighborhood")
 
