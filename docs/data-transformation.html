@@ -24,7 +24,7 @@
 <meta name="author" content="Jingwen Bai, Qiran Li, Zheng Wu" />
 
 
-<meta name="date" content="2021-12-11" />
+<meta name="date" content="2021-12-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,18 +54,6 @@
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/proj4-2.6.2/proj4.min.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
-<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet" />
-<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet" />
-<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
-<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.freezable.js"></script>
-<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
 <script src="libs/proj4js-2.3.15/proj4.js"></script>
 <link href="libs/highcharts-8.1.2/css/motion.css" rel="stylesheet" />
 <script src="libs/highcharts-8.1.2/highcharts.js"></script>
@@ -107,6 +95,22 @@
 <script src="libs/highcharts-8.1.2/custom/reset.js"></script>
 <script src="libs/highcharts-8.1.2/modules/boost.js"></script>
 <script src="libs/highchart-binding-0.8.2/highchart.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet" />
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet" />
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.freezable.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
+<link href="libs/wordcloud2-0.0.1/wordcloud.css" rel="stylesheet" />
+<script src="libs/wordcloud2-0.0.1/wordcloud2-all.js"></script>
+<script src="libs/wordcloud2-0.0.1/hover.js"></script>
+<script src="libs/wordcloud2-binding-0.2.1/wordcloud2.js"></script>
 
 
 
@@ -166,11 +170,16 @@
 <ul>
 <li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#crime-arrest-analysis"><i class="fa fa-check"></i><b>5.1</b> Crime Arrest Analysis</a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="results.html"><a href="results.html#overall-illustration-on-map"><i class="fa fa-check"></i><b>5.1.1</b> Overall Illustration on Map</a></li>
-<li class="chapter" data-level="5.1.2" data-path="results.html"><a href="results.html#time-analysis"><i class="fa fa-check"></i><b>5.1.2</b> Time Analysis</a></li>
-<li class="chapter" data-level="5.1.3" data-path="results.html"><a href="results.html#spatial-analysis"><i class="fa fa-check"></i><b>5.1.3</b> Spatial Analysis</a></li>
+<li class="chapter" data-level="5.1.1" data-path="results.html"><a href="results.html#time-analysis"><i class="fa fa-check"></i><b>5.1.1</b> Time Analysis</a></li>
+<li class="chapter" data-level="5.1.2" data-path="results.html"><a href="results.html#geometry-dimension-overall-illustration"><i class="fa fa-check"></i><b>5.1.2</b> Geometry Dimension: Overall Illustration</a></li>
+<li class="chapter" data-level="5.1.3" data-path="results.html"><a href="results.html#geometry-dimension-zoom-in-to-borough-combining-time-series-analysis"><i class="fa fa-check"></i><b>5.1.3</b> Geometry Dimension: Zoom in to Borough &amp; Combining Time Series Analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#hate-crime-analysis"><i class="fa fa-check"></i><b>5.2</b> Hate Crime Analysis</a></li>
+<li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#crime-complaint-analysis"><i class="fa fa-check"></i><b>5.2</b> Crime Complaint Analysis</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="results.html"><a href="results.html#time-analysis-1"><i class="fa fa-check"></i><b>5.2.1</b> Time Analysis</a></li>
+<li class="chapter" data-level="5.2.2" data-path="results.html"><a href="results.html#nlp-analysis"><i class="fa fa-check"></i><b>5.2.2</b> NLP Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="results.html"><a href="results.html#hate-crime-analysis"><i class="fa fa-check"></i><b>5.3</b> Hate Crime Analysis</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a>
 <ul>
@@ -415,6 +424,152 @@
 </tr>
 </tbody>
 </table>
+<pre><code>##    CMPLNT_NUM CMPLNT_FR_DT CMPLNT_FR_TM CMPLNT_TO_DT CMPLNT_TO_TM ADDR_PCT_CD     RPT_DT KY_CD
+## 1   394506329   12/31/2019     17:30:00                                    32 12/31/2019   118
+## 2   968873685   12/29/2019     16:31:00   12/29/2019     16:54:00          47 12/29/2019   113
+## 3   509837549   12/15/2019     18:45:00                                   109 12/29/2019   578
+## 4   352454313   12/28/2019     01:00:00                                    47 12/28/2019   126
+## 5   248803469   09/05/2008     21:41:00                                    NA 09/05/2008   101
+## 6   293718737   12/27/2019     22:00:00                                     9 12/27/2019   107
+## 7   552685226   12/27/2019     20:10:00   12/27/2019     20:15:00          79 12/27/2019   117
+## 8   134037758   12/26/2019     20:00:00   12/27/2019     07:15:00         101 12/27/2019   341
+## 9   855385879   12/26/2019     19:57:00                                    44 12/26/2019   361
+## 10  241602326   12/25/2019     23:00:00   12/26/2019     14:25:00          20 12/26/2019   341
+## 11  585574881   12/24/2019     16:00:00                                    14 12/24/2019   109
+## 12  916172359   12/21/2019     20:00:00   12/21/2019     20:30:00          25 12/24/2019   341
+## 13  946914583   12/22/2019     04:15:00   12/22/2019     04:24:00         108 12/22/2019   113
+## 14  355952564   12/21/2019     02:35:00                                    46 12/21/2019   101
+## 15  249276017   12/20/2019     14:00:00                                    42 12/21/2019   106
+## 16  636997863   12/20/2019     22:18:00                                    52 12/20/2019   344
+## 17  183266811   12/20/2019     01:35:00   12/20/2019     01:44:00          66 12/20/2019   107
+## 18  699043216   12/20/2019     00:07:00   12/20/2019     00:12:00          50 12/20/2019   341
+## 19  431547413   12/10/2019     20:06:00   12/10/2019     20:24:00           7 12/20/2019   114
+## 20  800366831   12/19/2019     17:50:00                                    43 12/19/2019   341
+## 21  354566222   12/19/2019     02:50:00                                    42 12/19/2019   104
+## 22  464928227   12/18/2019     20:30:00   12/19/2019     11:22:00         104 12/19/2019   341
+## 23  721499574   10/18/2013     20:34:00                                    75 10/18/2013   101
+## 24  441714270   12/06/2019     11:30:00   12/07/2019     08:00:00          10 12/19/2019   233
+## 25  747375469   12/18/2019     18:15:00                                   100 12/18/2019   101
+## 26  464533599   12/18/2019     17:40:00                                    18 12/18/2019   341
+## 27  509186416   12/18/2019     17:00:00   12/18/2019     17:15:00          48 12/18/2019   113
+## 28  744568485   12/18/2019     14:00:00                                    17 12/18/2019   341
+##                          OFNS_DESC PD_CD                        PD_DESC CRM_ATPT_CPTD_CD  LAW_CAT_CD   BORO_NM
+## 1                DANGEROUS WEAPONS   793           WEAPONS POSSESSION 3        COMPLETED      FELONY MANHATTAN
+## 2                          FORGERY   729 FORGERY,ETC.,UNCLASSIFIED-FELO        COMPLETED      FELONY     BRONX
+## 3                    HARRASSMENT 2   638          HARASSMENT,SUBD 3,4,5        COMPLETED   VIOLATION    QUEENS
+## 4          MISCELLANEOUS PENAL LAW   117        RECKLESS ENDANGERMENT 1        COMPLETED      FELONY     BRONX
+## 5  MURDER &amp; NON-NEGL. MANSLAUGHTER    NA                                       COMPLETED      FELONY          
+## 6                         BURGLARY   223       BURGLARY,RESIDENCE,NIGHT        ATTEMPTED      FELONY MANHATTAN
+## 7                  DANGEROUS DRUGS   521   CONTROLLED SUBSTANCE, SALE 5        COMPLETED      FELONY  BROOKLYN
+## 8                    PETIT LARCENY   321        LARCENY,PETIT FROM AUTO        COMPLETED MISDEMEANOR    QUEENS
+## 9    OFF. AGNST PUB ORD SENSBLTY &amp;   639        AGGRAVATED HARASSMENT 2        COMPLETED MISDEMEANOR     BRONX
+## 10                   PETIT LARCENY   321        LARCENY,PETIT FROM AUTO        COMPLETED MISDEMEANOR MANHATTAN
+## 11                   GRAND LARCENY   433 LARCENY,GRAND FROM STORE-SHOPL        COMPLETED      FELONY MANHATTAN
+## 12                   PETIT LARCENY   301 LARCENY,PETIT BY ACQUIRING LOS        COMPLETED MISDEMEANOR MANHATTAN
+## 13                         FORGERY   729 FORGERY,ETC.,UNCLASSIFIED-FELO        COMPLETED      FELONY    QUEENS
+## 14 MURDER &amp; NON-NEGL. MANSLAUGHTER    NA                                       COMPLETED      FELONY          
+## 15                  FELONY ASSAULT   109       ASSAULT 2,1,UNCLASSIFIED        COMPLETED      FELONY     BRONX
+## 16    ASSAULT 3 &amp; RELATED OFFENSES   114            OBSTR BREATH/CIRCUL        COMPLETED MISDEMEANOR     BRONX
+## 17                        BURGLARY   223       BURGLARY,RESIDENCE,NIGHT        COMPLETED      FELONY  BROOKLYN
+## 18                   PETIT LARCENY   339 LARCENY,PETIT FROM OPEN AREAS,        COMPLETED MISDEMEANOR     BRONX
+## 19                           ARSON   263                    ARSON 2,3,4        COMPLETED      FELONY MANHATTAN
+## 20                   PETIT LARCENY   333 LARCENY,PETIT FROM STORE-SHOPL        COMPLETED MISDEMEANOR     BRONX
+## 21                            RAPE   153                         RAPE 3        COMPLETED      FELONY     BRONX
+## 22                   PETIT LARCENY   321        LARCENY,PETIT FROM AUTO        COMPLETED MISDEMEANOR    QUEENS
+## 23 MURDER &amp; NON-NEGL. MANSLAUGHTER    NA                                       COMPLETED      FELONY          
+## 24                      SEX CRIMES   175               SEXUAL ABUSE 3,2        COMPLETED MISDEMEANOR MANHATTAN
+## 25 MURDER &amp; NON-NEGL. MANSLAUGHTER    NA                                       COMPLETED      FELONY          
+## 26                   PETIT LARCENY   333 LARCENY,PETIT FROM STORE-SHOPL        COMPLETED MISDEMEANOR MANHATTAN
+## 27                         FORGERY   729 FORGERY,ETC.,UNCLASSIFIED-FELO        COMPLETED      FELONY     BRONX
+## 28                   PETIT LARCENY   349 LARCENY,PETIT OF LICENSE PLATE        COMPLETED MISDEMEANOR MANHATTAN
+##    LOC_OF_OCCUR_DESC              PREM_TYP_DESC          JURIS_DESC JURISDICTION_CODE PARKS_NM HADEVELOPT HOUSING_PSA
+## 1                                        STREET    N.Y. POLICE DEPT                 0                                
+## 2                                        STREET    N.Y. POLICE DEPT                 0                                
+## 3           FRONT OF                     STREET    N.Y. POLICE DEPT                 0                                
+## 4            REAR OF                     STREET    N.Y. POLICE DEPT                 0                                
+## 5            OUTSIDE                               N.Y. POLICE DEPT                NA     &lt;NA&gt;                   &lt;NA&gt;
+## 6           FRONT OF     RESIDENCE - APT. HOUSE    N.Y. POLICE DEPT                 0                                
+## 7                                        STREET    N.Y. POLICE DEPT                 0                                
+## 8           FRONT OF                     STREET    N.Y. POLICE DEPT                 0                                
+## 9                                        STREET    N.Y. POLICE DEPT                 0                                
+## 10                                       STREET    N.Y. POLICE DEPT                 0                                
+## 11            INSIDE           DEPARTMENT STORE    N.Y. POLICE DEPT                 0                                
+## 12                                        OTHER    N.Y. POLICE DEPT                 0                                
+## 13                                       STREET    N.Y. POLICE DEPT                 0                                
+## 14            INSIDE                               N.Y. POLICE DEPT                NA                                
+## 15                                       STREET    N.Y. POLICE DEPT                 0                                
+## 16            INSIDE     RESIDENCE - APT. HOUSE    N.Y. POLICE DEPT                 0                                
+## 17           REAR OF            RESIDENCE-HOUSE    N.Y. POLICE DEPT                 0                                
+## 18                                        OTHER         METRO NORTH                15                                
+## 19            INSIDE RESIDENCE - PUBLIC HOUSING N.Y. HOUSING POLICE                 2          LA GUARDIA       575.0
+## 20            INSIDE           DEPARTMENT STORE    N.Y. POLICE DEPT                 0                                
+## 21            INSIDE         ABANDONED BUILDING    N.Y. POLICE DEPT                 0                                
+## 22                                       STREET    N.Y. POLICE DEPT                 0                                
+## 23           OUTSIDE                               N.Y. POLICE DEPT                NA     &lt;NA&gt;                   &lt;NA&gt;
+## 24            INSIDE                   HOSPITAL    N.Y. POLICE DEPT                 0                                
+## 25           OUTSIDE                               N.Y. POLICE DEPT                NA                                
+## 26          FRONT OF                               N.Y. POLICE DEPT                 0                                
+## 27            INSIDE                      OTHER    N.Y. POLICE DEPT                 0                                
+## 28                                       STREET    N.Y. POLICE DEPT                 0                                
+##    X_COORD_CD Y_COORD_CD SUSP_AGE_GROUP      SUSP_RACE SUSP_SEX TRANSIT_DISTRICT Latitude Longitude
+## 1      999937     238365                                                      NA 40.82093 -73.94332
+## 2     1022508     261990                                                      NA 40.88570 -73.86164
+## 3     1034178     209758          25-44        UNKNOWN        M               NA 40.74228 -73.81982
+## 4     1026412     258211          18-24          BLACK        M               NA 40.87531 -73.84755
+## 5     1001215     193881                                                      NA 40.69883 -73.93882
+## 6      989665     201866                                                      NA 40.72076 -73.98047
+## 7     1001545     192836                                                      NA 40.69596 -73.93763
+## 8     1054394     162186                                                      NA 40.61157 -73.74737
+## 9     1007027     245405          18-24          BLACK        F               NA 40.84023 -73.91768
+## 10     987147     220853                                                      NA 40.77287 -73.98954
+## 11     987220     212676                                                      NA 40.75043 -73.98928
+## 12    1001150     231355        UNKNOWN        UNKNOWN        U               NA 40.80168 -73.93896
+## 13     996424     210017                                                      NA 40.74312 -73.95607
+## 14    1009507     252093          18-24 BLACK HISPANIC        M               NA 40.85858 -73.90870
+## 15    1008690     238862        UNKNOWN        UNKNOWN        U               NA 40.82227 -73.91170
+## 16    1014563     253789          25-44          BLACK        M               NA 40.86322 -73.89041
+## 17     989260     169727                                                      NA 40.63254 -73.98195
+## 18    1008839     257949                                                      NA 40.87466 -73.91109
+## 19     987063     198657                                                      NA 40.71195 -73.98985
+## 20    1023380     239329          45-64 WHITE HISPANIC        M               NA 40.82350 -73.85862
+## 21    1008798     238971          18-24 BLACK HISPANIC        M               NA 40.82257 -73.91131
+## 22    1011048     193750                                                      NA 40.69844 -73.90336
+## 23    1013091     184311          45-64 WHITE HISPANIC        M               NA 40.67253 -73.89603
+## 24     984623     209859        UNKNOWN          BLACK        M               NA 40.74270 -73.99866
+## 25    1036299     153335          25-44          BLACK        U               NA 40.58740 -73.81261
+## 26     988668     218026          25-44          BLACK        M               NA 40.76511 -73.98405
+## 27    1016804     251715                                                      NA 40.85752 -73.88232
+## 28     993626     213937                                                      NA 40.75389 -73.96616
+##                                     Lat_Lon              PATROL_BORO STATION_NAME VIC_AGE_GROUP       VIC_RACE VIC_SEX
+## 1   (40.82092679700002, -73.94332421899996)    PATROL BORO MAN NORTH                    UNKNOWN        UNKNOWN       E
+## 2  (40.885701406000074, -73.86164032499995)        PATROL BORO BRONX                    UNKNOWN        UNKNOWN       E
+## 3         (40.74228115600005, -73.81982408) PATROL BORO QUEENS NORTH                      25-44 WHITE HISPANIC       F
+## 4   (40.87531145100007, -73.84754521099995)        PATROL BORO BRONX                    UNKNOWN        UNKNOWN       E
+## 5             (40.698827283, -73.938819047)                                               25-44          BLACK       M
+## 6   (40.72075882100006, -73.98046642299995)    PATROL BORO MAN SOUTH                    UNKNOWN        UNKNOWN       M
+## 7  (40.695958362000056, -73.93763162199998)  PATROL BORO BKLYN NORTH                    UNKNOWN        UNKNOWN       E
+## 8   (40.61157006600007, -73.74736517199995) PATROL BORO QUEENS SOUTH                      25-44 WHITE HISPANIC       F
+## 9   (40.84023413800003, -73.91768411399994)        PATROL BORO BRONX                      18-24          BLACK       F
+## 10  (40.77287456000005, -73.98954212299998)    PATROL BORO MAN NORTH                      45-64          BLACK       M
+## 11  (40.75043076800005, -73.98928217599996)    PATROL BORO MAN SOUTH                    UNKNOWN        UNKNOWN       D
+## 12  (40.80168405900002, -73.93895929199994)    PATROL BORO MAN NORTH                      25-44        UNKNOWN       F
+## 13 (40.743124599000055, -73.95606807299998) PATROL BORO QUEENS NORTH                    UNKNOWN        UNKNOWN       E
+## 14  (40.85858397000004, -73.90869606999998)                                               18-24 WHITE HISPANIC       M
+## 15  (40.82227104100008, -73.91169777999993)        PATROL BORO BRONX                        &lt;18 BLACK HISPANIC       M
+## 16  (40.86322306500005, -73.89041071099996)        PATROL BORO BRONX                      18-24          BLACK       F
+## 17  (40.63254475200006, -73.98195137599998)  PATROL BORO BKLYN SOUTH                        65+          WHITE       F
+## 18  (40.87465879000007, -73.91108943699999)        PATROL BORO BRONX                      25-44          WHITE       F
+## 19  (40.71195209300004, -73.98985467599994)    PATROL BORO MAN SOUTH                    UNKNOWN        UNKNOWN       E
+## 20 (40.823499964000064, -73.85861898699994)        PATROL BORO BRONX                    UNKNOWN        UNKNOWN       D
+## 21  (40.82256991600008, -73.91130716899994)        PATROL BORO BRONX                        &lt;18 BLACK HISPANIC       F
+## 22  (40.69844340600008, -73.90335796299998) PATROL BORO QUEENS NORTH                      25-44          WHITE       M
+## 23              (40.6725291, -73.896030558)                                               18-24          BLACK       M
+## 24  (40.74269929900004, -73.99865537999993)    PATROL BORO MAN SOUTH                      25-44        UNKNOWN       F
+## 25  (40.58740067900004, -73.81260554099998)                                               45-64          BLACK       M
+## 26  (40.76511454900003, -73.98405256399997)    PATROL BORO MAN SOUTH                    UNKNOWN        UNKNOWN       D
+## 27  (40.85752258300005, -73.88231889499998)        PATROL BORO BRONX                    UNKNOWN        UNKNOWN       E
+## 28  (40.75388742300004, -73.96615999399995)    PATROL BORO MAN SOUTH                    UNKNOWN        UNKNOWN       D
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 7375965 rows ]</code></pre>
 <p>The data is relatively complex.</p>
 <p>First, for our Arrest Data, we acquired over 5.1 million rows and 19 variables.</p>
 <table>
@@ -1140,6 +1295,52 @@
 <div id="pre-processing-for-complaint-data" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Pre-processing for Complaint Data</h2>
 <p>Our modification on Complaint Data set are similar to what we processed on Arrest Data set.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Column1_</th>
+<th align="left">Variable</th>
+<th align="left">Column2_</th>
+<th align="left">Classe</th>
+<th align="left">Column3_</th>
+<th align="left">First_value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">Year</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">2006, 2006, 2006</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">LAW_CAT_CD</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">FELONY, MISDEMEANOR, VIOLATION</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">count</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">171638, 288539, 69417</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">prop</td>
+<td align="left">||</td>
+<td align="left">double</td>
+<td align="left">||</td>
+<td align="left">0.324093550908809, 0.544830568322149, 0.131075880769042</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="pre-processing-for-other-data-sets" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Pre-processing for other Data Sets</h2>
@@ -1147,7 +1348,7 @@
 </div>
 <div id="next-stage" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> Next Stage</h2>
-<p>We have successfully constructed cleaned data sets for our actual analysis now.</p>
+<p>We have successfully constructed cleaned data sets now. Next, we can start analyzing.</p>
 
 </div>
 </div>

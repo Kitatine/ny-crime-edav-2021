@@ -24,7 +24,7 @@
 <meta name="author" content="Jingwen Bai, Qiran Li, Zheng Wu" />
 
 
-<meta name="date" content="2021-12-11" />
+<meta name="date" content="2021-12-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,18 +54,6 @@
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/proj4-2.6.2/proj4.min.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
-<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet" />
-<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet" />
-<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
-<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.freezable.js"></script>
-<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
 <script src="libs/proj4js-2.3.15/proj4.js"></script>
 <link href="libs/highcharts-8.1.2/css/motion.css" rel="stylesheet" />
 <script src="libs/highcharts-8.1.2/highcharts.js"></script>
@@ -107,6 +95,22 @@
 <script src="libs/highcharts-8.1.2/custom/reset.js"></script>
 <script src="libs/highcharts-8.1.2/modules/boost.js"></script>
 <script src="libs/highchart-binding-0.8.2/highchart.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet" />
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet" />
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.freezable.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
+<link href="libs/wordcloud2-0.0.1/wordcloud.css" rel="stylesheet" />
+<script src="libs/wordcloud2-0.0.1/wordcloud2-all.js"></script>
+<script src="libs/wordcloud2-0.0.1/hover.js"></script>
+<script src="libs/wordcloud2-binding-0.2.1/wordcloud2.js"></script>
 
 
 
@@ -166,11 +170,16 @@
 <ul>
 <li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#crime-arrest-analysis"><i class="fa fa-check"></i><b>5.1</b> Crime Arrest Analysis</a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="results.html"><a href="results.html#overall-illustration-on-map"><i class="fa fa-check"></i><b>5.1.1</b> Overall Illustration on Map</a></li>
-<li class="chapter" data-level="5.1.2" data-path="results.html"><a href="results.html#time-analysis"><i class="fa fa-check"></i><b>5.1.2</b> Time Analysis</a></li>
-<li class="chapter" data-level="5.1.3" data-path="results.html"><a href="results.html#spatial-analysis"><i class="fa fa-check"></i><b>5.1.3</b> Spatial Analysis</a></li>
+<li class="chapter" data-level="5.1.1" data-path="results.html"><a href="results.html#time-analysis"><i class="fa fa-check"></i><b>5.1.1</b> Time Analysis</a></li>
+<li class="chapter" data-level="5.1.2" data-path="results.html"><a href="results.html#geometry-dimension-overall-illustration"><i class="fa fa-check"></i><b>5.1.2</b> Geometry Dimension: Overall Illustration</a></li>
+<li class="chapter" data-level="5.1.3" data-path="results.html"><a href="results.html#geometry-dimension-zoom-in-to-borough-combining-time-series-analysis"><i class="fa fa-check"></i><b>5.1.3</b> Geometry Dimension: Zoom in to Borough &amp; Combining Time Series Analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#hate-crime-analysis"><i class="fa fa-check"></i><b>5.2</b> Hate Crime Analysis</a></li>
+<li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#crime-complaint-analysis"><i class="fa fa-check"></i><b>5.2</b> Crime Complaint Analysis</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="results.html"><a href="results.html#time-analysis-1"><i class="fa fa-check"></i><b>5.2.1</b> Time Analysis</a></li>
+<li class="chapter" data-level="5.2.2" data-path="results.html"><a href="results.html#nlp-analysis"><i class="fa fa-check"></i><b>5.2.2</b> NLP Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="results.html"><a href="results.html#hate-crime-analysis"><i class="fa fa-check"></i><b>5.3</b> Hate Crime Analysis</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a>
 <ul>
@@ -208,8 +217,8 @@
 <table>
 <caption><span id="tab:unnamed-chunk-3">Table 2.1: </span>Major columns used in NYPD Complaints</caption>
 <colgroup>
-<col width="9%" />
-<col width="90%" />
+<col width="7%" />
+<col width="92%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -219,8 +228,12 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">CMPLNT_FR_DT</td>
-<td align="left">Date in %m/%d/%y, Exact date of occurrence for the reported event (or starting date of occurrence, if CMPLNT_TO_DT exists)</td>
+<td align="left">RPT_DT</td>
+<td align="left">Date in %m/%d/%y, Date event was reported to police</td>
+</tr>
+<tr class="even">
+<td align="left">OFNS_DESC</td>
+<td align="left">Text, Description of internal classification corresponding with KY code (more general category than PD description)</td>
 </tr>
 </tbody>
 </table>
@@ -230,6 +243,10 @@
 <p>NYPD Arrests Data (Historic) includes a list of every arrest in NYC going back to 2006 through the end of the previous calendar year. This is a breakdown of every arrest effected in NYC by the NYPD going back to 2006 through the end of the previous calendar year. This data is manually extracted every quarter and reviewed by the Office of Management Analysis and Planning before being posted on the NYPD website. Each record represents an arrest effected in NYC by the NYPD and includes information about the type of crime, the location and time of enforcement. In addition, information related to suspect demographics is also included. (<a href="https://data.cityofnewyork.us/Public-Safety/NYPD-Arrests-Data-Historic-/8h9b-rp9u">Source</a>)</p>
 <table>
 <caption><span id="tab:unnamed-chunk-4">Table 2.2: </span>Major columns used in NYPD Arrest</caption>
+<colgroup>
+<col width="11%" />
+<col width="88%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">Variables</th>
@@ -239,11 +256,23 @@
 <tbody>
 <tr class="odd">
 <td align="left">LAW_CAT_CD</td>
-<td align="left">Text, Level of offense: felony, misdemeanor, violation</td>
+<td align="left">Factor, Level of offense: felony, misdemeanor, violation</td>
 </tr>
 <tr class="even">
 <td align="left">ARREST_DATE</td>
 <td align="left">Date in %m/%d/%y, Exact date of arrest for the reported event</td>
+</tr>
+<tr class="odd">
+<td align="left">ARREST_BORO</td>
+<td align="left">Factor, Borough of arrest. B(Bronx), S(Staten Island), K(Brooklyn), M(Manhattan), Q(Queens)</td>
+</tr>
+<tr class="even">
+<td align="left">Latitude</td>
+<td align="left">Text, Latitude coordinate for Global Coordinate System, WGS 1984, decimal degrees (EPSG 4326)</td>
+</tr>
+<tr class="odd">
+<td align="left">Longitude</td>
+<td align="left">Text, Longitude coordinate for Global Coordinate System, WGS 1984, decimal degrees (EPSG 4326)</td>
 </tr>
 </tbody>
 </table>

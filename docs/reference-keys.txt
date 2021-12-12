@@ -29,9 +29,12 @@ for-arrest-historical
 for-arrest-ytd
 results
 crime-arrest-analysis
-overall-illustration-on-map
 time-analysis
-spatial-analysis
+geometry-dimension-overall-illustration
+geometry-dimension-zoom-in-to-borough-combining-time-series-analysis
+crime-complaint-analysis
+time-analysis-1
+nlp-analysis
 hate-crime-analysis
 interactive-component
 overview-of-arrests-data-by-time

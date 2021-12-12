@@ -1,7 +1,25 @@
 # Results
 
+There are many traces about how the pandemic influence the crimes that one can find from the media. According to Wall Street Journal, there is a [fall back](https://www.wsj.com/articles/new-york-city-crime-falls-as-coronavirus-takes-hold-11584998470) on crimes when the pandemic just started. However, as pandemic shut down the city, the attorneys have [declined to prosecute](https://www.wsj.com/articles/some-crimes-in-new-york-city-evade-prosecution-during-coronavirus-11588110554) more then 500 cases from March 12, 2020 to April 28, 2020. Along with the influence form virus getting deeper, by the end of 2020, New York police power seemed to have a [hard time](https://www.wsj.com/articles/new-york-city-police-solve-fewer-crimes-in-pandemic-11606917600) in solving crimes.
+
+In this report, we ask 3 straightforward questions:
+
+> How does the emerging of COVID-19 affect the number of crime behaviors? If so, is the number raising or declining?
+
+> Is there any difference in crime control among the boroughs?
+
+> There is a new catogory in post-COVID era called "Hate Crime". How does hate crimes distributed on the geometry dimension?
+
 ```{r echo = FALSE, results = FALSE}
 #all the code below are just tests, just trying to make things work , will be extracted later on
+
+# word cloud generator
+library(wordcloud)
+library(wordcloud2)
+
+# for text mining
+library(tm)
+
 library(ff)
 
 library(ggmap)
@@ -25,7 +43,9 @@ gpclibPermit()
 library('rjson')
 library(ggpubr)
 
+# color palettes
 library(RColorBrewer)
+library(viridis)
 
 result <- fromJSON(file = 'configure.json')
 GOOGLE_KEY <- result$GOOGLE_KEY
@@ -35,31 +55,31 @@ register_google(key = GOOGLE_KEY)
 
 ```
 
+To address these questions
+
+> We first analyzed Arrest Data
+
+> Then Complaint Data
+
+> Then Hate Crime Data.
 
 ## Crime Arrest Analysis
 
-### Overall Illustration on Map
+From 2006 to 2020, NYPD has recorded over 5.1 million arresting. We can derive our analysis on both time and space dimensions.
 
-```{r}
-library(leaflet)
-library(ggmap)
+The Analysis for Arrest Data is as follow: we first we analyse the time span, then we analyse the geometry distribution of crimes. We combine the 2-dimension analysis for further insights at last.
 
-df_year = df_year %>% mutate(lon = Longitude, lat = Latitude)
-df_2020 = df_year %>% filter(Year == "2020")
-leaflet(df_year, height=300, width=900) %>%
-  addTiles() %>%  # Add default OpenStreetMap map tiles
-  addMarkers(lng=df_2020$lon, lat=df_2020$lat,
-             clusterOptions = markerClusterOptions())
+> For the time span part, we first perform a time analysis on the different level of offense crime (felony, misdemeanor, violation, and other). The whole time span is from 2006 to 2020.
 
-```
+> For the geometry part, we first provide a overall visualization on the geometry distribution of the arrests. Then we zoom in to boroughs (Bronx, Staten Island, Brooklyn, Manhattan, and Queens).
 
-
+> For the analysis by combining time and geometry, we specifically select 2010, 2019, and 2020 as featured years. Then we derive crimes categories distribution analysis based on boroughs with these time window.
 
 ### Time Analysis
 
-We first perform some transformation on the arrest dataset to enable our illustration for the trend of the data.
+We first perform some transformation on the arrest data set to enable our illustration for the trend of the data.
 
-Then we first could illustrate in the time line to see the trend of the overall incidents for each level of offense to see if there is any dramatic change in the pandameic year.   
+Then we first could illustrate in the line plot to see the trend of the overall incidents for each level of offense to see if there is any dramatic change in the pandemeic year.   
 
 ```{r illustrate time trend for arrest, total count for offense}
 options(scipen = 999)
@@ -108,7 +128,15 @@ interactive_trend_plot_arrest <- function(df){
 interactive_trend_plot_arrest(df_year_target)
 ```
 
-Also, we could investigate the ratio of each kind of offense by years by looking at the stacked bar plot,   
+As is shown in the graph, there are general declining trends on all categories of crimes from 2006 to 2020. The total number of all crime categories hits a historical low at 139 024 cases. 
+
+* For misdemeanor arrest, the total number of crimes per year remains in a slowly increasing pattern before 2010, and this tendency brought the number to a historical height in 2010. After the peak, there is a 10-year declining period till 2020. From 2010 to 2014, the decreasing process is relatively smooth, only yielded 11.16% of cases decreasing. The number then realized a grammatical falling in 2015, a total of 220 169, which is a 15.19% decreasing year-on-year. Then move started a fast decreasing period. From 2015 to 2020, the percentage decreasing in misdemeanor is, astonishingly, 84.74%, or 186 591. The total number hit an 14-year high percent decrease year-on-year, 42.33%, to 73 015.
+
+* For felony, before 2009, the level of total number of felony arrest remains high, over 100k cases. Starting 2010, the number is stabilized between 90 000 and 100 000. A decreasing trend started in 2016. Till 2019, there is a 11.69%, or 11 038 decrease. Similar to the misdemeanor in 2020, a huge decreasing, which is 19.18% year-on-year or 18 106 cases occurred.
+
+* For violation, a raising was detected between 2006 and 2009. From 2009 to 2014, there is a 5-year smooth period that the total case each year barely change. Starting 2015, a falling started and reached a very low level in 2018 (3017). In 2020, just like misdemeanor and felony, the number jumped from 2822 to 549.
+
+Then, we investigate the ratio of each kind of offense by years by looking at the stacked bar plot,   
 
 ```{r interactive bar chart 1 for arrest data}
 temporal_ratio_plot_arrest <- function(df) {
@@ -128,14 +156,44 @@ temporal_ratio_plot_arrest <- function(df) {
 temporal_ratio_plot_arrest(df_year_target)
 ```
 
-From the plot, we notice that though over the years since 2016 to 2020, the misdemeanor level of offense remains as the most frequently happened events, its ratio suffers a significant decrease. Moreover, we can witness the improvement in the safety of the community by noticing the fewer and fewer occupation of the violation class events.    
+Over the years since 2016 to 2020, the misdemeanor level of offense remains as the most frequently happened events, its ratio suffers a significant decrease.
 
+* In 2010, the portion of misdemeanor reached a historical high at 69.38%, over 2/3 of all the cases.
+* In 2019, the number is 59.36%.
+* In 2020, with the generalized decreasing in cases of all categories, the number hit a historical low, at 52.52%, just above half the cases.
 
+Moreover, we can witness the improvement in the safety of the community by noticing the fewer and fewer occupation of the violation class events.    
 
-### Spatial Analysis   
-Having some basic idea in temporal data, we could then zoom in to investigate the detailed spatial distibution of those offense incidents.  
+### Geometry Dimension: Overall Illustration
 
-daibiaoxing nianfen, zooming in dao diqu
+We marked all the locations of arrest in 2020 on map.
+
+* According to our interactive map, these area suffers greater cases reported than other area: Brooklyn downtown, Harlem in Manhattan, Morrisania in Bronx, Manhattan downtown.
+
+* Manhattan is generally safer than other boroughs (not including Staten Island because of population differences).
+
+* Harlem in Mannhattan has the biggest number in arrest.
+
+The main function of our map is serving as a general guide of safety. One in New York City can figure out how exactly the social security situation was in one's area. Further more, we specifically improved the readability by aggregating the arrests into their "most common centers". As one zooming in/out the map, the aggregation level will adjust against one's zooming scales, which means no matter what scale of arresting location (say, from boroughs to streets) information the one want, the map can always provide a great aggregation.
+
+```{r}
+library(leaflet)
+library(ggmap)
+
+df_year = df_year %>% mutate(lon = Longitude, lat = Latitude)
+df_2020 = df_year %>% filter(Year == "2020")
+leaflet(df_year, height=490, width=800) %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(lng=df_2020$lon, lat=df_2020$lat,
+             clusterOptions = markerClusterOptions())
+
+```
+
+### Geometry Dimension: Zoom in to Borough & Combining Time Series Analysis 
+
+We could zoom in to investigate the detailed spatial distribution of those offense incidents.
+
+As mentioned in our time analysis above, year of 2010, 2015, and 2019 are special turning points/starting point of tendencies. And 2020 is exactly when the COVID-19 broke, which is our main target in this project. Based on our overall geometry distribution navigating tool above, we can analyze the distributions of crimes categories in the 5 boroughs of New York City.
 
 ```{r}
 df_year$LAW_CAT_CD <- factor(df_year$LAW_CAT_CD, levels = c("M", "F", "V", "I"))
@@ -173,6 +231,7 @@ spatial_plot_arrest_interactive <- function(df, year) {
 df <- df_year %>% group_by(Year, LAW_CAT_CD, ARREST_BORO) %>% summarise(count = n()) 
 
 spatial_plot_arrest_interactive(df, 2010)
+spatial_plot_arrest_interactive(df, 2015)
 spatial_plot_arrest_interactive(df, 2019)
 spatial_plot_arrest_interactive(df, 2020)
 
@@ -182,17 +241,201 @@ spatial_plot_arrest_interactive(df, 2020)
 
 ```
 
+* In the 4 year time point, Brooklyn always has the highest arrest number among all 5 boroughs. Manhattan follows Brooklyn closely. Bronx and Queens follow Manhattan in order. And Staten Island always with lowest number. This pattern may related to population distribution, 
 
+* All 5 boroughs did well in reducing the number of violations. In 2020, almost all arrests lie in misdemeanor and felony.
+
+<<<<<<< HEAD
+* Both the misdemeanor and felony arrests decrease in all 5 boroughs through the years. However, the number of misdemeanor decrease much faster than the number of felony. In 2010, misdemeanor contribute to almost 70% of arrests. In 2019, this number in Brooklyn is around 50%. In 2020, this number in all 5 boroughs is approximate 50%.
+
+* Bronx, Brooklyn, and Manhattan achieved almost 50% cut in arrest from 2010 to 2019, while Queens only did 40%.
+
+* Although the number of arrest in Staten Island is relatively small comparing to other boroughs, Staten Island has made a surprising 60% cut in arrest number.
+
+* Even though Bronx has much lower total number of arrest in 2010, 2015, and 2019, in 2020, arrest number in Bronx (32 382) is almost the same as the number in Manhattan (32 609), where the difference divided by Manhattan is less than 1%. Manhattan performs much better than Bronx in cutting the total number considering the difference between the 2 boroughs in 2010 divided by Manhattan is over 11%, or 12k.
+
+* The same thing happened between Manhattan and Queens. In 2010, the numbers gap divided by Manhattan is over 32%, or 36k. However, in 2020, gap is merely 8.5%, or 2.7k.
+
+## Crime Complaint Analysis
+
+To provide a more comprehensive understanding about the crime number trend, we import Complaints Data. We analyze this set as follow:
+
+> Draft trend dectection by solely analyzing this set.
+
+> Combine Arrest and Complaint Data sets
+
+> Provide a NLP analysis to address what are the exact contents of complaints
+
+### Time Analysis
+
+```{r}
+complaint.df_year_target$LAW_CAT_CD <- factor(complaint.df_year_target$LAW_CAT_CD)
+year_range <- unique(complaint.df_year_target$Year)
+caption = "Number of complained incidents of different offense level over"
+caption <- paste(caption,
+                 min(year_range), "-", max(year_range))
+
+cols <- brewer.pal(n = 8, name = "Set2")
+color_lst <- colorspace::rainbow_hcl(n = 4)
+
+# the component is in working
+interactive_trend_plot_complaint <- function(df){
+  levels(df$LAW_CAT_CD) <- c("Felony", "Misdemeanor", "Violation")
+  plt <-
+    df %>% 
+      hchart(
+        'line', hcaes(x = Year, y = count, group = LAW_CAT_CD)
+      ) %>%
+      hc_colors(cols) %>%
+      hc_legend(align = "right", verticalAlign = "top",layout = "horizontal",floating=TRUE, y = 75) %>%
+      hc_title(text = paste("<b>", caption, "</b>")) %>%
+      hc_subtitle(text = "Click on the legend to hide/show the seleced level of offense")
+  return(plt)
+}
+
+# static_trend_plot_arrest(df_year_target)
+interactive_trend_plot_complaint(complaint.df_year_target)
+```
+
+Although Arrests Data shows a dramatic downfall during the years, the Complaints Data is different. Misdemeanor still shows material decreasing, but Felony and Violation does not. The complaint about violation even has a increasing trend starting 2011. We can check this further by combining the arrests and complaints data sets.
+
+```{r merge two summary table}
+
+df_year_target$Type = c('Arrest')
+complaint.df_year_target$Type = c('Complaint')
+df_year_target <- df_year_target[df_year_target$LAW_CAT_CD != 'I', c('Type', 'Year', 'LAW_CAT_CD', 'count')]
+df_year_target$LAW_CAT_CD <- droplevels(df_year_target$LAW_CAT_CD)
+df_year_target$LAW_CAT_CD <- forcats::fct_relevel(df_year_target$LAW_CAT_CD, c('F', 'M', 'V'))
+
+levels(complaint.df_year_target$LAW_CAT_CD) <- c('F', 'M', 'V')
+complaint.df_year_target <- complaint.df_year_target[complaint.df_year_target$LAW_CAT_CD != 'I', c('Type', 'Year', 'LAW_CAT_CD', 'count')]
+#printStr(complaint.df_year_target)
+
+ca.df_year_target <- rbind(df_year_target, complaint.df_year_target)
+ca.df_year_target$CombinedType <- paste(ca.df_year_target$Type, ca.df_year_target$LAW_CAT_CD)
+ca.df_year_target <- ca.df_year_target[order(ca.df_year_target$Year),]
+
+```
+
+```{r plot complaint v.s. arrest}
+
+caption = "Number of complaint v.s. arrest incidents of different offense level over years"
+
+interactive_trend_plot_ca <- function(df){
+  levels(df$LAW_CAT_CD) <- c("Felony", "Misdemeanor", "Violation")
+  plt <-
+    df %>% 
+      hchart(
+        'line', hcaes(x = Year, y = count, group = 'CombinedType')
+      ) %>%
+      hc_colors(cols) %>%
+      hc_legend(align = "right", verticalAlign = "top",layout = "horizontal",floating=TRUE, y = 75) %>%
+      hc_title(text = paste("<b>", caption, "</b>")) %>%
+      hc_subtitle(text = "Click on the legend to hide/show the seleced level of offense")
+  return(plt)
+}
+
+interactive_trend_plot_ca(ca.df_year_target)
+
+```
+
+The 2 data sets have patterns as follow:
+
+* Felony and misdemeanor share the general tread of increasing/decreasing in different periods. That is to say, when arrest number falls, complaints number falls, too.
+
+* From 2006 to 2020, the number of violation in complaints and arrests diverge all the time. This category almost follows a contrary direction in number changes. From 2006 to 2011, as the actual arrests raise, the complaints slightly fall. From 2012 to 2020, as the arrests number dramatically falls, the complaints about violation present a upward trend.
+
+```{r arrest/complaint percent data transform by year}
+
+ca.df_year_target <-
+  ca.df_year_target %>% group_by(LAW_CAT_CD, Year) %>% mutate(percent = count/sum(count))
+
+ca.df_year_target <- ca.df_year_target %>% filter(Type == 'Arrest')
+
+```
+
+
+```{r arrest/complaint percent plot by year}
+caption = "Arrest/complaint Incident percent plot of different offense level over years"
+interactive_trend_plot_ca_ratio <- function(df){
+  levels(df$LAW_CAT_CD) <- c("Felony", "Misdemeanor", "Violation")
+  plt <-
+    df %>% 
+      hchart(
+        'line', hcaes(x = Year, y = percent, group = 'LAW_CAT_CD')
+      ) %>%
+      hc_colors(cols) %>%
+      hc_legend(align = "right", verticalAlign = "top",layout = "horizontal",floating=TRUE, y = 50) %>%
+      hc_title(text = paste("<b>", caption, "</b>")) %>%
+      hc_subtitle(text = "Click on the legend to hide/show the seleced level of offense")
+  return(plt)
+}
+
+interactive_trend_plot_ca_ratio(ca.df_year_target)
+#printStr(ca.df_year_target)
+```
+
+We can proof our observations in a more accurate way. By calculating the ratio of arrest over complaint, we merged the 2 data sets into a comprehensive one. The smaller the ratio, the bigger the gap between complaints and arrests (complaints > arrests).
+
+* The most important pattern is, staring 2013, a consecutive decreasing in Violation happened. If we regard the actual arrests as actual happened crimes, the social security powers have successfully rooted violation.
+
+* Both felony and misdemeanor displayed a relatively stable range before 2014. Staring 2015, both of the ratios entered a decreasing period. The misdemeanor ratio implies a bigger gap between arrests and complains. 
+
+### NLP Analysis
+
+```{r}
+clean_text <- function(docs) {
+  # Convert the text to lower case
+  docs <- tm::tm_map(docs, content_transformer(tolower))
+  # Remove numbers
+  docs <- tm::tm_map(docs, removeNumbers)
+  # Remove english common stopwords
+  docs <- tm::tm_map(docs, removeWords, stopwords("english"))
+  # Remove your own stop word
+  # specify your stopwords as a character vector
+  docs <- tm::tm_map(docs, removeWords, c("related", "blabla2")) 
+  # Remove punctuations
+  docs <- tm::tm_map(docs, removePunctuation)
+  # Eliminate extra white spaces
+  docs <- tm::tm_map(docs, stripWhitespace)
+  return(docs)
+}
+
+generate_word_cloud <- function(docs){
+  dtm <- TermDocumentMatrix(docs)
+  m <- as.matrix(dtm)
+  v <- sort(rowSums(m),decreasing=TRUE)
+  d <- data.frame(word = names(v),freq=v)
+  
+  set.seed(5702)
+  # wd <- wordcloud(words = d$word, freq = d$freq, min.freq = 1,
+            # max.words=200, random.order=FALSE, rot.per=0.35, 
+            # colors=viridis(n = 128))
+  wd <- wordcloud2(data = d, size=0.7, color='random-dark')
+  return(wd)
+}
+
+complaint.df_year_target_nlp <- complaint.df_year_target_nlp %>% filter(Year > 2016)
+docs <- Corpus(VectorSource(complaint.df_year_target_nlp$OFNS_DESC))
+docs <- clean_text(docs)
+wd <- generate_word_cloud(docs)
+wd
+```
+
+This word cloud displayed the actual contents of complaints in a decent way. The top 3 level of contents are mainly stealing and assaulting. Specifically:
+
+* Larceny is the most common complaints.
+
+* Petit, harassment, and assault make up the second level
+
+* The third level of common complaints was formed by offenses and mischief.
 
 ## Hate Crime Analysis
 
-Total Hate Crime Number this year
-
 ```{r}
 # get map
-manhattan_map <- get_map(location = c(lon = -73.95, lat = 40.7), zoom = 11, scale = "auto", )
+manhattan_map <- get_map(location = c(lon = -73.95, lat =  40.7), zoom = 11, scale = "auto", )
 #ggmap(manhattan_map)
-
 ```
 
 ```{r, echo=FALSE}
@@ -204,14 +447,14 @@ points <- points[which(!is.na(points$Longitude)),]
 
 r <- GET('http://data.beta.nyc//dataset/0ff93d2d-90ba-457c-9f7e-39e47bf2ac5f/resource/35dd04fb-81b3-479b-a074-a27a37888ce7/download/d085e2f8d0b54d4590b1e7d1f35594c1pediacitiesnycneighborhoods.geojson')
 
-nyc_neighborhoods <- readOGR(content(r,'text'), 'OGRGeoJSON', verbose = F)
+nyc_neighborhoods <- readOGR(httr::content(r,'text'), 'OGRGeoJSON', verbose = F)
 
 points_spdf <- points
 coordinates(points_spdf) <- ~Longitude + Latitude
 proj4string(points_spdf) <- proj4string(nyc_neighborhoods)
 matches <- over(points_spdf, nyc_neighborhoods)
 points <- cbind(points, matches)
-points_by_neighborhood <- points %>% group_by(neighborhood) %>% dplyr::summarize(num_points=n())
+points_by_neighborhood <- points %>% dplyr::group_by(neighborhood) %>% dplyr::summarize(num_points=n())
 
 map_data <- geo_join(nyc_neighborhoods, points_by_neighborhood, "neighborhood", "neighborhood")
 
@@ -230,6 +473,19 @@ ggmap(manhattan_map)+
   ylab("") + 
   labs(fill="Number of Crimes")
 ```
+
+Based on the heat map, we can derive analysis in a high-to-low manner:
+
+*Harlem in Manhattan has the most hate crimes.
+
+* Jamaica, Rochdale, Laurelton, Cambridge Heights, and Queens Village is very close to Harlem.
+
+* Area close to Broadway in Brooklyn, Area close to Belt Pkwy in Brooklyn, Flushing in Queens, Midtown & Upper Town in Manhattan has higher Hate Crimes number than most of other areas in New York City.
+
+* Staten Island has a very small number of Hate Crimes.
+
+
+Total Hate Crime Number (2021, YTD).
 
 ```{r}
 leaflet(plot_data) %>%

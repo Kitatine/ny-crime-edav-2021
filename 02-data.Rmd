@@ -18,8 +18,11 @@ One can easily find these data sets on the original data provider website [NYC O
 NYPD Complaint Data Historical data set includes all valid felony, misdemeanor, and violation crimes reported to the New York City Police Department (NYPD) from 2006 to the end of last year (2019). For additional details, please see the attached data dictionary in the ‘About’ section. ([Source](https://data.cityofnewyork.us/Public-Safety/NYPD-Complaint-Data-Historic/qgea-i56i))
 
 ```{r, results='asis'}
-complaints.description.df = data.frame(Variables = c("CMPLNT_FR_DT"), 
-                            Description = c("Date in %m/%d/%y, Exact date of occurrence for the reported event (or starting date of occurrence, if CMPLNT_TO_DT exists)")
+complaints.description.df = data.frame(
+                            Variables = c("RPT_DT",
+                                          "OFNS_DESC"), 
+                            Description = c("Date in %m/%d/%y, Date event was reported to police",
+                                            "Text, Description of internal classification corresponding with KY code (more general category than PD description)")
 )
 knitr::kable(complaints.description.df, caption = "Major columns used in NYPD Complaints",
              row.names = F,font_size = 10)
@@ -32,8 +35,15 @@ NYPD Arrests Data (Historic) includes a list of every arrest in NYC going back t
 ```{r}
 arrest.description.df = data.frame(
                             Variables = c("LAW_CAT_CD", 
-                                          "ARREST_DATE"), 
-                            Description = c("Text, Level of offense: felony, misdemeanor, violation",                                              "Date in %m/%d/%y, Exact date of arrest for the reported event"))
+                                          "ARREST_DATE",
+                                          "ARREST_BORO", 
+                                          "Latitude",
+                                          "Longitude"), 
+                            Description = c("Factor, Level of offense: felony, misdemeanor, violation",                                                              "Date in %m/%d/%y, Exact date of arrest for the reported event",
+                                            "Factor, Borough of arrest. B(Bronx), S(Staten Island), K(Brooklyn), M(Manhattan), Q(Queens)",
+                                            "Text, Latitude coordinate for Global Coordinate System, WGS 1984, decimal degrees (EPSG 4326)",
+                                            "Text, Longitude coordinate for Global Coordinate System, WGS 1984, decimal degrees (EPSG 4326)"
+))
 knitr::kable(arrest.description.df, caption = "Major columns used in NYPD Arrest",
              row.names = F,font_size = 10)
 ```
