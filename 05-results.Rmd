@@ -245,7 +245,6 @@ spatial_plot_arrest_interactive(df, 2020)
 
 * All 5 boroughs did well in reducing the number of violations. In 2020, almost all arrests lie in misdemeanor and felony.
 
-<<<<<<< HEAD
 * Both the misdemeanor and felony arrests decrease in all 5 boroughs through the years. However, the number of misdemeanor decrease much faster than the number of felony. In 2010, misdemeanor contribute to almost 70% of arrests. In 2019, this number in Brooklyn is around 50%. In 2020, this number in all 5 boroughs is approximate 50%.
 
 * Bronx, Brooklyn, and Manhattan achieved almost 50% cut in arrest from 2010 to 2019, while Queens only did 40%.

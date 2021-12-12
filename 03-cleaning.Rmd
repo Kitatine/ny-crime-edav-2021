@@ -104,7 +104,7 @@ We created tables for the data set structures to get a first impression on how e
 arrest.df = read.csv.ffdf(file = 'data/NYPD_Arrests_Data__Historic_.csv', header=TRUE, 
                   first.rows=10000, next.rows=50000)
 arrest.df = as.data.frame(arrest.df)
-str(arrest.df)
+printStr(arrest.df)
 knitr::kable(head(arrest.df), caption = "Head 6 Rows in Arrest Dataset for Temporal Analysis",
              row.names = F,font_size = 10)
 ```
@@ -113,7 +113,7 @@ knitr::kable(head(arrest.df), caption = "Head 6 Rows in Arrest Dataset for Tempo
 # if want to see the detailed output, add the VERBOSE = TRUE option for the read.csv.ffdf function
 complaint.df = read.csv(file="data/NYPD_Complaint_Data_Historic.csv")
 
-complaint.df
+printStr(complaint.df)
 ```
 
 
