@@ -91,8 +91,6 @@ library(dplyr)
 library(ggplot2)
 library(knitr)
 library(magrittr)
-# if want to see the detailed output, add the VERBOSE = TRUE option for the read.csv.ffdf function
-complaint.df = read.csv(file="data/NYPD_Complaint_Data_Historic.csv")
 ```
 
 We created tables for the data set structures to get a first impression on how exactly the data is showed.
@@ -105,6 +103,14 @@ str(arrest.df)
 knitr::kable(head(arrest.df), caption = "Head 6 Rows in Arrest Dataset for Temporal Analysis",
              row.names = F,font_size = 10)
 ```
+
+```{r load the data complaint}
+# if want to see the detailed output, add the VERBOSE = TRUE option for the read.csv.ffdf function
+complaint.df = read.csv(file="data/NYPD_Complaint_Data_Historic.csv")
+
+complaint.df
+```
+
 
 The data is relatively complex.
 
@@ -169,6 +175,23 @@ printStr(df_year)
 
 ## Pre-processing for Complaint Data
 Our modification on Complaint Data set are similar to what we processed on Arrest Data set.
+
+```{r}
+complaint.df_year_target <- time_target(complaint.df, 
+                              time_id_col = 'RPT_DT',
+                              option = 'year',
+                              col_of_interest = c('LAW_CAT_CD', 'CMPLNT_FR_DT', 'Year'),
+                              target_col = 'LAW_CAT_CD',
+                              group_option = 'group')
+complaint.df_year_target_nlp <- time_target(complaint.df, 
+                              time_id_col = 'RPT_DT',
+                              option = 'year',
+                              col_of_interest = c('LAW_CAT_CD', 'CMPLNT_FR_DT', 'OFNS_DESC', 'Year'),
+                              target_col = 'LAW_CAT_CD')
+
+
+head(complaint.df_year_target)
+```
 
 ## Pre-processing for other Data Sets
 No pre-processing is needed for other data sets.
