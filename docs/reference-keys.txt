@@ -38,4 +38,8 @@ nlp-analysis
 hate-crime-analysis
 interactive-component
 overview-of-arrests-data-by-time
+usage
+insights
+spatial-visulization-of-crime-data-by-precincts
+insights-1
 conclusion
