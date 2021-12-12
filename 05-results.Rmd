@@ -35,7 +35,15 @@ gpclibPermit()
 library('rjson')
 library(ggpubr)
 
+# color palettes
 library(RColorBrewer)
+
+# word cloud generator
+library(wordcloud)
+library(wordcloud2)
+
+# for text mining
+library(tm)
 
 result <- fromJSON(file = 'configure.json')
 GOOGLE_KEY <- result$GOOGLE_KEY
@@ -77,6 +85,7 @@ caption <- paste(caption,
 cols <- brewer.pal(n = 8, name = "Set2")
 color_lst <- colorspace::rainbow_hcl(n = 4)
 
+# the component is no more used
 static_trend_plot_arrest <- function(df) {
   plt_arrest_1 <- 
     ggplot(data = df, aes(x = as.numeric(Year), y = count)) + 
@@ -92,7 +101,7 @@ static_trend_plot_arrest <- function(df) {
   return(plt_arrest_1)
 }
 
-
+# the component is in working
 interactive_trend_plot_arrest <- function(df){
   levels(df$LAW_CAT_CD) <- c("Misdemeanor", "Felony", "Violation", "Other")
   plt <-
@@ -228,7 +237,158 @@ spatial_plot_arrest_interactive(df, 2020)
 
 * All 5 boroughs did well in reducing the number of violations. In 2020, almost all arrests lie in misdemeanor and felony.
 
+<<<<<<< HEAD
 * Both the misdemeanor and felony arrests decrease in all 5 boroughs through the years. However, the number of misdemeanor decrease much faster than the number of felony. In 2010, misdemeanor contribute to almost 70% of arrests. In 2019, this number in Brooklyn is around 50%. In 2020, this number in all 5 boroughs is approximate 50%.
+=======
+
+
+## Crime Complaint Analysis
+
+### Time Analysis
+
+```{r}
+complaint.df_year_target$LAW_CAT_CD <- factor(complaint.df_year_target$LAW_CAT_CD)
+year_range <- unique(complaint.df_year_target$Year)
+caption = "Number of complained incidents of different offense level over"
+caption <- paste(caption,
+                 min(year_range), "-", max(year_range))
+
+cols <- brewer.pal(n = 8, name = "Set2")
+color_lst <- colorspace::rainbow_hcl(n = 4)
+
+# the component is in working
+interactive_trend_plot_complaint <- function(df){
+  levels(df$LAW_CAT_CD) <- c("Felony", "Misdemeanor", "Violation")
+  plt <-
+    df %>% 
+      hchart(
+        'line', hcaes(x = Year, y = count, group = LAW_CAT_CD)
+      ) %>%
+      hc_colors(cols) %>%
+      hc_legend(align = "right", verticalAlign = "top",layout = "horizontal",floating=TRUE, y = 50) %>%
+      hc_title(text = paste("<b>", caption, "</b>")) %>%
+      hc_subtitle(text = "Click on the legend to hide/show the seleced level of offense")
+  return(plt)
+}
+
+# static_trend_plot_arrest(df_year_target)
+interactive_trend_plot_complaint(complaint.df_year_target)
+```
+
+```{r merge two summary table}
+
+df_year_target$Type = c('Arrest')
+complaint.df_year_target$Type = c('Complaint')
+df_year_target <- df_year_target[df_year_target$LAW_CAT_CD != 'I', c('Type', 'Year', 'LAW_CAT_CD', 'count')]
+df_year_target$LAW_CAT_CD <- droplevels(df_year_target$LAW_CAT_CD)
+df_year_target$LAW_CAT_CD <- fct_relevel(df_year_target$LAW_CAT_CD, c('F', 'M', 'V'))
+
+levels(complaint.df_year_target$LAW_CAT_CD) <- c('F', 'M', 'V')
+complaint.df_year_target <- complaint.df_year_target[complaint.df_year_target$LAW_CAT_CD != 'I', c('Type', 'Year', 'LAW_CAT_CD', 'count')]
+complaint.df_year_target
+
+ca.df_year_target <- rbind(df_year_target, complaint.df_year_target)
+ca.df_year_target$CombinedType <- paste(ca.df_year_target$Type, ca.df_year_target$LAW_CAT_CD)
+ca.df_year_target <- ca.df_year_target[order(ca.df_year_target$Year),]
+
+```
+
+```{r plot complaint v.s. arrest}
+
+caption = "Number of complaint v.s. arrest incidents of different offense level over years"
+
+interactive_trend_plot_ca <- function(df){
+  levels(df$LAW_CAT_CD) <- c("Felony", "Misdemeanor", "Violation")
+  plt <-
+    df %>% 
+      hchart(
+        'line', hcaes(x = Year, y = count, group = 'CombinedType')
+      ) %>%
+      hc_colors(cols) %>%
+      hc_legend(align = "right", verticalAlign = "top",layout = "horizontal",floating=TRUE, y = 50) %>%
+      hc_title(text = paste("<b>", caption, "</b>")) %>%
+      hc_subtitle(text = "Click on the legend to hide/show the seleced level of offense")
+  return(plt)
+}
+
+interactive_trend_plot_ca(ca.df_year_target)
+
+```
+
+
+```{r arrest/complaint percent data transform by year}
+
+ca.df_year_target <-
+  ca.df_year_target %>% group_by(LAW_CAT_CD, Year) %>% mutate(percent = count/sum(count))
+
+ca.df_year_target <- ca.df_year_target %>% filter(Type == 'Arrest')
+
+```
+
+
+```{r arrest/complaint percent plot by year}
+caption = "Arrest/complaint Incident percent plot of different offense level over years"
+interactive_trend_plot_ca_ratio <- function(df){
+  levels(df$LAW_CAT_CD) <- c("Felony", "Misdemeanor", "Violation")
+  plt <-
+    df %>% 
+      hchart(
+        'line', hcaes(x = Year, y = percent, group = 'LAW_CAT_CD')
+      ) %>%
+      hc_colors(cols) %>%
+      hc_legend(align = "right", verticalAlign = "top",layout = "horizontal",floating=TRUE, y = 50) %>%
+      hc_title(text = paste("<b>", caption, "</b>")) %>%
+      hc_subtitle(text = "Click on the legend to hide/show the seleced level of offense")
+  return(plt)
+}
+
+interactive_trend_plot_ca_ratio(ca.df_year_target)
+ca.df_year_target
+```
+
+### NLP Analysis
+
+```{r}
+clean_text <- function(docs) {
+  # Convert the text to lower case
+  docs <- tm_map(docs, content_transformer(tolower))
+  # Remove numbers
+  docs <- tm_map(docs, removeNumbers)
+  # Remove english common stopwords
+  docs <- tm_map(docs, removeWords, stopwords("english"))
+  # Remove your own stop word
+  # specify your stopwords as a character vector
+  docs <- tm_map(docs, removeWords, c("related", "blabla2")) 
+  # Remove punctuations
+  docs <- tm_map(docs, removePunctuation)
+  # Eliminate extra white spaces
+  docs <- tm_map(docs, stripWhitespace)
+  return(docs)
+}
+
+generate_word_cloud <- function(docs){
+  dtm <- TermDocumentMatrix(docs)
+  m <- as.matrix(dtm)
+  v <- sort(rowSums(m),decreasing=TRUE)
+  d <- data.frame(word = names(v),freq=v)
+  
+  set.seed(5702)
+  wd <- wordcloud(words = d$word, freq = d$freq, min.freq = 1,
+            max.words=200, random.order=FALSE, rot.per=0.35, 
+            colors=viridis(n = 128))
+  return(wd)
+}
+
+complaint.df_year_target_nlp <- complaint.df_year_target_nlp %>% filter(Year > 2016)
+docs <- Corpus(VectorSource(complaint.df_year_target_nlp$OFNS_DESC))
+docs <- clean_text(docs)
+wd <- generate_word_cloud(docs)
+```
+
+
+
+## Hate Crime Analysis
+>>>>>>> remotes/origin/wz-dev
 
 * Bronx, Brooklyn, and Manhattan achieved almost 50% cut in arrest from 2010 to 2019, while Queens only did 40%.
 

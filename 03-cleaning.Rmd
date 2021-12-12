@@ -20,7 +20,7 @@ Finally, after successfully cleaned/pre-processed the Arrest Data and the Compla
 
 We developed several reusable modules that we would repetitively use in our analysis below. Specifically, we set our environment as well as a time stamp formatting function to unify our criteria for date data.
 
->One can implement these modules via the syntax of time-and-date manipulation in R and "knitr" as well as "magrittr" packages.
+> One can implement these modules via the syntax of time-and-date manipulation in R and "knitr" as well as "magrittr" packages.
 
 ```{r cleaning data analysis, reusable module}
 filter_before <- function(df, col, format = "%m/%d/%Y", year = NULL, date = NULL, option = NULL) {
@@ -31,7 +31,7 @@ filter_before <- function(df, col, format = "%m/%d/%Y", year = NULL, date = NULL
 }
 ```
 
->We also developed a mimic function for str() to provide insights of the data sets in a table way.
+> We also developed a mimic function for str() to provide insights of the data sets in a table way.
 
 ```{r str() display function}
 printStr <- function(df) {
@@ -45,10 +45,9 @@ printStr <- function(df) {
 }
 ```
 
->To formulate proper data structure and columns, we developed a function allowing we derive year and/or month information from the original time stamp column of Arrest Data. Further more, this function also allow us to decide whether an grouping by year and/or month is needed. One can find further details in our repository.
+> To formulate proper data structure and columns, we developed a function allowing we derive year and/or month information from the original time stamp column of Arrest Data. Further more, this function also allow us to decide whether an grouping by year and/or month is needed. One can find further details in our repository.
 
 ```{r data transformation for arrest time analysis}
-
 time_target <- function(df, time_id_col, option = NULL, col_of_interest = NULL, target_col  = NULL,
                         group_option = NULL){
     if (option == 'year') {
@@ -97,8 +96,6 @@ library(dplyr)
 library(ggplot2)
 library(knitr)
 library(magrittr)
-# if want to see the detailed output, add the VERBOSE = TRUE option for the read.csv.ffdf function
-complaint.df = read.csv(file="data/NYPD_Complaint_Data_Historic.csv")
 ```
 
 We created tables for the data set structures to get a first impression on how exactly the data is showed.
@@ -106,12 +103,19 @@ We created tables for the data set structures to get a first impression on how e
 ```{r load the data, arrest}
 arrest.df = read.csv.ffdf(file = 'data/NYPD_Arrests_Data__Historic_.csv', header=TRUE, 
                   first.rows=10000, next.rows=50000)
-
 arrest.df = as.data.frame(arrest.df)
 str(arrest.df)
 knitr::kable(head(arrest.df), caption = "Head 6 Rows in Arrest Dataset for Temporal Analysis",
              row.names = F,font_size = 10)
 ```
+
+```{r load the data complaint}
+# if want to see the detailed output, add the VERBOSE = TRUE option for the read.csv.ffdf function
+complaint.df = read.csv(file="data/NYPD_Complaint_Data_Historic.csv")
+
+complaint.df
+```
+
 
 The data is relatively complex.
 
@@ -173,11 +177,32 @@ Here is a brief structure of the cleaned data set.
 printStr(df_year)
 ```
 
+## Pre-processing for Complaint Data
+Our modification on Complaint Data set are similar to what we processed on Arrest Data set.
+
+```{r}
+complaint.df_year_target <- time_target(complaint.df, 
+                              time_id_col = 'RPT_DT',
+                              option = 'year',
+                              col_of_interest = c('LAW_CAT_CD', 'CMPLNT_FR_DT', 'Year'),
+                              target_col = 'LAW_CAT_CD',
+                              group_option = 'group')
+complaint.df_year_target_nlp <- time_target(complaint.df, 
+                              time_id_col = 'RPT_DT',
+                              option = 'year',
+                              col_of_interest = c('LAW_CAT_CD', 'CMPLNT_FR_DT', 'OFNS_DESC', 'Year'),
+                              target_col = 'LAW_CAT_CD')
+#head(complaint.df_year_target)
+```
+
+```{r}
+printStr(complaint.df_year_target)
+```
+
 
 ## Pre-processing for other Data Sets
 No pre-processing is needed for other data sets.
 
 ## Next Stage
 We have successfully constructed cleaned data sets now. Next, we can start analyzing.
-
 
