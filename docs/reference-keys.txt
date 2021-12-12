@@ -39,3 +39,8 @@ hate-crime-analysis
 interactive-component
 overview-of-arrests-data-by-time
 conclusion
+spatial-visulization-of-crime-data-by-precincts
+insights
+insights-1
+useage
+usage

@@ -7,13 +7,12 @@
         <title></title>
         <script src="https://d3js.org/d3.v6.js"></script>
          <link rel="stylesheet" href="scripts/interactve.css">
-       
     </head>
     <body>
     <p id="format1" >Total Arrests in History</p>
     <svg width="600" height="450" id="svg3">
     </svg>
-    <p id="format1" >Arrests by Categories in 2021</p>
+    <p id="format1" >Arrests by Categories from 2018 to 2020</p>
     <label>Select a crime category:</label>
     <select id="CrimeCategory"></select>
     <svg  width="600" height="450"  id="crimeByCategory"></svg> 
@@ -21,3 +20,23 @@
     <script type="text/javascript"  src="scripts/crimeByCategory.js"> </script>
     </body>
 </html>
+### Usage:
+The first graph automatically draws an overall crime number in NYC by each month from 2010 to 
+The second graph draws monthly crime numbers in NYC by the top five crime categories, which are assault, drugs, vehicle and traffic, felony, and petit larceny. 
+
+### Insights:
+From the first graph, we can see the overall number of all kinds of crime are decreasing. We can also see a periodical trend where the crime number reaches its lowest point at approximately the end of each year, which is more obvious for the first five years.
+From the second graph, we can see that the overall trend for the number of crimes is also decreasing over time for most crime categories except felony. The number of felonies mostly stayed steady for the past three years. In 2020 April and 2020 June, the number of crimes significantly decreases for all listed categories. 
+
+
+## Spatial Visulization of Crime Data by precincts 
+
+<iframe src="scripts/index.html" width="1000" height="800"></iframe>
+
+### Insights:
+We notice that some precincts are more likely to have crime events no matter which year is selected, such as precinct #44, #14, #75 #40. 
+<br>In the early 10s, we see that crime events are mostly concentrated in precincts #75, #14, and #44. However, we also see that more regions have darker colors in the late 10s, especially in 2020. 2020 has the most number of deep blue color regions than other years, where precinct #75 does not have the deepest color. Since, whenever we select a year we rescale the color domain, the deeper that color is the crime events are more frequent. 
+<br>Therefore, this shows that crimes are no longer concentrated in specific regions, which has been more dispersed in various regions over these 10 years.
+
+Note: It might be slow when updating using d3 bookdown, you can also checkout:
+https://jingwenb.github.io/nyc-crime-map-visualization/
