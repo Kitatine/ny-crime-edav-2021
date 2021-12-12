@@ -19,8 +19,10 @@ NYPD Complaint Data Historical data set includes all valid felony, misdemeanor, 
 
 ```{r, results='asis'}
 complaints.description.df = data.frame(
-                            Variables = c("CMPLNT_FR_DT"), 
-                            Description = c("Date in %m/%d/%y, Exact date of occurrence for the reported event (or starting date of occurrence, if CMPLNT_TO_DT exists)")
+                            Variables = c("RPT_DT",
+                                          "OFNS_DESC"), 
+                            Description = c("Date in %m/%d/%y, Date event was reported to police",
+                                            "Text, Description of internal classification corresponding with KY code (more general category than PD description)")
 )
 knitr::kable(complaints.description.df, caption = "Major columns used in NYPD Complaints",
              row.names = F,font_size = 10)
