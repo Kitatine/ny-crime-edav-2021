@@ -45,6 +45,7 @@ register_google(key = GOOGLE_KEY)
 
 ```
 
+To address these questions, we analyzed Arrest Data and Hate Crime Data.
 
 ## Crime Arrest Analysis
 
@@ -148,23 +149,34 @@ Moreover, we can witness the improvement in the safety of the community by notic
 
 ### Geometry Dimension: Overall Illustration
 
+We marked all the locations of arrest in 2020 on map.
+
+* According to our interactive map, these area suffers greater cases reported than other area: Brooklyn downtown, Harlem in Manhattan, Morrisania in Bronx, Manhattan downtown.
+
+* Manhattan is generally safer than other boroughs (not including Staten Island because of population differences).
+
+* Harlem in Mannhattan has the biggest number in arrest.
+
+The main function of our map is serving as a general guide of safety. One in New York City can figure out how exactly the social security situation was in one's area. Further more, we specifically improved the readability by aggregating the arrests into their "most common centers". As one zooming in/out the map, the aggregation level will adjust against one's zooming scales, which means no matter what scale of arresting location (say, from boroughs to streets) information the one want, the map can always provide a great aggregation.
+
 ```{r}
 library(leaflet)
 library(ggmap)
 
 df_year = df_year %>% mutate(lon = Longitude, lat = Latitude)
 df_2020 = df_year %>% filter(Year == "2020")
-leaflet(df_year, height=300, width=900) %>%
+leaflet(df_year, height=490, width=800) %>%
   addTiles() %>%  # Add default OpenStreetMap map tiles
   addMarkers(lng=df_2020$lon, lat=df_2020$lat,
              clusterOptions = markerClusterOptions())
 
 ```
 
-### Geometry Dimension: Zoom in to Borough  
-We could zoom in to investigate the detailed spatial distribution of those offense incidents.  
+### Geometry Dimension: Zoom in to Borough & Combining Time Series Analysis 
 
-daibiaoxing nianfen, zooming in dao diqu
+We could zoom in to investigate the detailed spatial distribution of those offense incidents.
+
+As mentioned in our time analysis above, year of 2010, 2015, and 2019 are special turning points/starting point of tendencies. And 2020 is exactly when the COVID-19 broke, which is our main target in this project. Based on our overall geometry distribution navigating tool above, we can analyze the distributions of crimes categories in the 5 boroughs of New York City.
 
 ```{r}
 df_year$LAW_CAT_CD <- factor(df_year$LAW_CAT_CD, levels = c("M", "F", "V", "I"))
@@ -202,7 +214,7 @@ spatial_plot_arrest_interactive <- function(df, year) {
 df <- df_year %>% group_by(Year, LAW_CAT_CD, ARREST_BORO) %>% summarise(count = n()) 
 
 spatial_plot_arrest_interactive(df, 2010)
-spatial_plot_arrest_interactive(df, 2014)
+spatial_plot_arrest_interactive(df, 2015)
 spatial_plot_arrest_interactive(df, 2019)
 spatial_plot_arrest_interactive(df, 2020)
 
@@ -212,13 +224,19 @@ spatial_plot_arrest_interactive(df, 2020)
 
 ```
 
+* In the 4 year time point, Brooklyn always has the highest arrest number among all 5 boroughs. Manhattan follows Brooklyn closely. Bronx and Queens follow Manhattan in order. And Staten Island always with lowest number. This pattern may related to population distribution, 
 
+* All 5 boroughs did well in reducing the number of violations. In 2020, almost all arrests lie in misdemeanor and felony.
 
+* Both the misdemeanor and felony arrests decrease in all 5 boroughs through the years. However, the number of misdemeanor decrease much faster than the number of felony. In 2010, misdemeanor contribute to almost 70% of arrests. In 2019, this number in Brooklyn is around 50%. In 2020, this number in all 5 boroughs is approximate 50%.
 
+* Bronx, Brooklyn, and Manhattan achieved almost 50% cut in arrest from 2010 to 2019, while Queens only did 40%.
 
+* Although the number of arrest in Staten Island is relatively small comparing to other boroughs, Staten Island has made a surprising 60% cut in arrest number.
 
+* Even though Bronx has much lower total number of arrest in 2010, 2015, and 2019, in 2020, arrest number in Bronx (32 382) is almost the same as the number in Manhattan (32 609), where the difference divided by Manhattan is less than 1%. Manhattan performs much better than Bronx in cutting the total number considering the difference between the 2 boroughs in 2010 divided by Manhattan is over 11%, or 12k.
 
-
+* The same thing happened between Manhattan and Queens. In 2010, the numbers gap devided by Manhattan is over 32%, or 36k. However, in 2020, gap is merely 8.5%, or 2.7k.
 
 ## Hate Crime Analysis
 
@@ -263,6 +281,17 @@ ggmap(manhattan_map)+
   ylab("") + 
   labs(fill="Number of Crimes")
 ```
+
+Based on the heat map, we can derive analysis in a high-to-low manner:
+
+*Harlem in Manhattan has the most hate crimes.
+
+* Jamaica, Rochdale, Laurelton, Cambridge Heights, and Queens Village is very close to Harlem.
+
+* Area close to Broadway in Brooklyn, Area close to Belt Pkwy in Brooklyn, Flushing in Queens, Midtown & Upper Town in Manhattan has higher Hate Crimes number than most of other areas in New York City.
+
+* Staten Island has a very small number of Hate Crimes.
+
 
 Total Hate Crime Number (2021, YTD).
 
