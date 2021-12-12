@@ -24,7 +24,7 @@
 <meta name="author" content="Jingwen Bai, Qiran Li, Zheng Wu" />
 
 
-<meta name="date" content="2021-11-18" />
+<meta name="date" content="2021-12-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,6 +53,60 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet" />
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet" />
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.freezable.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
+<script src="libs/proj4js-2.3.15/proj4.js"></script>
+<link href="libs/highcharts-8.1.2/css/motion.css" rel="stylesheet" />
+<script src="libs/highcharts-8.1.2/highcharts.js"></script>
+<script src="libs/highcharts-8.1.2/highcharts-3d.js"></script>
+<script src="libs/highcharts-8.1.2/highcharts-more.js"></script>
+<script src="libs/highcharts-8.1.2/modules/stock.js"></script>
+<script src="libs/highcharts-8.1.2/modules/map.js"></script>
+<script src="libs/highcharts-8.1.2/modules/annotations.js"></script>
+<script src="libs/highcharts-8.1.2/modules/data.js"></script>
+<script src="libs/highcharts-8.1.2/modules/drilldown.js"></script>
+<script src="libs/highcharts-8.1.2/modules/item-series.js"></script>
+<script src="libs/highcharts-8.1.2/modules/offline-exporting.js"></script>
+<script src="libs/highcharts-8.1.2/modules/overlapping-datalabels.js"></script>
+<script src="libs/highcharts-8.1.2/modules/exporting.js"></script>
+<script src="libs/highcharts-8.1.2/modules/export-data.js"></script>
+<script src="libs/highcharts-8.1.2/modules/funnel.js"></script>
+<script src="libs/highcharts-8.1.2/modules/heatmap.js"></script>
+<script src="libs/highcharts-8.1.2/modules/treemap.js"></script>
+<script src="libs/highcharts-8.1.2/modules/sankey.js"></script>
+<script src="libs/highcharts-8.1.2/modules/dependency-wheel.js"></script>
+<script src="libs/highcharts-8.1.2/modules/organization.js"></script>
+<script src="libs/highcharts-8.1.2/modules/solid-gauge.js"></script>
+<script src="libs/highcharts-8.1.2/modules/streamgraph.js"></script>
+<script src="libs/highcharts-8.1.2/modules/sunburst.js"></script>
+<script src="libs/highcharts-8.1.2/modules/vector.js"></script>
+<script src="libs/highcharts-8.1.2/modules/wordcloud.js"></script>
+<script src="libs/highcharts-8.1.2/modules/xrange.js"></script>
+<script src="libs/highcharts-8.1.2/modules/tilemap.js"></script>
+<script src="libs/highcharts-8.1.2/modules/venn.js"></script>
+<script src="libs/highcharts-8.1.2/modules/gantt.js"></script>
+<script src="libs/highcharts-8.1.2/modules/timeline.js"></script>
+<script src="libs/highcharts-8.1.2/modules/parallel-coordinates.js"></script>
+<script src="libs/highcharts-8.1.2/modules/bullet.js"></script>
+<script src="libs/highcharts-8.1.2/modules/coloraxis.js"></script>
+<script src="libs/highcharts-8.1.2/modules/dumbbell.js"></script>
+<script src="libs/highcharts-8.1.2/modules/lollipop.js"></script>
+<script src="libs/highcharts-8.1.2/modules/series-label.js"></script>
+<script src="libs/highcharts-8.1.2/plugins/motion.js"></script>
+<script src="libs/highcharts-8.1.2/custom/reset.js"></script>
+<script src="libs/highcharts-8.1.2/modules/boost.js"></script>
+<script src="libs/highchart-binding-0.8.2/highchart.js"></script>
 
 
 
@@ -70,12 +124,30 @@
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">nyCrime2021</a></li>
+<li><a href="./">nycCrime2021</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
-<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
+<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#nypd-complaints-dataset"><i class="fa fa-check"></i><b>2.1</b> NYPD Complaints Dataset</a></li>
+<li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#nypd-arrest-dataset"><i class="fa fa-check"></i><b>2.2</b> NYPD Arrest Dataset</a></li>
+<li class="chapter" data-level="2.3" data-path="data-sources.html"><a href="data-sources.html#other-data-sets"><i class="fa fa-check"></i><b>2.3</b> Other Data Sets</a></li>
+<li class="chapter" data-level="2.4" data-path="data-sources.html"><a href="data-sources.html#featured-variables"><i class="fa fa-check"></i><b>2.4</b> Featured Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#construction-of-processing-modules"><i class="fa fa-check"></i><b>3.1</b> Construction of Processing Modules</a></li>
+<li class="chapter" data-level="3.2" data-path="data-transformation.html"><a href="data-transformation.html#preprocessing-loading-and-descriptive-analysis"><i class="fa fa-check"></i><b>3.2</b> Preprocessing: Loading and Descriptive Analysis</a></li>
+<li class="chapter" data-level="3.3" data-path="data-transformation.html"><a href="data-transformation.html#pre-processing-for-arrest-data"><i class="fa fa-check"></i><b>3.3</b> Pre-processing for Arrest Data</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="data-transformation.html"><a href="data-transformation.html#arrest-data-time-analysis-pre-processing"><i class="fa fa-check"></i><b>3.3.1</b> Arrest Data: Time Analysis Pre-processing</a></li>
+<li class="chapter" data-level="3.3.2" data-path="data-transformation.html"><a href="data-transformation.html#arrest-data-geometry-anaylsis-pre-processing"><i class="fa fa-check"></i><b>3.3.2</b> Arrest Data: Geometry Anaylsis Pre-processing</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="data-transformation.html"><a href="data-transformation.html#pre-processing-for-complaint-data"><i class="fa fa-check"></i><b>3.4</b> Pre-processing for Complaint Data</a></li>
+<li class="chapter" data-level="3.5" data-path="data-transformation.html"><a href="data-transformation.html#pre-processing-for-other-data-sets"><i class="fa fa-check"></i><b>3.5</b> Pre-processing for other Data Sets</a></li>
+<li class="chapter" data-level="3.6" data-path="data-transformation.html"><a href="data-transformation.html#next-stage"><i class="fa fa-check"></i><b>3.6</b> Next Stage</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="missing-values.html"><a href="missing-values.html#missing-data-analysis"><i class="fa fa-check"></i><b>4.1</b> Missing Data Analysis</a>
@@ -90,8 +162,20 @@
 <li class="chapter" data-level="4.1.8" data-path="missing-values.html"><a href="missing-values.html#for-arrest-ytd"><i class="fa fa-check"></i><b>4.1.8</b> For arrest (YTD):</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
-<li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
+<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#crime-arrest-analysis"><i class="fa fa-check"></i><b>5.1</b> Crime Arrest Analysis</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="results.html"><a href="results.html#overall-illustration-on-map"><i class="fa fa-check"></i><b>5.1.1</b> Overall Illustration on Map</a></li>
+<li class="chapter" data-level="5.1.2" data-path="results.html"><a href="results.html#time-analysis"><i class="fa fa-check"></i><b>5.1.2</b> Time Analysis</a></li>
+<li class="chapter" data-level="5.1.3" data-path="results.html"><a href="results.html#spatial-analysis"><i class="fa fa-check"></i><b>5.1.3</b> Spatial Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#hate-crime-analysis"><i class="fa fa-check"></i><b>5.2</b> Hate Crime Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="interactive-component.html"><a href="interactive-component.html#overview-of-arrests-data-by-time"><i class="fa fa-check"></i><b>6.1</b> Overview of Arrests Data by Time</a></li>
+</ul></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -114,7 +198,958 @@
             <section class="normal" id="section-">
 <div id="data-transformation" class="section level1" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Data transformation</h1>
+<p>The NYPD Open Data Sets are generally well constructed and with consistent data structure and type, and the sets usually do not have serious missing value issues. Therefore, our focus here would mainly be insights formulation, where we shall decide the specific metric for further exploration.</p>
+<p>Specifically, we include the basic data transformation as the pre-processing module to clean the data and obtain some fundamental insights.</p>
+<p>Notice that, since all our data listed here have millions of rows, so we turn to the <code>ff</code> library to enable fast loading the data set feature. Besides, we also developed several reusable modules for cleaner and more efficient processing. For more information on ‘ff’ package, please check <a href="https://cran.r-project.org/web/packages/ff/index.html">here</a>.</p>
+<p>Our interest lies on the geometry distribution and the time series analysis of our Arrest Data and Complaint Data.</p>
+<p>Finally, after successfully cleaned/pre-processed the Arrest Data and the Complaint Data, we introduced a map API as well to include the geometry information for our further visualized and interactive analysis in later chapters.</p>
+<div id="construction-of-processing-modules" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Construction of Processing Modules</h2>
+<p>We developed several reusable modules that we would repetitively use in our analysis below. Specifically, we set our environment as well as a time stamp formatting function to unify our criteria for date data.</p>
+<blockquote>
+<p>One can implement these modules via the syntax of time-and-date manipulation in R and “knitr” as well as “magrittr” packages.</p>
+</blockquote>
+<blockquote>
+<p>We also developed a mimic function for str() to provide insights of the data sets in a table way.</p>
+</blockquote>
+<blockquote>
+<p>To formulate proper data structure and columns, we developed a function allowing we derive year and/or month information from the original time stamp column of Arrest Data. Further more, this function also allow us to decide whether an grouping by year and/or month is needed. One can find further details in our repository.</p>
+</blockquote>
+<p>For a detailed implementation, please refer to our <a href="https://github.com/Kitatine/ny-crime-edav-2021">repository</a>.</p>
+</div>
+<div id="preprocessing-loading-and-descriptive-analysis" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Preprocessing: Loading and Descriptive Analysis</h2>
+<p>We created tables for the data set structures to get a first impression on how exactly the data is showed.</p>
+<pre><code>## &#39;data.frame&#39;:    5153369 obs. of  19 variables:
+##  $ ARREST_KEY       : int  32311380 192799737 193260691 149117452 190049060 24288194 189182271 196324211 196785901 197554056 ...
+##  $ ARREST_DATE      : Factor w/ 5479 levels &quot;01/01/2019&quot;,&quot;01/02/2018&quot;,..: 247 44 62 9 495 399 462 164 181 210 ...
+##  $ PD_CD            : int  511 177 NA 153 157 203 153 157 175 175 ...
+##  $ PD_DESC          : Factor w/ 423 levels &quot;&quot;,&quot;ACCOSTING,FRAUDULENT&quot;,..: 33 153 1 139 137 176 139 137 155 155 ...
+##  $ KY_CD            : int  235 116 NA 104 104 352 104 104 233 233 ...
+##  $ OFNS_DESC        : Factor w/ 88 levels &quot;&quot;,&quot;ADMINISTRATIVE CODE&quot;,..: 11 56 1 54 54 10 54 54 56 56 ...
+##  $ LAW_CODE         : Factor w/ 2441 levels &quot;&quot;,&quot;ABC00000MA&quot;,..: 308 137 334 114 117 151 114 117 129 129 ...
+##  $ LAW_CAT_CD       : Factor w/ 5 levels &quot;&quot;,&quot;F&quot;,&quot;I&quot;,&quot;M&quot;,..: 4 2 2 2 2 4 2 2 4 4 ...
+##  $ ARREST_BORO      : Factor w/ 6 levels &quot;B&quot;,&quot;K&quot;,&quot;M&quot;,&quot;Q&quot;,..: 4 3 3 2 2 2 3 2 1 3 ...
+##  $ ARREST_PRECINCT  : int  27 25 14 67 77 77 5 77 50 26 ...
+##  $ JURISDICTION_CODE: int  1 0 0 0 0 2 0 0 0 0 ...
+##  $ AGE_GROUP        : Factor w/ 92 levels &quot;&lt;18&quot;,&quot;18-24&quot;,..: 2 4 3 3 3 4 4 4 3 4 ...
+##  $ PERP_SEX         : Factor w/ 2 levels &quot;F&quot;,&quot;M&quot;: 2 2 2 2 2 2 2 2 2 1 ...
+##  $ PERP_RACE        : Factor w/ 8 levels &quot;AMERICAN INDIAN/ALASKAN NATIVE&quot;,..: 3 3 5 3 3 3 7 4 3 3 ...
+##  $ X_COORD_CD       : num  NA 1000555 986685 998032 1003606 ...
+##  $ Y_COORD_CD       : num  NA 230994 215375 175598 185050 ...
+##  $ Latitude         : num  NA 40.8 40.8 40.6 40.7 ...
+##  $ Longitude        : num  NA -73.9 -74 -74 -73.9 ...
+##  $ Lon_Lat          : Factor w/ 119134 levels &quot;&quot;,&quot;POINT (-73.70659676099996 40.75353245800005)&quot;,..: 1 3325 4680 3693 2941 2826 4834 2941 1926 3905 ...</code></pre>
+<table style="width:100%;">
+<caption>(#tab:load the data, arrest)Head 6 Rows in Arrest Dataset for Temporal Analysis</caption>
+<colgroup>
+<col width="4%" />
+<col width="4%" />
+<col width="2%" />
+<col width="12%" />
+<col width="2%" />
+<col width="6%" />
+<col width="4%" />
+<col width="4%" />
+<col width="4%" />
+<col width="5%" />
+<col width="6%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="4%" />
+<col width="4%" />
+<col width="3%" />
+<col width="3%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">ARREST_KEY</th>
+<th align="left">ARREST_DATE</th>
+<th align="right">PD_CD</th>
+<th align="left">PD_DESC</th>
+<th align="right">KY_CD</th>
+<th align="left">OFNS_DESC</th>
+<th align="left">LAW_CODE</th>
+<th align="left">LAW_CAT_CD</th>
+<th align="left">ARREST_BORO</th>
+<th align="right">ARREST_PRECINCT</th>
+<th align="right">JURISDICTION_CODE</th>
+<th align="left">AGE_GROUP</th>
+<th align="left">PERP_SEX</th>
+<th align="left">PERP_RACE</th>
+<th align="right">X_COORD_CD</th>
+<th align="right">Y_COORD_CD</th>
+<th align="right">Latitude</th>
+<th align="right">Longitude</th>
+<th align="left">Lon_Lat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">32311380</td>
+<td align="left">06/18/2007</td>
+<td align="right">511</td>
+<td align="left">CONTROLLED SUBSTANCE, POSSESSION 7</td>
+<td align="right">235</td>
+<td align="left">DANGEROUS DRUGS</td>
+<td align="left">PL 2200300</td>
+<td align="left">M</td>
+<td align="left">Q</td>
+<td align="right">27</td>
+<td align="right">1</td>
+<td align="left">18-24</td>
+<td align="left">M</td>
+<td align="left">BLACK</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">192799737</td>
+<td align="left">01/26/2019</td>
+<td align="right">177</td>
+<td align="left">SEXUAL ABUSE</td>
+<td align="right">116</td>
+<td align="left">SEX CRIMES</td>
+<td align="left">PL 1306503</td>
+<td align="left">F</td>
+<td align="left">M</td>
+<td align="right">25</td>
+<td align="right">0</td>
+<td align="left">45-64</td>
+<td align="left">M</td>
+<td align="left">BLACK</td>
+<td align="right">1000555</td>
+<td align="right">230994</td>
+<td align="right">40.80069</td>
+<td align="right">-73.94111</td>
+<td align="left">POINT (-73.94110928599997 40.800694331000045)</td>
+</tr>
+<tr class="odd">
+<td align="right">193260691</td>
+<td align="left">02/06/2019</td>
+<td align="right">NA</td>
+<td align="left"></td>
+<td align="right">NA</td>
+<td align="left"></td>
+<td align="left">PL 2203400</td>
+<td align="left">F</td>
+<td align="left">M</td>
+<td align="right">14</td>
+<td align="right">0</td>
+<td align="left">25-44</td>
+<td align="left">M</td>
+<td align="left">UNKNOWN</td>
+<td align="right">986685</td>
+<td align="right">215375</td>
+<td align="right">40.75784</td>
+<td align="right">-73.99121</td>
+<td align="left">POINT (-73.99121211099998 40.75783900300007)</td>
+</tr>
+<tr class="even">
+<td align="right">149117452</td>
+<td align="left">01/06/2016</td>
+<td align="right">153</td>
+<td align="left">RAPE 3</td>
+<td align="right">104</td>
+<td align="left">RAPE</td>
+<td align="left">PL 1302503</td>
+<td align="left">F</td>
+<td align="left">K</td>
+<td align="right">67</td>
+<td align="right">0</td>
+<td align="left">25-44</td>
+<td align="left">M</td>
+<td align="left">BLACK</td>
+<td align="right">998032</td>
+<td align="right">175598</td>
+<td align="right">40.64865</td>
+<td align="right">-73.95034</td>
+<td align="left">POINT (-73.95033556299995 40.648650085000035)</td>
+</tr>
+<tr class="odd">
+<td align="right">190049060</td>
+<td align="left">11/15/2018</td>
+<td align="right">157</td>
+<td align="left">RAPE 1</td>
+<td align="right">104</td>
+<td align="left">RAPE</td>
+<td align="left">PL 1303501</td>
+<td align="left">F</td>
+<td align="left">K</td>
+<td align="right">77</td>
+<td align="right">0</td>
+<td align="left">25-44</td>
+<td align="left">M</td>
+<td align="left">BLACK</td>
+<td align="right">1003606</td>
+<td align="right">185050</td>
+<td align="right">40.67458</td>
+<td align="right">-73.93022</td>
+<td align="left">POINT (-73.93022154099998 40.67458330800008)</td>
+</tr>
+<tr class="even">
+<td align="right">24288194</td>
+<td align="left">09/13/2006</td>
+<td align="right">203</td>
+<td align="left">TRESPASS 3, CRIMINAL</td>
+<td align="right">352</td>
+<td align="left">CRIMINAL TRESPASS</td>
+<td align="left">PL 140100E</td>
+<td align="left">M</td>
+<td align="left">K</td>
+<td align="right">77</td>
+<td align="right">2</td>
+<td align="left">45-64</td>
+<td align="left">M</td>
+<td align="left">BLACK</td>
+<td align="right">1004580</td>
+<td align="right">183838</td>
+<td align="right">40.67125</td>
+<td align="right">-73.92671</td>
+<td align="left">POINT (-73.926713851 40.67125445700003)</td>
+</tr>
+</tbody>
+</table>
+<p>The data is relatively complex.</p>
+<p>First, for our Arrest Data, we acquired over 5.1 million rows and 19 variables.</p>
+<table>
+<colgroup>
+<col width="8%" />
+<col width="11%" />
+<col width="8%" />
+<col width="5%" />
+<col width="8%" />
+<col width="59%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Column1_</th>
+<th align="left">Variable</th>
+<th align="left">Column2_</th>
+<th align="left">Classe</th>
+<th align="left">Column3_</th>
+<th align="left">First_value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">ARREST_KEY</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">32311380, 192799737, 193260691</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">ARREST_DATE</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">06/18/2007, 01/26/2019, 02/06/2019</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">PD_CD</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">511, 177, NA</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">PD_DESC</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">CONTROLLED SUBSTANCE, POSSESSION 7, SEXUAL ABUSE,</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">KY_CD</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">235, 116, NA</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">OFNS_DESC</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">DANGEROUS DRUGS, SEX CRIMES,</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">LAW_CODE</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">PL 2200300, PL 1306503, PL 2203400</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">LAW_CAT_CD</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">M, F, F</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">ARREST_BORO</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">Q, M, M</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">ARREST_PRECINCT</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">27, 25, 14</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">JURISDICTION_CODE</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">1, 0, 0</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">AGE_GROUP</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">18-24, 45-64, 25-44</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">PERP_SEX</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">M, M, M</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">PERP_RACE</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">BLACK, BLACK, UNKNOWN</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">X_COORD_CD</td>
+<td align="left">||</td>
+<td align="left">double</td>
+<td align="left">||</td>
+<td align="left">NA, 1000555, 986685</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">Y_COORD_CD</td>
+<td align="left">||</td>
+<td align="left">double</td>
+<td align="left">||</td>
+<td align="left">NA, 230994, 215375</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">Latitude</td>
+<td align="left">||</td>
+<td align="left">double</td>
+<td align="left">||</td>
+<td align="left">NA, 40.800694331, 40.7578390030001</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">Longitude</td>
+<td align="left">||</td>
+<td align="left">double</td>
+<td align="left">||</td>
+<td align="left">NA, -73.941109286, -73.991212111</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">Lon_Lat</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">, POINT (-73.94110928599997 40.800694331000045), POINT (-73.99121211099998 40.75783900300007)</td>
+</tr>
+</tbody>
+</table>
+<p>Then, for our Complaints Data, we acquired over 7.3 million rows and 35 variables.</p>
+<table>
+<colgroup>
+<col width="7%" />
+<col width="9%" />
+<col width="7%" />
+<col width="5%" />
+<col width="7%" />
+<col width="63%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Column1_</th>
+<th align="left">Variable</th>
+<th align="left">Column2_</th>
+<th align="left">Classe</th>
+<th align="left">Column3_</th>
+<th align="left">First_value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">CMPLNT_NUM</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">394506329, 968873685, 509837549</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">CMPLNT_FR_DT</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">12/31/2019, 12/29/2019, 12/15/2019</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">CMPLNT_FR_TM</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">17:30:00, 16:31:00, 18:45:00</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">CMPLNT_TO_DT</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">, 12/29/2019,</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">CMPLNT_TO_TM</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">, 16:54:00,</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">ADDR_PCT_CD</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">32, 47, 109</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">RPT_DT</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">12/31/2019, 12/29/2019, 12/29/2019</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">KY_CD</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">118, 113, 578</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">OFNS_DESC</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">DANGEROUS WEAPONS, FORGERY, HARRASSMENT 2</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">PD_CD</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">793, 729, 638</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">PD_DESC</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">WEAPONS POSSESSION 3, FORGERY,ETC.,UNCLASSIFIED-FELO, HARASSMENT,SUBD 3,4,5</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">CRM_ATPT_CPTD_CD</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">COMPLETED, COMPLETED, COMPLETED</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">LAW_CAT_CD</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">FELONY, FELONY, VIOLATION</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">BORO_NM</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">MANHATTAN, BRONX, QUEENS</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">LOC_OF_OCCUR_DESC</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">, , FRONT OF</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">PREM_TYP_DESC</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">STREET, STREET, STREET</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">JURIS_DESC</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">N.Y. POLICE DEPT, N.Y. POLICE DEPT, N.Y. POLICE DEPT</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">JURISDICTION_CODE</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">0, 0, 0</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">PARKS_NM</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">, ,</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">HADEVELOPT</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">, ,</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">HOUSING_PSA</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">, ,</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">X_COORD_CD</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">999937, 1022508, 1034178</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">Y_COORD_CD</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">238365, 261990, 209758</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">SUSP_AGE_GROUP</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">, , 25-44</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">SUSP_RACE</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">, , UNKNOWN</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">SUSP_SEX</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">, , M</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">TRANSIT_DISTRICT</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">NA, NA, NA</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">Latitude</td>
+<td align="left">||</td>
+<td align="left">double</td>
+<td align="left">||</td>
+<td align="left">40.820926797, 40.8857014060001, 40.742281156</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">Longitude</td>
+<td align="left">||</td>
+<td align="left">double</td>
+<td align="left">||</td>
+<td align="left">-73.943324219, -73.861640325, -73.81982408</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">Lat_Lon</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">(40.82092679700002, -73.94332421899996), (40.885701406000074, -73.86164032499995), (40.74228115600005, -73.81982408)</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">PATROL_BORO</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">PATROL BORO MAN NORTH, PATROL BORO BRONX, PATROL BORO QUEENS NORTH</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">STATION_NAME</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">, ,</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">VIC_AGE_GROUP</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">UNKNOWN, UNKNOWN, 25-44</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">VIC_RACE</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">UNKNOWN, UNKNOWN, WHITE HISPANIC</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">VIC_SEX</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">E, E, F</td>
+</tr>
+</tbody>
+</table>
+<p>We processed the Arrest Data, Complaints Data and other data sets separately.</p>
+</div>
+<div id="pre-processing-for-arrest-data" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Pre-processing for Arrest Data</h2>
+<div id="arrest-data-time-analysis-pre-processing" class="section level3" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Arrest Data: Time Analysis Pre-processing</h3>
+<p>To formulate proper data structure and columns, we developed a function allowing we derive year and/or month information from the original time stamp column of Arrest Data. Further more, this function also allow us to decide whether an grouping by year and/or month is needed. One can find further details in our repository.</p>
+<table>
+<caption><span id="tab:unnamed-chunk-6">Table 3.1: </span>Head 6 Rows in Arrest Dataset for Temporal Analysis</caption>
+<thead>
+<tr class="header">
+<th align="left">Year</th>
+<th align="left">LAW_CAT_CD</th>
+<th align="right">count</th>
+<th align="right">prop</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2006</td>
+<td align="left">F</td>
+<td align="right">103308</td>
+<td align="right">0.2786039</td>
+</tr>
+<tr class="even">
+<td align="left">2006</td>
+<td align="left">I</td>
+<td align="right">2040</td>
+<td align="right">0.0055015</td>
+</tr>
+<tr class="odd">
+<td align="left">2006</td>
+<td align="left">M</td>
+<td align="right">245508</td>
+<td align="right">0.6620928</td>
+</tr>
+<tr class="even">
+<td align="left">2006</td>
+<td align="left">V</td>
+<td align="right">19950</td>
+<td align="right">0.0538017</td>
+</tr>
+<tr class="odd">
+<td align="left">2007</td>
+<td align="left">F</td>
+<td align="right">108617</td>
+<td align="right">0.2700982</td>
+</tr>
+<tr class="even">
+<td align="left">2007</td>
+<td align="left">I</td>
+<td align="right">4234</td>
+<td align="right">0.0105287</td>
+</tr>
+</tbody>
+</table>
+<p>We selected information from year, LAW_CAT_CD (crime category), counting of each category, and probability represented by frequency out via processing on ‘LAW_CAT_CD’, ‘ARREST_DATE’, and ‘Year’. This allowed us to perform a analysis on crime category based on their counting and probability in a time series manner.</p>
+<table>
+<colgroup>
+<col width="11%" />
+<col width="9%" />
+<col width="11%" />
+<col width="8%" />
+<col width="11%" />
+<col width="49%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Column1_</th>
+<th align="left">Variable</th>
+<th align="left">Column2_</th>
+<th align="left">Classe</th>
+<th align="left">Column3_</th>
+<th align="left">First_value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">Year</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">2006, 2006, 2006</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">LAW_CAT_CD</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">F, I, M</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">count</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">103308, 2040, 245508</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">prop</td>
+<td align="left">||</td>
+<td align="left">double</td>
+<td align="left">||</td>
+<td align="left">0.278603906085662, 0.00550152910147085, 0.662092846394071</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="arrest-data-geometry-anaylsis-pre-processing" class="section level3" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Arrest Data: Geometry Anaylsis Pre-processing</h3>
+<p>We selected out ‘LAW_CAT_CD’, ‘ARREST_DATE’, ‘Year’, ‘ARREST_BORO’, ‘Latitude’, and ‘Longitude’ in order to get a better understanding on the geometry distribution of the crimes.</p>
+<table>
+<caption><span id="tab:unnamed-chunk-8">Table 3.2: </span>Head 6 Rows in Arrest Dataset for Spatial Analysis</caption>
+<thead>
+<tr class="header">
+<th align="left">LAW_CAT_CD</th>
+<th align="left">ARREST_DATE</th>
+<th align="left">Year</th>
+<th align="left">ARREST_BORO</th>
+<th align="right">Latitude</th>
+<th align="right">Longitude</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">F</td>
+<td align="left">01/26/2019</td>
+<td align="left">2019</td>
+<td align="left">M</td>
+<td align="right">40.80069</td>
+<td align="right">-73.94111</td>
+</tr>
+<tr class="even">
+<td align="left">F</td>
+<td align="left">02/06/2019</td>
+<td align="left">2019</td>
+<td align="left">M</td>
+<td align="right">40.75784</td>
+<td align="right">-73.99121</td>
+</tr>
+<tr class="odd">
+<td align="left">F</td>
+<td align="left">01/06/2016</td>
+<td align="left">2016</td>
+<td align="left">K</td>
+<td align="right">40.64865</td>
+<td align="right">-73.95034</td>
+</tr>
+<tr class="even">
+<td align="left">F</td>
+<td align="left">11/15/2018</td>
+<td align="left">2018</td>
+<td align="left">K</td>
+<td align="right">40.67458</td>
+<td align="right">-73.93022</td>
+</tr>
+<tr class="odd">
+<td align="left">M</td>
+<td align="left">09/13/2006</td>
+<td align="left">2006</td>
+<td align="left">K</td>
+<td align="right">40.67125</td>
+<td align="right">-73.92671</td>
+</tr>
+<tr class="even">
+<td align="left">F</td>
+<td align="left">10/24/2018</td>
+<td align="left">2018</td>
+<td align="left">M</td>
+<td align="right">40.71620</td>
+<td align="right">-73.99749</td>
+</tr>
+</tbody>
+</table>
+<p>Here is a brief structure of the cleaned data set.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Column1_</th>
+<th align="left">Variable</th>
+<th align="left">Column2_</th>
+<th align="left">Classe</th>
+<th align="left">Column3_</th>
+<th align="left">First_value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">LAW_CAT_CD</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">F, F, F</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">ARREST_DATE</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">01/26/2019, 02/06/2019, 01/06/2016</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">Year</td>
+<td align="left">||</td>
+<td align="left">character</td>
+<td align="left">||</td>
+<td align="left">2019, 2019, 2016</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">ARREST_BORO</td>
+<td align="left">||</td>
+<td align="left">integer</td>
+<td align="left">||</td>
+<td align="left">M, M, K</td>
+</tr>
+<tr class="odd">
+<td align="left">||</td>
+<td align="left">Latitude</td>
+<td align="left">||</td>
+<td align="left">double</td>
+<td align="left">||</td>
+<td align="left">40.800694331, 40.7578390030001, 40.648650085</td>
+</tr>
+<tr class="even">
+<td align="left">||</td>
+<td align="left">Longitude</td>
+<td align="left">||</td>
+<td align="left">double</td>
+<td align="left">||</td>
+<td align="left">-73.941109286, -73.991212111, -73.950335563</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="pre-processing-for-complaint-data" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Pre-processing for Complaint Data</h2>
+<p>Our modification on Complaint Data set are similar to what we processed on Arrest Data set.</p>
+</div>
+<div id="pre-processing-for-other-data-sets" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Pre-processing for other Data Sets</h2>
+<p>No pre-processing is needed for other data sets.</p>
+</div>
+<div id="next-stage" class="section level2" number="3.6">
+<h2><span class="header-section-number">3.6</span> Next Stage</h2>
+<p>We have successfully constructed cleaned data sets for our actual analysis now.</p>
 
+</div>
 </div>
             </section>
 
