@@ -203,4 +203,6 @@ printStr(complaint.df_year_target)
 No pre-processing is needed for other data sets.
 
 ## Next Stage
+<<<<<<< HEAD
 We have successfully constructed cleaned data sets now. Next, we can start analyzing.
+

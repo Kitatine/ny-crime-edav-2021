@@ -239,8 +239,7 @@ spatial_plot_arrest_interactive(df, 2020)
 
 * All 5 boroughs did well in reducing the number of violations. In 2020, almost all arrests lie in misdemeanor and felony.
 
-* Both the misdemeanor and felony arrests decrease in all 5 boroughs through the years. However, the number of misdemeanor decrease much faster than the number of felony. In 2010, misdemeanor contribute to almost 70% of arrests. In 2019, this number in Brooklyn is around 50%. In 2020, this number in all 5 boroughs is approximate 50%.
-
+<<<<<<< HEAD
 * Both the misdemeanor and felony arrests decrease in all 5 boroughs through the years. However, the number of misdemeanor decrease much faster than the number of felony. In 2010, misdemeanor contribute to almost 70% of arrests. In 2019, this number in Brooklyn is around 50%. In 2020, this number in all 5 boroughs is approximate 50%.
 
 * Bronx, Brooklyn, and Manhattan achieved almost 50% cut in arrest from 2010 to 2019, while Queens only did 40%.
@@ -284,7 +283,7 @@ interactive_trend_plot_complaint <- function(df){
 interactive_trend_plot_complaint(complaint.df_year_target)
 ```
 
-Although Arrests Data shows a dramatic downfall during the years, the Complaints Data is different.
+Although Arrests Data shows a dramatic downfall during the years, the Complaints Data is different. Misdemeanor still shows material decreasing, but Felony and Violation does not. The complaint about violation even has a increasing trend starting 2011. We can check this further by combining the arrests and complaints data sets.
 
 ```{r merge two summary table}
 
@@ -326,6 +325,11 @@ interactive_trend_plot_ca(ca.df_year_target)
 
 ```
 
+The 2 data sets have patterns as follow:
+
+* Felony and misdemeanor share the general tread of increasing/decreasing in different periods. That is to say, when arrest number falls, complaints number falls, too.
+
+* From 2006 to 2020, 
 
 ```{r arrest/complaint percent data transform by year}
 
@@ -397,7 +401,10 @@ wd <- generate_word_cloud(docs)
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> remotes/origin/wz-dev
 
 ## Hate Crime Analysis
 
