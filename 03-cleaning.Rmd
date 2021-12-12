@@ -1,17 +1,21 @@
 # Data transformation
 
-Here we include the basic data transformation as the preprocessing module to clean the data and obtain some fundamental insights. Most of the data provided by NYPD has already been organized and has few missing data, so our focus here would mainly be insights formulation, where we shall decide the specific metric for further exploration.     
-Notice that since all our data listed here have millions of rows, so we turn to the `ff` library to enable fast loading the dataset feature.   
+The NYPD Open Data Sets are generally well constructed and with consistent data structure and type, and the sets usually do not have serious missing value issues. Therefore, our focus here would mainly be insights formulation, where we shall decide the specific metric for further exploration.
+
+Specifically, we include the basic data transformation as the pre-processing module to clean the data and obtain some fundamental insights.
+
+Notice that, since all our data listed here have millions of rows, so we turn to the `ff` library to enable fast loading the data set feature. Besides, we also developed several reusable modules for cleaner and more efficient processing. For more information on 'ff' package, please check [here](https://cran.r-project.org/web/packages/ff/index.html).
+
+Our interest lies on the geometry distribution and the time series analysis of our Arrest Data and Complaint Data.
+
+Finally, after successfully cleaned/pre-processed the Arrest Data and the Complaint Data, we introduced a map API as well to include the geometry information for our further visualized and interactive analysis in later chapters.
 
 
-```{r import the data}
-library(ff)
-library(dplyr)
-library(ggplot2)
-# if want to see the detailed output, add the VERBOSE = TRUE option for the read.csv.ffdf function
-complaint.df = read.csv(file="data/NYPD_Complaint_Data_Historic.csv")
-```
-First we define some reusable module that we would repetitively use in our analysis below,   
+## Construction of Processing Modules
+
+We developed several reusable modules that we would repetitively use in our analysis below. Specifically, we set our environment as well as a time stamp formatting function to unify our criteria for date data.
+
+> One can implement these modules via the syntax of time-and-date manipulation in R and "knitr" as well as "magrittr" packages.
 
 ```{r cleaning data analysis, reusable module}
 filter_before <- function(df, col, format = "%m/%d/%Y", year = NULL, date = NULL, option = NULL) {
@@ -22,21 +26,23 @@ filter_before <- function(df, col, format = "%m/%d/%Y", year = NULL, date = NULL
 }
 ```
 
-## Preprocessing for Arrest data
-```{r load the data, arrest}
-arrest.df = read.csv.ffdf(file = 'data/NYPD_Arrests_Data__Historic_.csv', header=TRUE, 
-                  first.rows=10000, next.rows=50000)
+> We also developed a mimic function for str() to provide insights of the data sets in a table way.
 
-arrest.df = as.data.frame(arrest.df)
-str(arrest.df)
-knitr::kable(head(arrest.df), caption = "Head 6 Rows in Arrest Dataset for Temporal Analysis",
-             row.names = F,font_size = 10)
+```{r str() display function}
+printStr <- function(df) {
+  data.frame(Column1_ = "||",
+    Variable = names(df),
+             Column2_ = "||",
+             Classe = sapply(df, typeof),
+             Column3_ = "||",
+             First_value = sapply(df, function(x) paste0(head(x, 3), collapse = ", ")),
+             row.names = NULL) %>% knitr::kable()
+}
 ```
 
-### Preprocessing for Time Analysis
+> To formulate proper data structure and columns, we developed a function allowing we derive year and/or month information from the original time stamp column of Arrest Data. Further more, this function also allow us to decide whether an grouping by year and/or month is needed. One can find further details in our repository.
 
 ```{r data transformation for arrest time analysis}
-
 time_target <- function(df, time_id_col, option = NULL, col_of_interest = NULL, target_col  = NULL,
                         group_option = NULL){
     if (option == 'year') {
@@ -53,7 +59,6 @@ time_target <- function(df, time_id_col, option = NULL, col_of_interest = NULL, 
             else{
               return(df.interest)
             }
-            
         }
         else {
           return(df[['Year']])
@@ -76,6 +81,52 @@ time_target <- function(df, time_id_col, option = NULL, col_of_interest = NULL, 
 }
 ```
 
+For a detailed implementation, please refer to our [repository](https://github.com/Kitatine/ny-crime-edav-2021).
+
+## Preprocessing: Loading and Descriptive Analysis
+
+```{r import the data}
+library(ff)
+library(dplyr)
+library(ggplot2)
+library(knitr)
+library(magrittr)
+# if want to see the detailed output, add the VERBOSE = TRUE option for the read.csv.ffdf function
+complaint.df = read.csv(file="data/NYPD_Complaint_Data_Historic.csv")
+```
+
+We created tables for the data set structures to get a first impression on how exactly the data is showed.
+
+```{r load the data, arrest}
+arrest.df = read.csv.ffdf(file = 'data/NYPD_Arrests_Data__Historic_.csv', header=TRUE, 
+                  first.rows=10000, next.rows=50000)
+arrest.df = as.data.frame(arrest.df)
+str(arrest.df)
+knitr::kable(head(arrest.df), caption = "Head 6 Rows in Arrest Dataset for Temporal Analysis",
+             row.names = F,font_size = 10)
+```
+
+The data is relatively complex.
+
+First, for our Arrest Data, we acquired over 5.1 million rows and 19 variables.
+
+```{r show str() in a visiable way, arrest}
+printStr(arrest.df)
+```
+
+Then, for our Complaints Data, we acquired over 7.3 million rows and 35 variables.
+
+```{r show str() in a visiable way, complaints}
+printStr(complaint.df)
+```
+
+We processed the Arrest Data, Complaints Data and other data sets separately.
+
+## Pre-processing for Arrest Data
+### Arrest Data: Time Analysis Pre-processing
+
+To formulate proper data structure and columns, we developed a function allowing we derive year and/or month information from the original time stamp column of Arrest Data. Further more, this function also allow us to decide whether an grouping by year and/or month is needed. One can find further details in our repository.
+
 ```{r}
 df_year_target <- time_target(arrest.df, 
                         time_id_col = 'ARREST_DATE',
@@ -87,8 +138,16 @@ knitr::kable(head(df_year_target), caption = "Head 6 Rows in Arrest Dataset for 
              row.names = F,font_size = 10)
 ```
 
+We selected information from year, LAW_CAT_CD (crime category), counting of each category, and probability represented by frequency out via processing on 'LAW_CAT_CD', 'ARREST_DATE', and 'Year'. This allowed us to perform a analysis on crime category based on their counting and probability in a time series manner.
 
-### Preprocessing for Spatial Anaylsis
+```{r}
+printStr(df_year_target)
+```
+
+
+### Arrest Data: Geometry Anaylsis Pre-processing
+
+We selected out 'LAW_CAT_CD', 'ARREST_DATE', 'Year', 'ARREST_BORO', 'Latitude', and 'Longitude' in order to get a better understanding on the geometry distribution of the crimes.
 
 ```{r}
 df_year <- time_target(arrest.df, 
@@ -101,3 +160,18 @@ knitr::kable(head(df_year), caption = "Head 6 Rows in Arrest Dataset for Spatial
              row.names = F,font_size = 10)
 ```
 
+Here is a brief structure of the cleaned data set.
+
+```{r}
+printStr(df_year)
+```
+
+
+## Pre-processing for Complaint Data
+Our modification on Complaint Data set are similar to what we processed on Arrest Data set.
+
+## Pre-processing for other Data Sets
+No pre-processing is needed for other data sets.
+
+## Next Stage
+We have successfully constructed cleaned data sets for our actual analysis now.
