@@ -393,6 +393,7 @@ docs <- clean_text(docs)
 wd <- generate_word_cloud(docs)
 ```
 
+
 ## Hate Crime Analysis
 
 ```{r}

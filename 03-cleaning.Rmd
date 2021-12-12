@@ -177,7 +177,10 @@ Here is a brief structure of the cleaned data set.
 printStr(df_year)
 ```
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 677a97560605253319cc75423cd54c548010ffa7
 ## Pre-processing for Complaint Data
 Our modification on Complaint Data set are similar to what we processed on Arrest Data set.
 
@@ -193,14 +196,25 @@ complaint.df_year_target_nlp <- time_target(complaint.df,
                               option = 'year',
                               col_of_interest = c('LAW_CAT_CD', 'CMPLNT_FR_DT', 'OFNS_DESC', 'Year'),
                               target_col = 'LAW_CAT_CD')
-
-
-head(complaint.df_year_target)
+#head(complaint.df_year_target)
 ```
 
+```{r}
+printStr(complaint.df_year_target)
+```
+
+<<<<<<< HEAD
+=======
+
+>>>>>>> 677a97560605253319cc75423cd54c548010ffa7
 ## Pre-processing for other Data Sets
 No pre-processing is needed for other data sets.
 
 ## Next Stage
+<<<<<<< HEAD
 
 We have successfully constructed cleaned data sets now. Next, we can start analyzing.
+=======
+We have successfully constructed cleaned data sets now. Next, we can start analyzing.
+
+>>>>>>> 677a97560605253319cc75423cd54c548010ffa7
