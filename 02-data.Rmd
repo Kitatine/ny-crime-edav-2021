@@ -39,10 +39,8 @@ arrest.description.df = data.frame(
                                           "Longitude"), 
                             Description = c("Factor, Level of offense: felony, misdemeanor, violation",                                                              "Date in %m/%d/%y, Exact date of arrest for the reported event",
                                             "Factor, Borough of arrest. B(Bronx), S(Staten Island), K(Brooklyn), M(Manhattan), Q(Queens)",
-                                            "Text, Latitude coordinate for Global Coordinate System, WGS
-1984, decimal degrees (EPSG 4326)",
-                                            "Text, Longitude coordinate for Global Coordinate System, WGS
-1984, decimal degrees (EPSG 4326)"
+                                            "Text, Latitude coordinate for Global Coordinate System, WGS 1984, decimal degrees (EPSG 4326)",
+                                            "Text, Longitude coordinate for Global Coordinate System, WGS 1984, decimal degrees (EPSG 4326)"
 ))
 knitr::kable(arrest.description.df, caption = "Major columns used in NYPD Arrest",
              row.names = F,font_size = 10)
