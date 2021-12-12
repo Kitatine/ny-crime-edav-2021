@@ -12,6 +12,14 @@ In this report, we ask 3 straightforward questions:
 
 ```{r echo = FALSE, results = FALSE}
 #all the code below are just tests, just trying to make things work , will be extracted later on
+
+# word cloud generator
+library(wordcloud)
+library(wordcloud2)
+
+# for text mining
+library(tm)
+
 library(ff)
 
 library(ggmap)
@@ -37,13 +45,7 @@ library(ggpubr)
 
 # color palettes
 library(RColorBrewer)
-
-# word cloud generator
-library(wordcloud)
-library(wordcloud2)
-
-# for text mining
-library(tm)
+library(viridis)
 
 result <- fromJSON(file = 'configure.json')
 GOOGLE_KEY <- result$GOOGLE_KEY
@@ -120,7 +122,7 @@ interactive_trend_plot_arrest <- function(df){
 interactive_trend_plot_arrest(df_year_target)
 ```
 
-As shown in the graph, there are general declining trends on all categories of crimes from 2006 to 2020. The total number of all crime categories hits a historical low at 139 024 cases. 
+As is shown in the graph, there are general declining trends on all categories of crimes from 2006 to 2020. The total number of all crime categories hits a historical low at 139 024 cases. 
 
 * For misdemeanor arrest, the total number of crimes per year remains in a slowly increasing pattern before 2010, and this tendency brought the number to a historical height in 2010. After the peak, there is a 10-year declining period till 2020. From 2010 to 2014, the decreasing process is relatively smooth, only yielded 11.16% of cases decreasing. The number then realized a grammatical falling in 2015, a total of 220 169, which is a 15.19% decreasing year-on-year. Then move started a fast decreasing period. From 2015 to 2020, the percentage decreasing in misdemeanor is, astonishingly, 84.74%, or 186 591. The total number hit an 14-year high percent decrease year-on-year, 42.33%, to 73 015.
 
@@ -237,10 +239,17 @@ spatial_plot_arrest_interactive(df, 2020)
 
 * All 5 boroughs did well in reducing the number of violations. In 2020, almost all arrests lie in misdemeanor and felony.
 
-<<<<<<< HEAD
 * Both the misdemeanor and felony arrests decrease in all 5 boroughs through the years. However, the number of misdemeanor decrease much faster than the number of felony. In 2010, misdemeanor contribute to almost 70% of arrests. In 2019, this number in Brooklyn is around 50%. In 2020, this number in all 5 boroughs is approximate 50%.
-=======
 
+* Both the misdemeanor and felony arrests decrease in all 5 boroughs through the years. However, the number of misdemeanor decrease much faster than the number of felony. In 2010, misdemeanor contribute to almost 70% of arrests. In 2019, this number in Brooklyn is around 50%. In 2020, this number in all 5 boroughs is approximate 50%.
+
+* Bronx, Brooklyn, and Manhattan achieved almost 50% cut in arrest from 2010 to 2019, while Queens only did 40%.
+
+* Although the number of arrest in Staten Island is relatively small comparing to other boroughs, Staten Island has made a surprising 60% cut in arrest number.
+
+* Even though Bronx has much lower total number of arrest in 2010, 2015, and 2019, in 2020, arrest number in Bronx (32 382) is almost the same as the number in Manhattan (32 609), where the difference divided by Manhattan is less than 1%. Manhattan performs much better than Bronx in cutting the total number considering the difference between the 2 boroughs in 2010 divided by Manhattan is over 11%, or 12k.
+
+* The same thing happened between Manhattan and Queens. In 2010, the numbers gap devided by Manhattan is over 32%, or 36k. However, in 2020, gap is merely 8.5%, or 2.7k.
 
 ## Crime Complaint Analysis
 
@@ -275,17 +284,19 @@ interactive_trend_plot_complaint <- function(df){
 interactive_trend_plot_complaint(complaint.df_year_target)
 ```
 
+Although Arrests Data shows a dramatic downfall during the years, the Complaints Data is different.
+
 ```{r merge two summary table}
 
 df_year_target$Type = c('Arrest')
 complaint.df_year_target$Type = c('Complaint')
 df_year_target <- df_year_target[df_year_target$LAW_CAT_CD != 'I', c('Type', 'Year', 'LAW_CAT_CD', 'count')]
 df_year_target$LAW_CAT_CD <- droplevels(df_year_target$LAW_CAT_CD)
-df_year_target$LAW_CAT_CD <- fct_relevel(df_year_target$LAW_CAT_CD, c('F', 'M', 'V'))
+df_year_target$LAW_CAT_CD <- forcats::fct_relevel(df_year_target$LAW_CAT_CD, c('F', 'M', 'V'))
 
 levels(complaint.df_year_target$LAW_CAT_CD) <- c('F', 'M', 'V')
 complaint.df_year_target <- complaint.df_year_target[complaint.df_year_target$LAW_CAT_CD != 'I', c('Type', 'Year', 'LAW_CAT_CD', 'count')]
-complaint.df_year_target
+#printStr(complaint.df_year_target)
 
 ca.df_year_target <- rbind(df_year_target, complaint.df_year_target)
 ca.df_year_target$CombinedType <- paste(ca.df_year_target$Type, ca.df_year_target$LAW_CAT_CD)
@@ -343,7 +354,7 @@ interactive_trend_plot_ca_ratio <- function(df){
 }
 
 interactive_trend_plot_ca_ratio(ca.df_year_target)
-ca.df_year_target
+printStr(ca.df_year_target)
 ```
 
 ### NLP Analysis
@@ -351,18 +362,18 @@ ca.df_year_target
 ```{r}
 clean_text <- function(docs) {
   # Convert the text to lower case
-  docs <- tm_map(docs, content_transformer(tolower))
+  docs <- tm::tm_map(docs, content_transformer(tolower))
   # Remove numbers
-  docs <- tm_map(docs, removeNumbers)
+  docs <- tm::tm_map(docs, removeNumbers)
   # Remove english common stopwords
-  docs <- tm_map(docs, removeWords, stopwords("english"))
+  docs <- tm::tm_map(docs, removeWords, stopwords("english"))
   # Remove your own stop word
   # specify your stopwords as a character vector
-  docs <- tm_map(docs, removeWords, c("related", "blabla2")) 
+  docs <- tm::tm_map(docs, removeWords, c("related", "blabla2")) 
   # Remove punctuations
-  docs <- tm_map(docs, removePunctuation)
+  docs <- tm::tm_map(docs, removePunctuation)
   # Eliminate extra white spaces
-  docs <- tm_map(docs, stripWhitespace)
+  docs <- tm::tm_map(docs, stripWhitespace)
   return(docs)
 }
 
@@ -385,24 +396,14 @@ docs <- clean_text(docs)
 wd <- generate_word_cloud(docs)
 ```
 
+<<<<<<< HEAD
 
-
-## Hate Crime Analysis
->>>>>>> remotes/origin/wz-dev
-
-* Bronx, Brooklyn, and Manhattan achieved almost 50% cut in arrest from 2010 to 2019, while Queens only did 40%.
-
-* Although the number of arrest in Staten Island is relatively small comparing to other boroughs, Staten Island has made a surprising 60% cut in arrest number.
-
-* Even though Bronx has much lower total number of arrest in 2010, 2015, and 2019, in 2020, arrest number in Bronx (32 382) is almost the same as the number in Manhattan (32 609), where the difference divided by Manhattan is less than 1%. Manhattan performs much better than Bronx in cutting the total number considering the difference between the 2 boroughs in 2010 divided by Manhattan is over 11%, or 12k.
-
-* The same thing happened between Manhattan and Queens. In 2010, the numbers gap devided by Manhattan is over 32%, or 36k. However, in 2020, gap is merely 8.5%, or 2.7k.
 
 ## Hate Crime Analysis
 
 ```{r}
 # get map
-manhattan_map <- get_map(location = c(lon = -73.95, lat = 40.7), zoom = 11, scale = "auto", )
+manhattan_map <- get_map(location = c(lon = -73.95, lat =  40.7), zoom = 11, scale = "auto", )
 #ggmap(manhattan_map)
 ```
 
@@ -415,14 +416,14 @@ points <- points[which(!is.na(points$Longitude)),]
 
 r <- GET('http://data.beta.nyc//dataset/0ff93d2d-90ba-457c-9f7e-39e47bf2ac5f/resource/35dd04fb-81b3-479b-a074-a27a37888ce7/download/d085e2f8d0b54d4590b1e7d1f35594c1pediacitiesnycneighborhoods.geojson')
 
-nyc_neighborhoods <- readOGR(content(r,'text'), 'OGRGeoJSON', verbose = F)
+nyc_neighborhoods <- readOGR(httr::content(r,'text'), 'OGRGeoJSON', verbose = F)
 
 points_spdf <- points
 coordinates(points_spdf) <- ~Longitude + Latitude
 proj4string(points_spdf) <- proj4string(nyc_neighborhoods)
 matches <- over(points_spdf, nyc_neighborhoods)
 points <- cbind(points, matches)
-points_by_neighborhood <- points %>% group_by(neighborhood) %>% dplyr::summarize(num_points=n())
+points_by_neighborhood <- points %>% dplyr::group_by(neighborhood) %>% dplyr::summarize(num_points=n())
 
 map_data <- geo_join(nyc_neighborhoods, points_by_neighborhood, "neighborhood", "neighborhood")
 

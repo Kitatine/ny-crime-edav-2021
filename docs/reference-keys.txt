@@ -36,6 +36,11 @@ hate-crime-analysis
 interactive-component
 overview-of-arrests-data-by-time
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+conclusion
+=======
+>>>>>>> remotes/origin/wz-dev
 other-data-sets
 featured-variables
 construction-of-processing-modules
@@ -49,6 +54,10 @@ time-analysis
 next-stage
 geometry-dimension-overall-illustration
 geometry-dimension-zoom-in-to-borough
+<<<<<<< HEAD
 =======
 conclusion
+>>>>>>> remotes/origin/wz-dev
+=======
+>>>>>>> cd4339c3f72aeb09c3650b2e79af530e404d6078
 >>>>>>> remotes/origin/wz-dev

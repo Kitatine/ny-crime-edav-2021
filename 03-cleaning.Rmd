@@ -199,10 +199,8 @@ complaint.df_year_target_nlp <- time_target(complaint.df,
 printStr(complaint.df_year_target)
 ```
 
-
 ## Pre-processing for other Data Sets
 No pre-processing is needed for other data sets.
 
 ## Next Stage
 We have successfully constructed cleaned data sets now. Next, we can start analyzing.
-
