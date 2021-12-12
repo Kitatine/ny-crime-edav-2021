@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Data transformation
 
 The NYPD Open Data Sets are generally well constructed and with consistent data structure and type, and the sets usually do not have serious missing value issues. Therefore, our focus here would mainly be insights formulation, where we shall decide the specific metric for further exploration.
@@ -197,4 +202,5 @@ head(complaint.df_year_target)
 No pre-processing is needed for other data sets.
 
 ## Next Stage
-We have successfully constructed cleaned data sets for our actual analysis now.
+
+We have successfully constructed cleaned data sets now. Next, we can start analyzing.

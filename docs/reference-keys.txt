@@ -35,4 +35,20 @@ spatial-analysis
 hate-crime-analysis
 interactive-component
 overview-of-arrests-data-by-time
+<<<<<<< HEAD
 conclusion
+=======
+other-data-sets
+featured-variables
+construction-of-processing-modules
+preprocessing-loading-and-descriptive-analysis
+pre-processing-for-arrest-data
+arrest-data-time-analysis-pre-processing
+arrest-data-geometry-anaylsis-pre-processing
+pre-processing-for-complaint-data
+pre-processing-for-other-data-sets
+time-analysis
+next-stage
+geometry-dimension-overall-illustration
+geometry-dimension-zoom-in-to-borough
+>>>>>>> cd4339c3f72aeb09c3650b2e79af530e404d6078
