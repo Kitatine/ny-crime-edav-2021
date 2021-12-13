@@ -7,3 +7,15 @@ site: bookdown::bookdown_site
 
 # Introduction
 
+There are many traces about how the pandemic influence the crimes that one can find from the media. According to Wall Street Journal, there is a [fall back](https://www.wsj.com/articles/new-york-city-crime-falls-as-coronavirus-takes-hold-11584998470) on crimes when the pandemic just started. However, as pandemic shut down the city, the attorneys have [declined to prosecute](https://www.wsj.com/articles/some-crimes-in-new-york-city-evade-prosecution-during-coronavirus-11588110554) more then 500 cases from March 12, 2020 to April 28, 2020. Along with the influence form virus getting deeper, by the end of 2020, New York police power seemed to have a [hard time](https://www.wsj.com/articles/new-york-city-police-solve-fewer-crimes-in-pandemic-11606917600) in solving crimes.
+
+In this report, we ask 3 straightforward questions:
+
+> How does the emerging of COVID-19 affect the number of crime behaviors? If so, is the number raising or declining?
+
+> Is there any difference in crime control among the boroughs?
+
+> There is a new catogory in post-COVID era called "Hate Crime". How does hate crimes distributed on the geometry dimension?
+
+The detailed exploration flow would be decomposed in a step-by-step manner in the following chapters, and the major results is presented in the chapter 5.   
+

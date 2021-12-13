@@ -43,3 +43,6 @@ insights
 spatial-visulization-of-crime-data-by-precincts
 insights-1
 conclusion
+brief-conclusion
+limitations
+future-directions
