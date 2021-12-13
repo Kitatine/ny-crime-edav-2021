@@ -8,7 +8,7 @@ In this report, we ask 3 straightforward questions:
 
 > Is there any difference in crime control among the boroughs?
 
-> There is a new catogory in post-COVID era called "Hate Crime". How does hate crimes distributed on the geometry dimension?
+> There is a new category in post-COVID era called "Hate Crime". How does hate crimes distributed on the geometry dimension?
 
 ```{r echo = FALSE, results = FALSE}
 #all the code below are just tests, just trying to make things work , will be extracted later on
