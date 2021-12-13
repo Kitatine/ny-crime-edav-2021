@@ -1,2 +1,10 @@
 # Conclusion
 
+
+![Credit: Global Times ng](source/nypd.jpg)
+
+
+By using the R and D3 programming in our exploratory data analysis class. Three of us are able to perform a deep analysis on NYC public safety issue. We have generated some noteworthy findings and speculations.
+
+
+
