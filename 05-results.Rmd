@@ -421,6 +421,7 @@ wd <- generate_word_cloud(docs)
 wd
 ```
 
+
 This word cloud displayed the actual contents of complaints in a decent way. The top 3 level of contents are mainly stealing and assaulting. Specifically:
 
 * Larceny is the most common complaints.
@@ -467,7 +468,7 @@ plot_data <- tidy(nyc_neighborhoods, region="neighborhood") %>%
 ggmap(manhattan_map)+
   geom_polygon(data=plot_data, aes(x=long, y=lat, group=group, fill=num_points), alpha=0.75) + 
   scale_fill_gradient(low="yellow", high="red") + 
-  ggtitle("Figure 1\n\nTotal Crimes per Neighborhood in NYC from 2021") + 
+  ggtitle("Total Crimes per Neighborhood in NYC from 2021") + 
   xlab("") +
   ylab("") + 
   labs(fill="Number of Crimes")
@@ -475,22 +476,12 @@ ggmap(manhattan_map)+
 
 Based on the heat map, we can derive analysis in a high-to-low manner:
 
-*Harlem in Manhattan has the most hate crimes.
+* Harlem in Manhattan has the most hate crimes.
 
 * Jamaica, Rochdale, Laurelton, Cambridge Heights, and Queens Village is very close to Harlem.
 
 * Area close to Broadway in Brooklyn, Area close to Belt Pkwy in Brooklyn, Flushing in Queens, Midtown & Upper Town in Manhattan has higher Hate Crimes number than most of other areas in New York City.
 
 * Staten Island has a very small number of Hate Crimes.
-
-
-Total Hate Crime Number (2021, YTD).
-
-```{r}
-leaflet(plot_data) %>%
-  addTiles() %>%
-  setView(-74.00, 40.71, zoom = 10) %>%
-  addCircleMarkers(~long, ~lat, radius = 5, stroke=FALSE, fillOpacity = 0.5)
-```
 
 
