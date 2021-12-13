@@ -24,7 +24,7 @@
 <meta name="author" content="Jingwen Bai, Qiran Li, Zheng Wu" />
 
 
-<meta name="date" content="2021-12-12" />
+<meta name="date" content="2021-12-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -193,7 +193,12 @@
 <li class="chapter" data-level="6.2.1" data-path="interactive-component.html"><a href="interactive-component.html#insights-1"><i class="fa fa-check"></i><b>6.2.1</b> Insights:</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
+<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="conclusion.html"><a href="conclusion.html#brief-conclusion"><i class="fa fa-check"></i><b>7.1</b> Brief Conclusion</a></li>
+<li class="chapter" data-level="7.2" data-path="conclusion.html"><a href="conclusion.html#limitations"><i class="fa fa-check"></i><b>7.2</b> Limitations</a></li>
+<li class="chapter" data-level="7.3" data-path="conclusion.html"><a href="conclusion.html#future-directions"><i class="fa fa-check"></i><b>7.3</b> Future Directions</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -215,7 +220,40 @@
             <section class="normal" id="section-">
 <div id="conclusion" class="section level1" number="7">
 <h1><span class="header-section-number">Chapter 7</span> Conclusion</h1>
+<div class="figure">
+<img src="source/nypd.jpg" alt="" />
+<p class="caption">Credit: Global Times ng</p>
+</div>
+<p>By using the R and D3 programming in our exploratory data analysis class. Three of us are able to perform a deep analysis on NYC public safety issue. We have generated some noteworthy findings and speculations.</p>
+<div id="brief-conclusion" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> Brief Conclusion</h2>
+<p>In brief, the analysis for <code>Arrest</code> Dataset illustrates firstly in time span the amount and ratio trend of the incidents for each level of offense, and secondly in space span the offense level distribution of those incidents by borough. The key conclusion follows as:</p>
+<ul>
+<li><p>The number of offense events decreases significantly through the years.</p></li>
+<li><p>Over the years since 2016 to 2020, though the misdemeanor level of offense remains as the most frequently happened events, its ratio suffers a significant decrease.</p></li>
+<li><p>Manhattan is generally safer than other boroughs (not including Staten Island because of population differences).</p></li>
+</ul>
+<p>The exploration for <code>Complaint</code> Dataset provides us with another insight to compensate for our perception on the previous dataset, where we focus on the analysis mainly in time span and word frequency:</p>
+<ul>
+<li><p>Though the arrested events decrease significantly among years, the general complaint data level almost remains the same from 2016 to 2020. To be more specific, with respect to the arrest/complaint ratio, starting from 2013, a consecutive decreasing in Violation happened; Starting 2015, both of the felony and misdemeanor ratios entered a decreasing period.</p></li>
+<li><p>The top 3 level of the complaint contents are mainly about stealing and assaulting.</p></li>
+</ul>
+</div>
+<div id="limitations" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> Limitations</h2>
+<ul>
+<li><p>Limitation of the crime data: To obtain a more comprehensive idea about the post-pandemic crime phenomenon, we need a more detailed list of the data after the year 2021, which requries the updates of the data by NYPD.</p></li>
+<li></li>
+</ul>
+</div>
+<div id="future-directions" class="section level2" number="7.3">
+<h2><span class="header-section-number">7.3</span> Future Directions</h2>
+<ul>
+<li><p>Deploy an automatic data fetch API and enable the functionality within our current implementation so that we could keep an automatic update to track the newest crime on map.</p></li>
+<li><p>Beyond the EDAV of the NYPD data, we could further build up some of the models, especially in the NLP analysis and time series analysis to systematically remove the noises in the dataset.</p></li>
+</ul>
 
+</div>
 </div>
             </section>
 
