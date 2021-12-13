@@ -7,9 +7,14 @@ site: bookdown::bookdown_site
 
 # Introduction
 
+
 There are many traces about how the pandemic influence the crimes that one can find from the media. According to Wall Street Journal, there is a [fall back](https://www.wsj.com/articles/new-york-city-crime-falls-as-coronavirus-takes-hold-11584998470) on crimes when the pandemic just started. However, as pandemic shut down the city, the attorneys have [declined to prosecute](https://www.wsj.com/articles/some-crimes-in-new-york-city-evade-prosecution-during-coronavirus-11588110554) more then 500 cases from March 12, 2020 to April 28, 2020. Along with the influence form virus getting deeper, by the end of 2020, New York police power seemed to have a [hard time](https://www.wsj.com/articles/new-york-city-police-solve-fewer-crimes-in-pandemic-11606917600) in solving crimes.
 
-In this report, we ask 3 straightforward questions:
+In September 2021, the Economist released their annual Safe Cities Index whitepaper, which ranks 60 cities across 76 indicators covering digital, health, infrastructure, personal and environmental security. In this report, New York ranked 11th among the 60 experimental cities with a total score of 78 points. [https://safecities.economist.com/safe-cities-2021-whitepaper/]
+
+However, just a few weeks ago, a grief accident happened near the Columbia University campus. A Columbia Computer Science Ph.D. candidate, Davide Giri, was fatally stabbed near the Manhattan campus on Thursday night Near Campus. Mr. Giri was only a week away from his 31st birthday. On the night of his death, another Italian scholar, Roberto Malaspina, was also stabbed in the back and seriously wounded in the abdomen. This depressed and terrifying accident has aroused our attention to the public safety issue of New York City. We would like to know which areas in New York City are more dangerous and which are safer. Moreover, since the outbreak of the COVID-19 pandemic, crime categories and crime rates have been changed a lot in cities all over the world. We would also like to know how pandemic affects public safety in New York City.
+
+We collected criminal history data from NYPD official websites. In this report, we will analyze these data to get answers to the following questions:
 
 > How does the emerging of COVID-19 affect the number of crime behaviors? If so, is the number raising or declining?
 

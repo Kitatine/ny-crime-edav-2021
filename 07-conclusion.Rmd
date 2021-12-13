@@ -1,5 +1,8 @@
 # Conclusion
+![Credit: Global Times ng](source/nypd.jpg)
 
+
+By using the R and D3 programming in our exploratory data analysis class. Three of us are able to perform a deep analysis on NYC public safety issue. We have generated some noteworthy findings and speculations.
 
 ## Brief Conclusion
 
@@ -29,4 +32,5 @@ The exploration for `Complaint` Dataset provides us with another insight to comp
 * Deploy an automatic data fetch API and enable the functionality within our current implementation so that we could keep an automatic update to track the newest crime on map.   
 
 * Beyond the EDAV of the NYPD data, we could further build up some of the models, especially in the NLP analysis and time series analysis to systematically remove the noises in the dataset.   
+
 
