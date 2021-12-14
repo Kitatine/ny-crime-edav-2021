@@ -25,7 +25,9 @@ The exploration for `Complaint` Dataset provides us with another insight to comp
 
 * Limitation of the crime data: To obtain a more comprehensive idea about the post-pandemic crime phenomenon, we need a more detailed list of the data after the year 2021, which requries the updates of the data by NYPD. 
 
-* 
+
+* Limitation of the implementation: Since export statements of JavaScript modules can not be used in embedded scripts, we have to include all variables, including constant variables in the same JavaScript files. This reduced the readability of our code for interactive part.
+
 
 ## Future Directions
 
@@ -33,4 +35,5 @@ The exploration for `Complaint` Dataset provides us with another insight to comp
 
 * Beyond the EDAV of the NYPD data, we could further build up some of the models, especially in the NLP analysis and time series analysis to systematically remove the noises in the dataset.   
 
+* Collect population data and income data corresponding to each neighborhood. So that we can discover if there is some correlation between population, incomes and crimes rates.
 
